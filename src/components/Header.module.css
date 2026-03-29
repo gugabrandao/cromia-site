@@ -34,7 +34,7 @@
 
 .nav {
   list-style: none;
-  margin: 0 0 0 30px;
+  margin: 0;
   padding: 0;
   display: flex;
   align-items: center;
@@ -43,10 +43,10 @@
 .nav li {
   font-family: 'Montserrat', sans-serif;
   font-size: 32px;
-  font-weight: 200;
+  font-weight: 350;
   letter-spacing: 0px;
   color: #4A2C2A;
-  padding-right: 30px;
+  padding: 0 15px;
 }
 
 .nav li a:hover {
@@ -55,17 +55,16 @@
 }
 
 .divisor {
-  margin: 0 10px;
+  margin: 0 5px;
   font-size: 14px;
   opacity: 0.5;
-  padding-right: 30px;
 }
 
 @media (max-width: 1200px) {
   .menu_bg {
     height: auto;
     flex-direction: column;
-    padding: 10px 0;
+    padding: 15px 0;
   }
 
   .logo {
@@ -74,6 +73,8 @@
 
   .nav li {
     font-size: 20px;
+    padding: 5px 10px;
+    font-weight: 400;
   }
 
   .divisor {
@@ -83,7 +84,8 @@
   .nav {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 2px;
+    gap: 5px;
     margin: 0;
+    padding: 0;
   }
 }

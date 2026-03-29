@@ -39,6 +39,7 @@
     height: 70px;
     bottom: 30px;
     right: 30px;
+    border-radius: 50%;
   }
 
   .btn_whatsapp_fixo svg {

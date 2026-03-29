@@ -1,8 +1,9 @@
 import styles from './Footer.module.css';
-import { Link } from 'react-router-dom';
+import { useModal } from '../context/ModalContext';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { openModal } = useModal();
 
   return (
     <footer>
@@ -10,9 +11,9 @@ export default function Footer() {
         Desenvolvido pela <b>Cromia</b> - Todos os Direitos Reservados ® - {year}
         <br className={styles.mobile_break} />
         &nbsp;|&nbsp;
-        <Link to="/politica-de-privacidade">Política de Privacidade</Link>
+        <span className={styles.link_modal} onClick={() => openModal('privacy')}>Política de Privacidade</span>
         &nbsp;|&nbsp;
-        <Link to="/termos-de-uso">Termos de Uso</Link>
+        <span className={styles.link_modal} onClick={() => openModal('terms')}>Termos de Uso</span>
       </div>
     </footer>
   );

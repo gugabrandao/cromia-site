@@ -61,13 +61,14 @@
   }
 
   .legenda {
-    font-size: clamp(20px, 3vw, 30px);
-    margin-left: -78px;
+    font-size: clamp(18px, 4vw, 24px);
+    margin: 0;
+    font-weight: 400;
   }
 
   .divisor2 {
-    margin: 0 13px 0 15px;
+    margin: 0 10px;
     opacity: 0.7;
-    font-size: 20px;
+    font-size: 16px;
   }
 }

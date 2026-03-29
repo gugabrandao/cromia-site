@@ -112,12 +112,29 @@
 @media (max-width: 1200px) {
   .box_branco {
     padding: 20px;
-    border-radius: 40px;
+    border-radius: 0px;
     font-size: 16px;
   }
 
+  .box_center {
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .dados_contato {
+    font-size: clamp(18px, 5vw, 22px);
+    margin-bottom: 25px;
+    word-break: break-all;
+  }
+
+  .midia_titulo {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
   .social_container {
-    gap: 20px;
+    gap: 25px;
+    margin-top: 40px;
   }
 
   .btn_social {
@@ -126,7 +143,7 @@
   }
 
   .btn_social svg {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
   }
 }
