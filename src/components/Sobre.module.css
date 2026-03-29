@@ -45,16 +45,7 @@
   min-height: 700px;
 }
 
-.foto_perfil {
-  float: right;
-  width: 200px;
-  height: auto;
-  border-radius: 50%;
-  border: 8px solid #fff;
-  opacity: 0.9;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  margin: 0 0 20px 30px;
-}
+
 
 .citacao {
   font-size: 22px;
@@ -84,11 +75,7 @@
     text-align: left;
   }
 
-  .foto_perfil {
-    float: none;
-    display: block;
-    margin: 0 auto 20px auto;
-  }
+
 
   .citacao {
     font-size: 24px;
