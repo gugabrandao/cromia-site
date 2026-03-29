@@ -43,7 +43,7 @@
 .nav li {
   font-family: 'Montserrat', sans-serif;
   font-size: 32px;
-  font-weight: 350;
+  font-weight: 200;
   letter-spacing: 0px;
   color: #4A2C2A;
   padding: 0 15px;
@@ -72,7 +72,7 @@
   }
 
   .nav li {
-    font-size: 20px;
+    font-size: 24px;
     padding: 5px 10px;
     font-weight: 400;
   }
