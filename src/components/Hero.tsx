@@ -62,9 +62,9 @@ export default function Hero() {
 
         <ul className={styles.legenda} id="legenda">
           <li>Marketing</li>
-          <li className={styles.divisor2}>•</li>
-          <li>Parceria Estratégica</li>
-          <li className={styles.divisor2}>•</li>
+          <li className={styles.divisor2}></li>
+          <li>Parceria <br className={styles.quebra_mobile} />Estratégica</li>
+          <li className={styles.divisor2}></li>
           <li>Tecnologia</li>
         </ul>
       </div>
