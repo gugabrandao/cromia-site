@@ -33,7 +33,7 @@
   width: 70vw;
   height: 70vw;
   background-color: #D29B8C;
-  opacity: 0.15;
+  opacity: 0.12;
   top: -10vw;
   left: -10vw;
   animation: float1 10s infinite alternate ease-in-out;
@@ -43,7 +43,7 @@
   width: 50vw;
   height: 50vw;
   background-color: #D29B8C;
-  opacity: 0.12;
+  opacity: 0.11;
   bottom: -10vw;
   right: -10vw;
   animation: float2 12s infinite alternate ease-in-out;
