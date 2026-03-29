@@ -9,7 +9,7 @@ export const PoliticaPrivacidadeContent = () => {
       <p>
         A sua privacidade é importante para nós. É política da <strong>Cromia — Tecnologia e Parceria Estratégica</strong> respeitar
         a sua privacidade em relação a qualquer informação sua que possamos coletar no site{' '}
-        <a href="https://www.cromiamkt.com.br" target="_blank" rel="noopener noreferrer">Cromia</a>.
+        <a href="https://www.cromia.app" target="_blank" rel="noopener noreferrer">Cromia</a>.
       </p>
 
       <h3>2. Coleta de Dados</h3>
@@ -60,7 +60,7 @@ export const TermosDeUsoContent = () => {
     <>
       <h3>1. Termos</h3>
       <p>
-        Ao acessar o site <a href="https://www.cromiamkt.com.br" target="_blank" rel="noopener noreferrer">Cromia</a>,
+        Ao acessar o site <a href="https://www.cromia.app" target="_blank" rel="noopener noreferrer">Cromia</a>,
         você concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis e
         concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se você não
         concordar com algum desses termos, está proibido de usar ou acessar este site.

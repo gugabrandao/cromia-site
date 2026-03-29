@@ -17,7 +17,7 @@ export default function TermosDeUso() {
             <div className={styles.box_branco}>
               <h3>1. Termos</h3>
               <p>
-                Ao acessar o site <a href="https://www.cromiamkt.com.br" target="_blank" rel="noopener noreferrer">Cromia</a>,
+                Ao acessar o site <a href="https://www.cromia.app" target="_blank" rel="noopener noreferrer">Cromia</a>,
                 você concorda em cumprir estes termos de serviço, todas as leis e regulamentos aplicáveis e
                 concorda que é responsável pelo cumprimento de todas as leis locais aplicáveis. Se você não
                 concordar com algum desses termos, está proibido de usar ou acessar este site.

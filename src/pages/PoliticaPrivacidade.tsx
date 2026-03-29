@@ -23,7 +23,7 @@ export default function PoliticaPrivacidade() {
               <p>
                 A sua privacidade é importante para nós. É política da <strong>Cromia — Marketing e Negócios</strong> respeitar
                 a sua privacidade em relação a qualquer informação sua que possamos coletar no site{' '}
-                <a href="https://www.cromiamkt.com.br" target="_blank" rel="noopener noreferrer">Cromia</a>.
+                <a href="https://www.cromia.app" target="_blank" rel="noopener noreferrer">Cromia</a>.
               </p>
 
               <h3>2. Coleta de Dados</h3>
