@@ -2,24 +2,24 @@ import styles from './Servicos.module.css';
 
 const servicos = [
   {
-    titulo: 'Instrução Estratégica: Raio-X de Marketing',
-    descricao: 'Um diagnóstico profundo para mapear a real maturidade do seu marketing. Analiso processos, estruturas de equipe e fluxos de trabalho para identificar exatamente o que trava o seu crescimento. Você recebe a clareza necessária para "organizar a casa".',
+    titulo: 'Diagnóstico e Mapeamento de Ecossistemas',
+    descricao: 'Analisamos profundamente os fluxos atuais da sua empresa para identificar exatamente onde a tecnologia pode eliminar gargalos, reduzir custos operacionais e acelerar seus resultados.',
   },
   {
-    titulo: 'Direcionamento Estratégico de Marketing',
-    descricao: 'Desenvolvimento de soluções sob medida para os desafios táticos e de comunicação do seu negócio. Atuo diretamente no desenho do posicionamento de mercado, inteligência de canais e estruturação de processos. Foco na construção de resultados sustentáveis.',
+    titulo: 'Implementação de Inteligência Artificial',
+    descricao: 'Levamos a IA para o coração do seu negócio. Integramos assistentes inteligentes (como a Yasmim) para humanizar o atendimento em larga escala e agilizar processos de agendamento e triagem.',
   },
   {
-    titulo: 'Liderança Estratégica Fracionada (PMO)',
-    descricao: 'Tenha uma líder de marketing sênior no seu time sem o custo fixo de um executivo em tempo integral. Atuo como sua gerente de marketing não exclusiva, integrando-me à rotina da empresa para assumir a governança técnica e elevar o nível de maturidade da equipe.',
+    titulo: 'Desenvolvimento de Soluções SaaS',
+    descricao: 'Criamos plataformas robustas, escaláveis e intuitivas. Entregamos o ecossistema completo para a gestão da sua operação, garantindo que o software se molde ao seu negócio, e não o contrário.',
   },
   {
-    titulo: 'Mentoria Estratégica (Coletiva)',
-    descricao: 'Um programa de desenvolvimento profissional desenhado para quem está começando ou deseja migrar da execução operacional para o pensamento estratégico. Ensino as alavancas que a maioria ignora para você conquistar valorização.',
+    titulo: 'Automação de Atendimento e Vendas',
+    descricao: 'Transformamos o contato com o cliente em um fluxo automatizado e fluido. Conectamos seu atendimento a estoques e sistemas internos para garantir respostas precisas e conversões mais rápidas.',
   },
   {
-    titulo: 'Instrução em Automação e Processos',
-    descricao: 'Tecnologia a serviço da agilidade. Implemento soluções de IA, chatbots e fluxos automatizados para eliminar gargalos manuais e qualificar leads. Transformo processos que hoje "estão na cabeça das pessoas" em sistemas inteligentes.',
+    titulo: 'Parceria e Mentoria Estratégica',
+    descricao: 'Não somos apenas fornecedores; somos parceiros. Oferecemos o suporte tático necessário para garantir que sua equipe extraia o máximo potencial das novas tecnologias implementadas.',
   },
 ];
 
