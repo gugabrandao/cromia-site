@@ -19,7 +19,7 @@
   top: 0;
   left: -17px;
   width: 240px;
-  z-index: 100;
+  z-index: 9001;
   transition: filter 0.2s ease;
 }
 
