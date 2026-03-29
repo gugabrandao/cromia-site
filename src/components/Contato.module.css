@@ -24,10 +24,10 @@
   text-align: center;
   color: #fff;
   margin-bottom: 1px;
-  text-shadow: 2px 2px 0px rgba(0,0,0,0.33);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.33);
   background-color: #D29B8C;
   border: solid 1px #fff;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   opacity: 0.75;
 }
 
@@ -36,8 +36,8 @@
   -webkit-backdrop-filter: blur(10px) saturate(180%);
   backdrop-filter: blur(10px) saturate(180%);
   padding: 40px;
-  border: 10px solid rgba(255,255,255,0.5);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border: 10px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   font-size: 18px;
   line-height: 1.6;
   min-height: 700px;
@@ -54,7 +54,7 @@
 
 .dados_contato a:hover {
   font-weight: 400;
-  text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .midia_titulo {
@@ -78,7 +78,7 @@
   border-radius: 50%;
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   border: solid 4px #fff;
 }
 
@@ -102,7 +102,7 @@
 
 .btn_social:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
 .btn_social:hover svg {
@@ -114,6 +114,7 @@
     padding: 20px;
     border-radius: 0px;
     font-size: 16px;
+    min-height: 442px;
   }
 
   .box_center {

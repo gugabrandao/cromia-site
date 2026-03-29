@@ -25,6 +25,12 @@ html {
   scroll-padding-top: 70px;
 }
 
+@media (max-width: 1200px) {
+  html {
+    scroll-padding-top: 64px;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
