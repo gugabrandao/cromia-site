@@ -1,0 +1,69 @@
+.cromia_mesh_bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  overflow: hidden;
+  z-index: -100;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0px);
+  will-change: transform;
+}
+
+.nude1 {
+  width: 70vw;
+  height: 70vw;
+  background-color: #D29B8C;
+  opacity: 0.15;
+  top: -10vw;
+  left: -10vw;
+  animation: float1 10s infinite alternate ease-in-out;
+}
+
+.nude2 {
+  width: 50vw;
+  height: 50vw;
+  background-color: #D29B8C;
+  opacity: 0.12;
+  bottom: -10vw;
+  right: -10vw;
+  animation: float2 12s infinite alternate ease-in-out;
+}
+
+.amber {
+  width: 55vw;
+  height: 55vw;
+  background-color: #B45F3B;
+  opacity: 0.10;
+  bottom: -20vw;
+  left: 20vw;
+  animation: float3 8s infinite alternate ease-in-out;
+}
+
+@keyframes float1 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(15vw, 10vw, 0) scale(1.2) skewX(5deg); }
+}
+
+@keyframes float2 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-15vw, -10vw, 0) scale(1.1) skewY(-5deg); }
+}
+
+@keyframes float3 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(10vw, -15vw, 0) scale(1.3); }
+}
+
+@media (max-width: 1200px) {
+  .nude1 { width: 100vw; height: 100vw; }
+  .nude2 { width: 100vw; height: 100vw; bottom: 20vw; }
+  .amber { width: 100vw; height: 100vw; }
+}

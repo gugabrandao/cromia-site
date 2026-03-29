@@ -1,0 +1,95 @@
+.secao_conteudo {
+  position: relative;
+  padding: 0px 20px 80px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.bg_parallax {
+  background-image: url('/imgs/bg2.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 0;
+  z-index: 2;
+}
+
+.titulo_secao {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(30px, 5vw, 50px);
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1px;
+  text-shadow: 2px 2px 0px rgba(0,0,0,0.33);
+  background-color: #D29B8C;
+  border: solid 1px #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  opacity: 0.75;
+}
+
+.box_branco {
+  background-color: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 40px;
+  border: 10px solid rgba(255,255,255,0.5);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: justify;
+  min-height: 700px;
+}
+
+.foto_perfil {
+  float: right;
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  border: 8px solid #fff;
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  margin: 0 0 20px 30px;
+}
+
+.citacao {
+  font-size: 22px;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.destaque_texto {
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(138, 96, 97, 0.2);
+  padding-bottom: 20px;
+}
+
+.destaque_texto h4 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #3A3A3A;
+}
+
+@media (max-width: 1200px) {
+  .box_branco {
+    padding: 20px;
+    border-radius: 40px;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .foto_perfil {
+    float: none;
+    display: block;
+    margin: 0 auto 20px auto;
+  }
+
+  .citacao {
+    font-size: 24px;
+  }
+}

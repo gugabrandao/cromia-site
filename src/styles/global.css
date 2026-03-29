@@ -1,0 +1,44 @@
+/* =============================================
+   CROMIA — Global Styles
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --nude-org: #D29B8C;
+  --amber-tech: #B45F3B;
+  --deep-brown: #4A2C2A;
+  --grey: #3A3A3A;
+  --border-color: rgba(138, 96, 97, 0.4);
+  --white-glass: rgba(255, 255, 255, 0.92);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: var(--grey);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a img {
+  border: none;
+}

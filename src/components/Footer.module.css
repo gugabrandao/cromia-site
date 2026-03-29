@@ -1,0 +1,29 @@
+.footer_bg {
+  background-color: #fff;
+  color: #8A6061;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: normal;
+  border-top: 1px solid rgba(138, 96, 97, 0.3);
+  opacity: 0.75;
+}
+
+.footer_bg a:hover {
+  text-decoration: underline;
+  filter: drop-shadow(2px 2px 3px #999999);
+}
+
+.mobile_break {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .footer_bg {
+    font-size: 16px;
+  }
+
+  .mobile_break {
+    display: block;
+  }
+}
