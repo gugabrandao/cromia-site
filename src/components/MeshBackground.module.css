@@ -13,7 +13,7 @@
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(5px);
   will-change: transform;
 }
 
