@@ -2,7 +2,7 @@ import styles from './Header.module.css';
 
 export default function Header() {
   return (
-    <header className={styles.menu_bg} id="menu_bg">
+    <header className={styles.menu_bg}>
       <a href="#home">
         <img src="/imgs/logo.svg" alt="Logo Cromia" className={styles.logo} id="logo" />
       </a>
