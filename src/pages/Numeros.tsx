@@ -112,9 +112,9 @@ const Numeros: React.FC = () => {
 
   return (
     <div className="bg-cromia-bg text-cromia-ink font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
-      <div className="max-w-[860px] mx-auto px-6 py-[52px]">
+      <div className="max-w-[860px] mx-auto px-6 py-[30px]">
         {/* Header */}
-        <div className="mb-12 border-b-2 border-cromia-ink pb-8">
+        <div className="mb-12 border-b-1 border-cromia-ink/20 pb-8">
           <div className="text-sm font-semibold tracking-[0.3em] uppercase text-cromia-gold mb-4 flex items-center gap-[10px] before:content-[''] before:w-6 before:h-[2px] before:bg-cromia-gold">
             Cromia Health · Yasmim
           </div>
@@ -129,16 +129,16 @@ const Numeros: React.FC = () => {
         </div>
 
         {/* Parâmetros */}
-        <div className="bg-cromia-surface border border-cromia-border rounded-sm p-8 mb-5 shadow-[0_2px_20px_rgba(26,18,8,0.06)]">
-          <div className="text-sm font-semibold tracking-[0.25em] uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
+        <div className="bg-cromia-surface border border-cromia-border rounded-sm p-8 mb-5 shadow-lg">
+          <div className="text-sm font-semibold tracking-[0.25em] uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border/50">
             Tamanho da clínica
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
-                <span className="text-sm text-cromia-ink2 tracking-wider">Consultas por dia</span>
+                <span className="text-base text-cromia-ink2 tracking-wider">Consultas por dia</span>
                 <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-ink">
-                  {consultas} <small className="font-space-grotesk text-sm text-cromia-muted font-normal">consultas</small>
+                  {consultas} <small className="font-space-grotesk text-base text-cromia-muted font-normal">consultas</small>
                 </span>
               </div>
               <input
@@ -149,9 +149,9 @@ const Numeros: React.FC = () => {
             </div>
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
-                <span className="text-sm text-cromia-ink2 tracking-wider">Ticket médio</span>
+                <span className="text-base text-cromia-ink2 tracking-wider">Ticket médio</span>
                 <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-ink">
-                  R$ {ticket} <small className="font-space-grotesk text-sm text-cromia-muted font-normal">/consulta</small>
+                  R$ {ticket} <small className="font-space-grotesk text-base text-cromia-muted font-normal">/ consulta</small>
                 </span>
               </div>
               <input
@@ -162,9 +162,9 @@ const Numeros: React.FC = () => {
             </div>
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
-                <span className="text-sm text-cromia-ink2 tracking-wider">Recepcionistas</span>
+                <span className="text-base text-cromia-ink2 tracking-wider">Recepcionistas</span>
                 <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-ink">
-                  {recep} <small className="font-space-grotesk text-sm text-cromia-muted font-normal">pessoas</small>
+                  {recep} <small className="font-space-grotesk text-base text-cromia-muted font-normal">pessoas</small>
                 </span>
               </div>
               <input
@@ -175,9 +175,9 @@ const Numeros: React.FC = () => {
             </div>
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
-                <span className="text-sm text-cromia-ink2 tracking-wider">Salário médio recep.</span>
+                <span className="text-base text-cromia-ink2 tracking-wider">Salário recepção</span>
                 <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-ink">
-                  R$ {salario.toLocaleString('pt-BR')} <small className="font-space-grotesk text-sm text-cromia-muted font-normal">/mês</small>
+                  R$ {salario.toLocaleString('pt-BR')} <small className="font-space-grotesk text-base text-cromia-muted font-normal">/ mês</small>
                 </span>
               </div>
               <input
@@ -190,19 +190,18 @@ const Numeros: React.FC = () => {
         </div>
 
         {/* Cenários */}
-        <div className="mb-5">
-          <div className="text-[13px] font-semibold tracking-[0.25em] uppercase text-cromia-ink2 mb-5 mt-[50px] flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
-            Maturidade operacional atual da clínica
-            <span className="text-sm font-normal tracking-wide lowercase text-cromia-ink2">— quanto mais precária, maior o impacto da Yasmim</span>
+        <div className="mt-15 mb-20 shadow-lg">
+          <div className="text-base font-semibold tracking-wide uppercase text-cromia-ink2 mb-5 mt-[50px] flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
+            Maturidade operacional atual
+            <span className="text-base font-normal tracking-wide normal-case text-cromia-ink2">— Quanto mais precária, maior o impacto da Yasmim</span>
           </div>
-          <div className="flex border border-cromia-border rounded-sm overflow-hidden bg-cromia-surface">
+          <div className="flex border border-cromia-border rounded-sm overflow-hidden bg-cromia-surface shadow-lg">
             {Object.keys(scenarios).map(s => (
               <button
                 key={s}
                 onClick={() => setActiveScenario(s)}
-                className={`flex-1 py-4 px-2 md:px-8 text-center cursor-pointer text-sm font-semibold tracking-wider uppercase transition-all duration-200 border-r border-cromia-border last:border-r-0 ${
-                  activeScenario === s ? 'bg-cromia-ink text-cromia-bg' : 'bg-none text-cromia-gold-dim'
-                }`}
+                className={`flex-1 py-4 px-2 md:px-8 text-center cursor-pointer text-sm font-semibold tracking-wider uppercase transition-all duration-200 border-r border-cromia-border last:border-r-0 ${activeScenario === s ? 'bg-cromia-gold text-white' : 'bg-none text-cromia-ink'
+                  }`}
               >
                 <span className="block mb-1">{scenarios[s].label}</span>
                 <span className="block text-sm font-normal tracking-normal lowercase opacity-80 leading-tight" dangerouslySetInnerHTML={{ __html: scenarios[s].shortDesc }} />
@@ -210,7 +209,7 @@ const Numeros: React.FC = () => {
             ))}
           </div>
           <div
-            className="mt-5 p-[14px_18px] bg-cromia-gold-light border border-cromia-gold/15 rounded-sm text-[18px] text-cromia-ink2 leading-[1.4] [&_strong]:font-black [&_strong]:text-cromia-gold-dim [&_strong]:italic-none"
+            className="mt-0 p-[14px_18px] bg-white border border-cromia-gold/15 rounded-sm text-[18px] text-cromia-ink2 leading-[1.4] [&_strong]:font-black [&_strong]:text-cromia-gold-dim [&_strong]:italic-none"
             dangerouslySetInnerHTML={{ __html: scenarios[activeScenario].context }}
           />
         </div>
@@ -218,8 +217,8 @@ const Numeros: React.FC = () => {
         {/* Blocos de Valor */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {/* Economia */}
-          <div className="rounded-sm p-7 bg-cromia-red-light border border-cromia-red/15">
-            <div className="text-sm font-semibold tracking-[0.25em] uppercase mb-[6px] text-cromia-red">O que deixa de gastar</div>
+          <div className="rounded-sm p-7 bg-cromia-red-light border border-cromia-red/15 shadow-lg">
+            <div className="text-sm font-semibold tracking-[0.25em] uppercase mb-[6px] text-cromia-red">O que deixa de perder</div>
             <div className="text-sm text-cromia-ink2 mb-[18px] leading-[1.4]">Economia com automação do atendimento</div>
             <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-red transition-all duration-300 ${getPulseClass('totalEco')}`}>
               {fmt(results.totalEco)}
@@ -242,7 +241,7 @@ const Numeros: React.FC = () => {
           </div>
 
           {/* Receita */}
-          <div className="rounded-sm p-7 bg-cromia-teal-light border border-cromia-teal/15">
+          <div className="rounded-sm p-7 bg-cromia-teal-light border border-cromia-teal/15 shadow-lg">
             <div className="text-sm font-semibold tracking-[0.25em] uppercase mb-[6px] text-cromia-teal">O que passa a ganhar</div>
             <div className="text-sm text-cromia-ink2 mb-[18px] leading-[1.4]">Receita nova capturada 24/7</div>
             <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-teal transition-all duration-300 ${getPulseClass('totalRec')}`}>
@@ -267,58 +266,58 @@ const Numeros: React.FC = () => {
         </div>
 
         {/* Hero Final */}
-        <div className="bg-cromia-ink rounded-sm p-10 text-center mb-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_130%,rgba(200,130,10,0.3)_0%,transparent_65%)] pointer-events-none" />
-          <div className="text-sm font-semibold tracking-[0.3em] uppercase text-cromia-muted mb-[10px] relative z-10">
+        <div className="bg-cromia-ink rounded-sm p-10 text-center mt-10 mb-4 relative overflow-hidden shadow-lg">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_130%,rgba(200,130,10,0.7)_0%,transparent_65%)] pointer-events-none" />
+          <div className="text-sm font-normal tracking-[0.3em] uppercase text-white/70 mb-[10px] relative z-10">
             Valor total gerado com a Yasmim / mês
           </div>
           <div className={`font-fraunces text-[clamp(2.5rem,8vw,5rem)] font-black text-cromia-bg leading-none mb-2 transition-all duration-400 relative z-10 [text-shadow:0_0_80px_rgba(200,130,10,0.25)] ${getPulseClass('total')}`}>
             {fmt(results.total)}
           </div>
-          <div className="text-[18px] text-white/50 tracking-wider leading-relaxed relative z-10">
+          <div className="text-[18px] text-white/70 tracking-wider leading-relaxed relative z-10">
             <strong className={`text-white/85 ${getPulseClass('totalAno')}`}>{fmt(results.totalAno)}</strong> por ano &nbsp;·&nbsp;
-            A Yasmim se paga em <strong className={`text-white/85 ${getPulseClass('paybackDias')}`}>{results.paybackDias} dias</strong> de operação
+            A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>{results.paybackDias} dias</strong> de operação
           </div>
         </div>
 
         {/* ROI / Pills */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-          <div className="bg-cromia-gold-light border border-cromia-gold/20 rounded-sm p-[18px] text-center">
-            <span className={`block font-fraunces text-2xl font-black text-cromia-gold-dim mb-1 transition-all duration-300 ${getPulseClass('roi')}`}>{results.roi}%</span>
-            <span className="text-[10px] text-cromia-muted tracking-widest uppercase">ROI sobre recorrência</span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10 mt-10">
+          <div className="bg-cromia-teal-light border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg">
+            <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('roi')}`}>{results.roi}%</span>
+            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">ROI sobre Mensalidade Starter</span>
           </div>
-          <div className="bg-cromia-gold-light border border-cromia-gold/20 rounded-sm p-[18px] text-center">
-            <span className={`block font-fraunces text-2xl font-black text-cromia-gold-dim mb-1 transition-all duration-300 ${getPulseClass('mult')}`}>{results.mult}x</span>
-            <span className="text-[10px] text-cromia-muted tracking-widest uppercase">Retorno por R$ investido</span>
+          <div className="bg-cromia-teal-light border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg">
+            <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('mult')}`}>{results.mult}x</span>
+            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Retorno por cada R$ investido</span>
           </div>
-          <div className="bg-cromia-gold-light border border-cromia-gold/20 rounded-sm p-[18px] text-center">
-            <span className={`block font-fraunces text-2xl font-black text-cromia-gold-dim mb-1 transition-all duration-300 ${getPulseClass('consultasExtra')}`}>+{fmtN(results.consultasExtra)}/mês</span>
-            <span className="text-[10px] text-cromia-muted tracking-widest uppercase">Consultas novas/mês</span>
+          <div className="bg-cromia-teal-light border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg">
+            <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('consultasExtra')}`}>+{fmtN(results.consultasExtra)}/mês</span>
+            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Consultas novas/mês</span>
           </div>
         </div>
 
         {/* Pitch Argument */}
-        <div className="bg-cromia-surface border border-cromia-border border-l-4 border-l-cromia-gold rounded-sm px-8 py-7 mb-6">
-          <div className="text-[18px] font-semibold tracking-widest uppercase text-cromia-gold mb-3.5">
+        <div className="bg-cromia-surface border border-cromia-border border-l-4 border-l-cromia-gold rounded-sm px-8 py-7 mb-10 shadow-lg">
+          <div className="text-[18px] font-bold tracking-widest uppercase text-cromia-gold mb-3.5">
             O fato é...
           </div>
-          <p className="font-fraunces text-[1.2rem] font-light italic text-cromia-ink leading-[1.8]">
+          <p className="font-fraunces text-[1.3rem] font-light italic text-cromia-ink leading-[1.8]">
             "Com <strong className="font-semibold not-italic text-cromia-gold-dim">{consultas} consultas/dia</strong> e ticket médio de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(ticket)}</strong>,
-            essa clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)}/mês</strong> só com no-show —
+            essa clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)}/mês</strong> só com <strong className="font-semibold not-italic text-cromia-gold-dim">no-show</strong> —
             e mais <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.recFora)}/mês</strong> em pacientes que tentam agendar fora do horário e não encontram ninguém.
             A Yasmim trabalha às 23h de domingo. No total, ela gera <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.total)}/mês</strong> de valor real.
-            A recorrência é <strong className="font-semibold not-italic text-cromia-gold-dim">R$ 2.000</strong>. O resto fica inteiro no caixa da clínica."
+            A recorrência (starter) é <strong className="font-semibold not-italic text-cromia-gold-dim">R$ 2.000</strong>. O resto fica inteiro no caixa da clínica."
           </p>
         </div>
 
         {/* Planos */}
-        <div className="bg-cromia-surface2 border border-cromia-border rounded-sm px-8 py-7">
-          <div className="text-sm font-semibold tracking-[0.25em] uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
-            Planos de Implementação Proporcional à Clínica
+        <div className="bg-cromia-surface2 border border-cromia-border rounded-sm px-8 py-7 mb-30 shadow-lg">
+          <div className="text-base font-semibold tracking-widest uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
+            Planos de Implementação - Proporcionais ao tamanho da Clínica
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="border border-cromia-border rounded-sm p-5 bg-cromia-surface text-center">
-              <div className="text-sm font-semibold tracking-widest uppercase text-cromia-muted mb-2">Starter</div>
+              <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">Starter</div>
               <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ 2.000</div>
               <div className="text-[17px] text-cromia-ink2 mb-3.5">1–5 médicos</div>
               <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
@@ -326,7 +325,7 @@ const Numeros: React.FC = () => {
               </span>
             </div>
             <div className="border border-cromia-border rounded-sm p-5 bg-cromia-surface text-center">
-              <div className="text-sm font-semibold tracking-widest uppercase text-cromia-muted mb-2">Clinic</div>
+              <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">Standard</div>
               <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ 2.800</div>
               <div className="text-[17px] text-cromia-ink2 mb-3.5">6–15 médicos</div>
               <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
@@ -334,7 +333,7 @@ const Numeros: React.FC = () => {
               </span>
             </div>
             <div className="border border-cromia-border rounded-sm p-5 bg-cromia-surface text-center">
-              <div className="text-sm font-semibold tracking-widest uppercase text-cromia-muted mb-2">Pro</div>
+              <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">Pro</div>
               <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ 3.900</div>
               <div className="text-[17px] text-cromia-ink2 mb-3.5">15+ médicos</div>
               <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
