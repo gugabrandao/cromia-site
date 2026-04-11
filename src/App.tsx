@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import PoliticaPrivacidade from './pages/PoliticaPrivacidade';
 import TermosDeUso from './pages/TermosDeUso';
+import Numeros from './pages/Numeros';
 import { ModalProvider, useModal } from './context/ModalContext';
 import Modal from './components/Modal';
 import { PoliticaPrivacidadeContent, TermosDeUsoContent } from './components/LegalContent';
@@ -16,6 +17,7 @@ function AppContent() {
         <Route path="/" element={<Home />} />
         <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
         <Route path="/termos-de-uso" element={<TermosDeUso />} />
+        <Route path="/numeros" element={<Numeros />} />
       </Routes>
 
       <Modal 

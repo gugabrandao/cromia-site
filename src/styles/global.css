@@ -1,3 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cromia-bg: #f5f0e8;
+  --color-cromia-surface: #ffffff;
+  --color-cromia-surface2: #faf7f2;
+  --color-cromia-ink: #1a1208;
+  --color-cromia-ink2: #4a3f2f;
+  --color-cromia-muted: #9a8f7f;
+  --color-cromia-border: #e8e0d0;
+  --color-cromia-gold: #c8820a;
+  --color-cromia-gold-light: #fdf3e0;
+  --color-cromia-gold-dim: #8a5a05;
+  --color-cromia-teal: #0a6b5c;
+  --color-cromia-teal-light: #e0f5f0;
+  --color-cromia-red: #b83232;
+  --color-cromia-red-light: #fdf0f0;
+
+  --font-fraunces: "Fraunces", serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+
+  --animate-calculator-pulse: calculator-pulse 0.35s ease-in-out;
+
+  @keyframes calculator-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+}
+
 /* =============================================
    CROMIA — Global Styles
    ============================================= */

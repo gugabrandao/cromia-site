@@ -1,0 +1,335 @@
+import React, { useState, useMemo, useEffect } from 'react';
+import styles from './Numeros.module.css';
+
+const fmt = (v: number) => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+const fmtN = (v: number) => Math.round(v).toLocaleString('pt-BR');
+
+interface Scenario {
+  label: string;
+  shortDesc: string;
+  context: string;
+  noshow_atual: number;
+  noshow_reducao: number;
+  recep_reducao: number;
+  fora_horario_vol: number;
+  fora_horario_perda: number;
+  encaixe_taxa: number;
+  reativ_taxa: number;
+}
+
+const scenarios: Record<string, Scenario> = {
+  organizada: {
+    label: 'Organizada',
+    shortDesc: 'Processos razoáveis,<br>poucos buracos',
+    context: 'Recepção funciona bem no horário comercial. No-show em torno de <strong>10%</strong> das consultas — a Yasmim elimina <strong>40%</strong> disso com confirmação ativa. Cerca de <strong>20%</strong> das tentativas de agendamento chegam fora do expediente, e <strong>60%</strong> dessas se perdem hoje. A Yasmim captura esse volume. Redução de <strong>30%</strong> na necessidade de recepcionistas. Reencaixe de <strong>30%</strong> dos cancelamentos. Reativação residual de <strong>1%</strong> dos inativos por mês.',
+    noshow_atual: 0.10, //10%
+    noshow_reducao: 0.40, //40%
+    recep_reducao: 0.30, //30%
+    fora_horario_vol: 0.20, //20%
+    fora_horario_perda: 0.60, //60%
+    encaixe_taxa: 0.30, //30%
+    reativ_taxa: 0.01, //1% 
+  },
+  media: {
+    label: 'Média',
+    shortDesc: 'Gaps claros,<br>recepção sobrecarregada',
+    context: 'Recepção sobrecarregada, telefone frequentemente ocupado. No-show em torno de <strong>18%</strong> — a Yasmim reduz <strong>55%</strong> disso com confirmação e reagendamento automático. <strong>30%</strong> das tentativas chegam fora do horário e <strong>75%</strong> dessas se perdem sem atendimento. Redução de <strong>50%</strong> no headcount de recepção. Reencaixe de <strong>45%</strong> dos cancelamentos. Reativação de <strong>2,5%</strong> da base de inativos por mês.',
+    noshow_atual: 0.18, //18%
+    noshow_reducao: 0.55, //55%
+    recep_reducao: 0.50, //50%
+    fora_horario_vol: 0.30, //30%
+    fora_horario_perda: 0.75, //75%
+    encaixe_taxa: 0.45, //45%
+    reativ_taxa: 0.025, //2.5%
+  },
+  precaria: {
+    label: 'Precária',
+    shortDesc: 'Muita perda,<br>sem automação nenhuma',
+    context: 'Sem nenhuma automação. No-show chega a <strong>28%</strong> da agenda — a Yasmim elimina <strong>70%</strong> desse volume. <strong>40%</strong> das tentativas de agendamento chegam fora do expediente and <strong>90%</strong> se perdem hoje por completo. Redução de até <strong>80%</strong> na dependência da recepção. Reencaixe de <strong>60%</strong> dos cancelamentos. Reativação de <strong>5%</strong> da base inativa por mês — pacientes que nunca foram recontactados.',
+    noshow_atual: 0.28, //28%
+    noshow_reducao: 0.70, //70%
+    recep_reducao: 0.80, //80%
+    fora_horario_vol: 0.40, //40%
+    fora_horario_perda: 0.90, //90%
+    encaixe_taxa: 0.60, //60%
+    reativ_taxa: 0.05, //5%
+  },
+};
+
+const DIAS_MES = 26;
+const RECORRENCIA = 2000;
+
+const Plano1: React.FC = () => {
+  const [consultas, setConsultas] = useState(40);
+  const [ticket, setTicket] = useState(200);
+  const [recep, setRecep] = useState(3);
+  const [salario, setSalario] = useState(1900);
+  const [activeScenario, setActiveScenario] = useState('media');
+  const [pulsing, setPulsing] = useState<Record<string, boolean>>({});
+
+  const sc = scenarios[activeScenario];
+
+  const results = useMemo(() => {
+    // --- ECONOMIA ---
+    const ecoRecep = salario * recep * sc.recep_reducao;
+    const consultasMes = consultas * DIAS_MES;
+    const noshowMes = consultasMes * sc.noshow_atual;
+    const ecoNoshow = noshowMes * sc.noshow_reducao * ticket;
+    const ecoExtras = salario * recep * sc.recep_reducao * 0.10;
+    const totalEco = ecoRecep + ecoNoshow + ecoExtras;
+
+    // --- RECEITA NOVA ---
+    const tentativasFora = consultasMes * sc.fora_horario_vol;
+    const recFora = tentativasFora * sc.fora_horario_perda * ticket;
+    const recEncaixe = noshowMes * sc.encaixe_taxa * ticket;
+    const recReativ = consultasMes * sc.reativ_taxa * ticket;
+    const totalRec = recFora + recEncaixe + recReativ;
+
+    // --- TOTAIS ---
+    const total = totalEco + totalRec;
+    const totalAno = total * 12;
+    const paybackDias = Math.ceil(RECORRENCIA / (total / DIAS_MES));
+    const roi = Math.round((total / RECORRENCIA - 1) * 100);
+    const mult = (total / RECORRENCIA).toFixed(1);
+    const consultasExtra = Math.round((recFora + recEncaixe) / ticket);
+
+    return {
+      ecoRecep,
+      ecoNoshow,
+      ecoExtras,
+      totalEco,
+      recFora,
+      recEncaixe,
+      recReativ,
+      totalRec,
+      total,
+      totalAno,
+      paybackDias,
+      roi,
+      mult,
+      consultasExtra,
+    };
+  }, [consultas, ticket, recep, salario, activeScenario]);
+
+  // Animation trigger
+  useEffect(() => {
+    const keys = Object.keys(results);
+    const newPulsing: Record<string, boolean> = {};
+    keys.forEach(k => {
+      newPulsing[k] = true;
+    });
+    setPulsing(newPulsing);
+    const timer = setTimeout(() => setPulsing({}), 350);
+    return () => clearTimeout(timer);
+  }, [results]);
+
+  const getPulseClass = (id: string) => pulsing[id] ? styles.pulse : '';
+
+  return (
+    <div className={styles.numeros}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.eyebrow}>Cromia Health · Yasmim</div>
+          <h1 className={styles.title}>
+            O que a Yasmim gera<br />
+            <em>trabalhando</em> enquanto<br />
+            você dorme
+          </h1>
+          <p className={styles.subtitle}>
+            Configure o tamanho da clínica nos parâmetros. Escolha o cenário conforme a maturidade operacional atual dela — quanto mais desorganizada hoje, maior o benefício com a Yasmim.
+          </p>
+        </div>
+
+        {/* Parâmetros da clínica */}
+        <div className={styles.controls}>
+          <div className={styles.blockTitle}>Tamanho da clínica</div>
+          <div className={styles.sliders}>
+            <div className={styles.sl}>
+              <div className={styles.slHeader}>
+                <span className={styles.slLabel}>Consultas por dia</span>
+                <span className={styles.slVal}>{consultas} <small>consultas</small></span>
+              </div>
+              <input
+                type="range"
+                className={styles.rangeInput}
+                min="10" max="150" step="5"
+                value={consultas}
+                onChange={(e) => setConsultas(+e.target.value)}
+              />
+            </div>
+            <div className={styles.sl}>
+              <div className={styles.slHeader}>
+                <span className={styles.slLabel}>Ticket médio</span>
+                <span className={styles.slVal}>R$ {ticket} <small>/consulta</small></span>
+              </div>
+              <input
+                type="range"
+                className={styles.rangeInput}
+                min="100" max="300" step="10"
+                value={ticket}
+                onChange={(e) => setTicket(+e.target.value)}
+              />
+            </div>
+            <div className={styles.sl}>
+              <div className={styles.slHeader}>
+                <span className={styles.slLabel}>Recepcionistas</span>
+                <span className={styles.slVal}>{recep} <small>pessoas</small></span>
+              </div>
+              <input
+                type="range"
+                className={styles.rangeInput}
+                min="1" max="10"
+                value={recep}
+                onChange={(e) => setRecep(+e.target.value)}
+              />
+            </div>
+            <div className={styles.sl}>
+              <div className={styles.slHeader}>
+                <span className={styles.slLabel}>Salário médio recep.</span>
+                <span className={styles.slVal}>R$ {salario.toLocaleString('pt-BR')} <small>/mês</small></span>
+              </div>
+              <input
+                type="range"
+                className={styles.rangeInput}
+                min="1200" max="4000" step="50"
+                value={salario}
+                onChange={(e) => setSalario(+e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Cenários */}
+        <div className={styles.scenariosWrap}>
+          <div className={styles.scenariosLabel}>
+            Maturidade operacional atual da clínica
+            <span>— quanto mais precária, maior o impacto da Yasmim</span>
+          </div>
+          <div className={styles.tabs}>
+            {Object.keys(scenarios).map((s) => (
+              <button
+                key={s}
+                className={`${styles.tab} ${activeScenario === s ? styles.tabActive : ''}`}
+                onClick={() => setActiveScenario(s)}
+              >
+                <span className={styles.tabName}>{scenarios[s].label}</span>
+                <span className={styles.tabDesc} dangerouslySetInnerHTML={{ __html: scenarios[s].shortDesc }} />
+              </button>
+            ))}
+          </div>
+          <div className={styles.scenarioContext} dangerouslySetInnerHTML={{ __html: scenarios[activeScenario].context }} />
+        </div>
+
+        {/* Blocos de valor */}
+        <div className={styles.valueGrid}>
+          <div className={`${styles.vblock} ${styles.vblockEconomia}`}>
+            <div className={styles.vblockLabel}>O que deixa de gastar</div>
+            <div className={styles.vblockTitle}>Economia com automação do atendimento</div>
+            <div className={`${styles.vblockNumber} ${getPulseClass('totalEco')}`}>{fmt(results.totalEco)}</div>
+            <div className={styles.vblockPeriod}>por mês</div>
+            <div className={styles.vblockItems}>
+              <div className={styles.vblockItem}>
+                <span>Redução de headcount</span>
+                <strong className={getPulseClass('ecoRecep')}>{fmt(results.ecoRecep)}</strong>
+              </div>
+              <div className={styles.vblockItem}>
+                <span>Redução de no-show</span>
+                <strong className={getPulseClass('ecoNoshow')}>{fmt(results.ecoNoshow)}</strong>
+              </div>
+              <div className={styles.vblockItem}>
+                <span>Horas extras evitadas</span>
+                <strong className={getPulseClass('ecoExtras')}>{fmt(results.ecoExtras)}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div className={`${styles.vblock} ${styles.vblockReceita}`}>
+            <div className={styles.vblockLabel}>O que passa a ganhar</div>
+            <div className={styles.vblockTitle}>Receita nova capturada 24/7</div>
+            <div className={`${styles.vblockNumber} ${getPulseClass('totalRec')}`}>{fmt(results.totalRec)}</div>
+            <div className={styles.vblockPeriod}>por mês</div>
+            <div className={styles.vblockItems}>
+              <div className={styles.vblockItem}>
+                <span>Agendamentos fora do horário</span>
+                <strong className={getPulseClass('recFora')}>{fmt(results.recFora)}</strong>
+              </div>
+              <div className={styles.vblockItem}>
+                <span>Reencaixe de cancelamentos</span>
+                <strong className={getPulseClass('recEncaixe')}>{fmt(results.recEncaixe)}</strong>
+              </div>
+              <div className={styles.vblockItem}>
+                <span>Reativação de pacientes inativos</span>
+                <strong className={getPulseClass('recReativ')}>{fmt(results.recReativ)}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Hero total */}
+        <div className={styles.heroTotal}>
+          <div className={styles.heroEyebrow}>Valor total gerado com a Yasmim / mês</div>
+          <div className={`${styles.heroNumber} ${getPulseClass('total')}`}>{fmt(results.total)}</div>
+          <div className={styles.heroSub}>
+            <strong className={getPulseClass('totalAno')}>{fmt(results.totalAno)}</strong> por ano &nbsp;·&nbsp;
+            A Yasmim se paga em <strong className={getPulseClass('paybackDias')}>{results.paybackDias} dias</strong> de operação
+          </div>
+        </div>
+
+        {/* Pills */}
+        <div className={styles.roiRow}>
+          <div className={styles.roiPill}>
+            <span className={`${styles.roiPillVal} ${getPulseClass('roi')}`}>{results.roi}%</span>
+            <span className={styles.roiPillLabel}>ROI sobre recorrência</span>
+          </div>
+          <div className={styles.roiPill}>
+            <span className={`${styles.roiPillVal} ${getPulseClass('mult')}`}>{results.mult}x</span>
+            <span className={styles.roiPillLabel}>Retorno por R$ investido</span>
+          </div>
+          <div className={styles.roiPill}>
+            <span className={`${styles.roiPillVal} ${getPulseClass('consultasExtra')}`}>+{fmtN(results.consultasExtra)}/mês</span>
+            <span className={styles.roiPillLabel}>Consultas novas/mês</span>
+          </div>
+        </div>
+
+        {/* Pitch */}
+        <div className={styles.pitchBox}>
+          <div className={styles.pitchTitle}>O fato é...</div>
+          <p className={styles.pitchText}>
+            "Com <strong>{consultas} consultas/dia</strong> e ticket médio de <strong>{fmt(ticket)}</strong>,
+            essa clínica perde hoje em torno de <strong>{fmt(results.ecoNoshow)}/mês</strong> só com no-show —
+            e mais <strong>{fmt(results.recFora)}/mês</strong> em pacientes que tentam agendar fora do horário e não encontram ninguém.
+            A Yasmim trabalha às 23h de domingo. No total, ela gera <strong>{fmt(results.total)}/mês</strong> de valor real.
+            A recorrência é <strong>R$ 2.000</strong>. O resto fica inteiro no caixa da clínica."
+          </p>
+        </div>
+
+        {/* Recorrência */}
+        <div className={styles.recorrencia}>
+          <div className={styles.blockTitle}>Planos de Implementação Proporcional à Clínica</div>
+          <div className={styles.recGrid}>
+            <div className={styles.recPlan}>
+              <div className={styles.recPlanName}>Starter</div>
+              <div className={styles.recPlanPrice}>R$ 2.000</div>
+              <div className={styles.recPlanSub}>1–5 médicos</div>
+              <span className={`${styles.recPlanRatio} ${getPulseClass('total')}`}>gera {(results.total / 2000).toFixed(1)}x</span>
+            </div>
+            <div className={styles.recPlan}>
+              <div className={styles.recPlanName}>Clinic</div>
+              <div className={styles.recPlanPrice}>R$ 2.800</div>
+              <div className={styles.recPlanSub}>6–15 médicos</div>
+              <span className={`${styles.recPlanRatio} ${getPulseClass('total')}`}>gera {(results.total / 2800).toFixed(1)}x</span>
+            </div>
+            <div className={styles.recPlan}>
+              <div className={styles.recPlanName}>Pro</div>
+              <div className={styles.recPlanPrice}>R$ 3.900</div>
+              <div className={styles.recPlanSub}>15+ médicos</div>
+              <span className={`${styles.recPlanRatio} ${getPulseClass('total')}`}>gera {(results.total / 3900).toFixed(1)}x</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Plano1;
