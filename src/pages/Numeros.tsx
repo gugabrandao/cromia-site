@@ -214,6 +214,38 @@ const Numeros: React.FC = () => {
           />
         </div>
 
+        {/* Base de Informações */}
+        <div className="mb-10 px-8 py-7 bg-cromia-surface border border-cromia-border rounded-sm shadow-sm transition-all hover:shadow-md">
+          <div className="text-sm font-semibold tracking-[0.2em] uppercase text-cromia-gold mb-4 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-cromia-gold animate-pulse"></span>
+            Base de Cálculo e Referências
+          </div>
+          <div className="space-y-4 text-cromia-ink2 leading-relaxed text-base">
+            <p>
+              <strong className="text-cromia-gold-dim">Base:</strong> literatura internacional de saúde aponta no-show entre <span className="font-semibold text-cromia-ink">15%–30%</span> em clínicas sem sistema de confirmação ativa. No Brasil, estudos do CFM e relatos de gestores de clínicas apontam médias próximas de <span className="font-semibold text-cromia-ink">20%</span> sem automação.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-4">
+              <div className="flex flex-col border-l-2 border-cromia-gold/30 pl-4">
+                <span className="text-2xl font-fraunces font-bold text-cromia-gold">10%</span>
+                <span className="text-sm leading-snug">Clínica que já faz alguma confirmação manual (ligação da recepção)</span>
+              </div>
+              <div className="flex flex-col border-l-2 border-cromia-gold/30 pl-4">
+                <span className="text-2xl font-fraunces font-bold text-cromia-gold">18%</span>
+                <span className="text-sm leading-snug">Clínica que não confirma sistematicamente, recepção ocupada</span>
+              </div>
+              <div className="flex flex-col border-l-2 border-cromia-gold/30 pl-4">
+                <span className="text-2xl font-fraunces font-bold text-cromia-gold">28%</span>
+                <span className="text-sm leading-snug">Sem nenhuma confirmação, agenda por telefone apenas</span>
+              </div>
+            </div>
+            
+            <p className="text-sm italic opacity-85 border-t border-cromia-border pt-4">
+              <strong className="not-italic text-cromia-gold-dim">Risco:</strong> esses números variam muito por especialidade. Psiquiatria e nutrição têm no-show muito maior (30%–40%). Urgências, menor.
+            </p>
+          </div>
+        </div>
+
         {/* Blocos de Valor */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {/* Economia */}
