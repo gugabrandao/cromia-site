@@ -21,7 +21,7 @@ const scenarios: Record<string, Scenario> = {
   organizada: {
     label: 'Organizada',
     shortDesc: 'Processos razoáveis,<br>poucos buracos',
-    context: '- Recepção funciona bem no horário comercial. No-show em torno de <strong>10%</strong> das consultas.</br></br>- <strong>Yasmim</strong> elimina <strong>40%</strong> disso com confirmação ativa.</br></br>- Cerca de <strong>20%</strong> das tentativas de agendamento chegam fora do expediente.</br></br>- <strong>60%</strong> dessas se perdem hoje. A <strong>Yasmim</strong> captura esse volume.</br></br>- Redução de <strong>30%</strong> na necessidade de recepcionistas.</br></br>- Reencaixe de <strong>30%</strong> dos cancelamentos.</br></br>- Reativação residual de <strong>1%</strong> dos inativos por mês.',
+    context: '- Recepção funciona bem no horário comercial. No-show em torno de <strong>10%</strong> das consultas.</br></br>- <strong>Yasmim</strong> elimina <strong>40%</strong> disso com confirmação ativa.</br></br>- Cerca de <strong>20%</strong> das tentativas de agendamento chegam fora do expediente, e <strong>60%</strong> dessas se perdem hoje.</br></br>- A recepção gasta ~<strong>30%</strong> do tempo em tarefas repetitivas que a <strong>Yasmim</strong> absorve — esse tempo é redirecionado para acolhimento e atendimento de qualidade.</br></br>- Reencaixe de <strong>30%</strong> dos cancelamentos.</br></br>- Reativação residual de <strong>1%</strong> dos inativos por mês.',
     noshow_atual: 0.10,
     noshow_reducao: 0.40,
     recep_reducao: 0.30,
@@ -33,7 +33,7 @@ const scenarios: Record<string, Scenario> = {
   media: {
     label: 'Média',
     shortDesc: 'Gaps claros,<br>recepção sobrecarregada',
-    context: '- Recepção sobrecarregada, telefone frequentemente ocupado. No-show em torno de <strong>18%</strong>.</br></br>- <strong>Yasmim</strong> reduz <strong>55%</strong> disso com confirmação e reagendamento automático.</br></br>- <strong>30%</strong> das tentativas chegam fora do horário.</br></br>- <strong>75%</strong> dessas se perdem sem atendimento.</br></br>- Redução de <strong>50%</strong> no headcount de recepção.</br></br>- Reencaixe de <strong>45%</strong> dos cancelamentos.</br></br>- Reativação de <strong>2,5%</strong> da base de inativos por mês.',
+    context: '- Recepção sobrecarregada, telefone frequentemente ocupado. No-show em torno de <strong>18%</strong>.</br></br>- <strong>Yasmim</strong> reduz <strong>55%</strong> disso com confirmação e reagendamento automático.</br></br>- <strong>30%</strong> das tentativas chegam fora do horário e <strong>75%</strong> dessas se perdem sem atendimento.</br></br>- A recepção gasta ~<strong>50%</strong> do tempo em triagem, agendamento e FAQ — tudo isso passa para a <strong>Yasmim</strong>, liberando a equipe para o que realmente importa.</br></br>- Reencaixe de <strong>45%</strong> dos cancelamentos.</br></br>- Reativação de <strong>2,5%</strong> da base de inativos por mês.',
     noshow_atual: 0.18,
     noshow_reducao: 0.55,
     recep_reducao: 0.50,
@@ -45,7 +45,7 @@ const scenarios: Record<string, Scenario> = {
   precaria: {
     label: 'Precária',
     shortDesc: 'Muita perda,<br>sem automação nenhuma',
-    context: '- Sem nenhuma automação. No-show chega a <strong>28%</strong> da agenda.</br></br>- <strong>Yasmim</strong> elimina <strong>70%</strong> desse volume.</br></br>- <strong>40%</strong> das tentativas de agendamento chegam fora do expediente.</br></br>- <strong>90%</strong> se perdem hoje por completo.</br></br>- Redução de até <strong>80%</strong> na dependência da recepção.</br></br>- Reencaixe de <strong>60%</strong> dos cancelamentos.</br></br>- Reativação de <strong>5%</strong> da base inativa por mês — pacientes que nunca foram recontactados.',
+    context: '- Sem nenhuma automação. No-show chega a <strong>28%</strong> da agenda.</br></br>- <strong>Yasmim</strong> elimina <strong>70%</strong> desse volume.</br></br>- <strong>40%</strong> das tentativas de agendamento chegam fora do expediente e <strong>90%</strong> se perdem por completo.</br></br>- A recepção gasta ~<strong>80%</strong> do tempo apenas atendendo telefone e respondendo mensagens repetitivas — a <strong>Yasmim</strong> assume esse volume inteiro, transformando a recepção num ponto de acolhimento, não de triagem.</br></br>- Reencaixe de <strong>60%</strong> dos cancelamentos.</br></br>- Reativação de <strong>5%</strong> da base inativa por mês — pacientes que nunca foram recontactados.',
     noshow_atual: 0.28,
     noshow_reducao: 0.70,
     recep_reducao: 0.80,
@@ -88,16 +88,16 @@ const referenceData: Record<string, {
       { value: '70%', desc: 'Substitui o caos total — qualquer confirmação já resolve muito' }
     ]
   },
-  'headcount': {
-    label: 'REDUÇÃO HEADCOUNT',
-    title: 'Redução de headcount de recepção',
-    base: <>Estimativa funcional — se a Yasmim absorve agendamento, cancelamento, FAQ e confirmação, quanto do trabalho da recepção ela substitui?</>,
+  'eficiencia': {
+    label: 'EFICIÊNCIA',
+    title: 'Eficiência operacional da recepção',
+    base: <>A Yasmim absorve as tarefas repetitivas da recepção — agendamento, confirmação, FAQ e cancelamento. O tempo liberado é redirecionado para acolhimento, qualidade no atendimento presencial e resolução de situações complexas. A proposta não é demitir, é <span className="font-semibold text-cromia-ink">transformar o papel da recepção</span>.</>,
     benchmarks: [
-      { value: '30%', desc: 'Clínica organizada ainda precisa de recepção para acolhimento, prontuário, pagamento' },
-      { value: '50%', desc: 'Metade do volume era atendimento que a Yasmim resolve' },
-      { value: '80%', desc: 'Clínica que usava recepção quase exclusivamente para agendamento por telefone' }
+      { value: '30%', desc: 'Clínica organizada — recepção já tem processos, Yasmim otimiza o que é repetitivo' },
+      { value: '50%', desc: 'Clínica média — metade do tempo da recepção era triagem e agendamento por telefone' },
+      { value: '80%', desc: 'Clínica precária — recepção vivia apagando incêndio, Yasmim assume o volume inteiro' }
     ],
-    obs: 'Esse é o número mais difícil de vender. Gestores resistem a falar em demissão. Na prática, o argumento muda para "não precisa contratar mais quando crescer" em vez de "vai demitir".'
+    obs: 'Com 3 recepcionistas e 50% do tempo liberado, são ~264h/mês redirecionadas. Isso vale mais do que qualquer corte de headcount.'
   },
   'volume-fora': {
     label: 'FORA DO HORÁRIO',
@@ -209,360 +209,367 @@ const Numeros: React.FC = () => {
     <>
       <MeshBackground />
       <div className="bg-transparent text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
-      <div className="max-w-[860px] mx-auto px-6 py-[30px] relative">
-        <a href="https://cromia.app" className="absolute top-4 right-6 transition-transform hover:scale-105 active:scale-95">
-          <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-40 md:w-40" />
-        </a>
-        {/* Header */}
-        <div className="mb-12 border-b-1 border-cromia-ink/20 pb-8">
-          <div className="text-base font-semibold tracking-[0.3em] uppercase text-[#b45f3b] mb-4 flex items-center gap-[10px] before:content-[''] before:w-6 before:h-[2px] before:bg-cromia-gold">
-            Cromia Health
-          </div>
-          <h1 className="font-fraunces text-cromia-ink/80 text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] m-0 mb-3">
-            O que a Yasmim gera<br />
-            <em className="italic font-light text-[#b45f3b]">trabalhando</em> enquanto<br />
-            você dorme
-          </h1>
-          <p className="text-[17px] text-cromia-ink leading-[1.7] max-w-[860px] m-0">
-            Configure o <span className="font-semibold">tamanho da clínica</span> nos parâmetros abaixo. Escolha o cenário conforme a maturidade operacional atual dela — Quanto mais desestruturada hoje, maior o custo/benefício com a implementação do <span className="font-semibold">Sistema Cromia Health</span>.
-          </p>
-        </div>
-
-        {/* Parâmetros */}
-        <div className="bg-cromia-surface border border-cromia-border rounded-sm p-8 mb-5 shadow-lg">
-          <div className="text-lg font-semibold tracking-[0.15em] uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border/70">
-            Tamanho da clínica
-          </div>
-          {/* Agora o grid contém todos os campos necessários */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 mb-8">
-            {/* Médicos — define plano e sugere consultas */}
-            <div className="flex flex-col gap-[10px]">
-              <div className="flex justify-between items-baseline">
-                <span className="text-base text-cromia-ink2 tracking-wider">Médicos ativos</span>
-                <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
-                  {medicos} <small className="font-space-grotesk text-base text-cromia-muted font-normal">médicos</small>
-                </span>
-              </div>
-              <input
-                type="range" min="1" max="25" step="1" value={medicos}
-                onChange={e => {
-                  const m = +e.target.value;
-                  setMedicos(m);
-                  // Sugere consultas/dia se o usuário nunca ajustou manualmente
-                  if (!consultaManual) setConsultas(Math.round(m * 7));
-                }}
-                className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
-              />
-              <span className="text-base text-cromia-muted italic">
-                Plano recomendado: <strong className="not-italic text-cromia-gold-dim">
-                  {planoRecomendado.charAt(0).toUpperCase() + planoRecomendado.slice(1)}
-                </strong>
-              </span>
+        <div className="max-w-[860px] mx-auto px-6 py-[30px] relative">
+          <a href="https://cromia.app" className="absolute top-4 right-6 transition-transform hover:scale-105 active:scale-95">
+            <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-40 md:w-40" />
+          </a>
+          {/* Header */}
+          <div className="mb-12 border-b-1 border-cromia-ink/20 pb-8">
+            <div className="text-base font-semibold tracking-[0.3em] uppercase text-[#b45f3b] mb-4 flex items-center gap-[10px] before:content-[''] before:w-6 before:h-[2px] before:bg-cromia-gold">
+              Cromia Health
             </div>
+            <h1 className="font-fraunces text-cromia-ink/80 text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] m-0 mb-3">
+              O que a Yasmim gera<br />
+              <em className="italic font-light text-[#b45f3b]">trabalhando</em> enquanto<br />
+              você dorme
+            </h1>
+            <p className="text-[17px] text-cromia-ink leading-[1.7] max-w-[860px] m-0">
+              Configure o <span className="font-semibold">tamanho da clínica</span> nos parâmetros abaixo. Escolha o cenário conforme a maturidade operacional atual dela — Quanto mais desestruturada hoje, maior o custo/benefício com a implementação do <span className="font-semibold">Sistema Cromia Health</span>.
+            </p>
+          </div>
 
-            {/* Consultas por dia — agora com flag de override manual */}
-            <div className="flex flex-col gap-[10px]">
-              <div className="flex justify-between items-baseline">
-                <span className="text-base text-cromia-ink2 tracking-wider">
-                  Consultas por dia
-                  {consultaManual && (
-                    <button
-                      onClick={() => { setConsultaManual(false); setConsultas(medicos * 7); }}
-                      className="ml-2 text-xs text-cromia-gold underline font-normal cursor-pointer"
-                    >
-                      resetar sugestão
-                    </button>
-                  )}
-                </span>
-                <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
-                  {consultas} <small className="font-space-grotesk text-base text-cromia-muted font-normal">consultas</small>
-                </span>
-              </div>
-              <input
-                type="range" min="10" max="200" step="5" value={consultas}
-                onChange={e => { setConsultaManual(true); setConsultas(+e.target.value); }}
-                className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
-              />
-              {!consultaManual && (
-                <span className="text-sm text-cromia-muted italic">
-                  Sugerido automaticamente (~7 /médico/dia)
-                </span>
-              )}
+          {/* Parâmetros */}
+          <div className="bg-cromia-surface border border-cromia-border rounded-sm p-8 mb-5 shadow-lg">
+            <div className="text-lg font-semibold tracking-[0.15em] uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border/70">
+              Tamanho da clínica
             </div>
-
-            <div className="flex flex-col gap-[10px]">
-              <div className="flex justify-between items-baseline">
-                <span className="text-base text-cromia-ink2 tracking-wider">Ticket médio</span>
-                <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
-                  R$ {ticket} <small className="font-space-grotesk text-base text-cromia-muted font-normal">/ consulta</small>
-                </span>
-              </div>
-              <input
-                type="range" min="100" max="300" step="10" value={ticket}
-                onChange={e => setTicket(+e.target.value)}
-                className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
-              />
-            </div>
-
-            <div className="flex flex-col gap-[10px]">
-              <div className="flex justify-between items-baseline">
-                <span className="text-base text-cromia-ink2 tracking-wider">Recepcionistas</span>
-                <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
-                  {recep} <small className="font-space-grotesk text-base text-cromia-muted font-normal">pessoas</small>
-                </span>
-              </div>
-              <input
-                type="range" min="1" max="10" value={recep}
-                onChange={e => setRecep(+e.target.value)}
-                className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
-              />
-            </div>
-
-            <div className="flex flex-col gap-[10px]">
-              <div className="flex justify-between items-baseline">
-                <span className="text-base text-cromia-ink2 tracking-wider">Salário recepção</span>
-                <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
-                  R$ {salario.toLocaleString('pt-BR')} <small className="font-space-grotesk text-base text-cromia-muted font-normal">/ mês</small>
-                </span>
-              </div>
-              <input
-                type="range" min="1200" max="4000" step="50" value={salario}
-                onChange={e => setSalario(+e.target.value)}
-                className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Cenários */}
-        <div className="mt-15 mb-0 shadow-lg">
-          <div className="text-xl font-semibold tracking-normal uppercase text-cromia-ink2 mb-5 mt-[40px] flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
-            Maturidade operacional atual
-            <span className="text-base font-semibold tracking-wide normal-case text-cromia-ink2">— Quanto mais precária, maior o impacto da Yasmim</span>
-          </div>
-          <div className="flex border border-cromia-border rounded-sm overflow-hidden bg-cromia-surface shadow-lg">
-            {Object.keys(scenarios).map(s => (
-              <button
-                key={s}
-                onClick={() => setActiveScenario(s)}
-                className={`flex-1 py-4 px-2 md:px-8 text-center cursor-pointer text-[15px] font-semibold tracking-wider uppercase transition-all duration-200 border-r border-cromia-border last:border-r-0 ${activeScenario === s ? 'bg-[#b45f3b] text-white' : 'bg-none text-cromia-ink'
-                  }`}
-              >
-                <span className="block mb-1">{scenarios[s].label}</span>
-                <span className="block text-sm font-normal tracking-normal lowercase opacity-100 leading-tight" dangerouslySetInnerHTML={{ __html: scenarios[s].shortDesc }} />
-              </button>
-            ))}
-          </div>
-          <div
-            className="mt-0 p-[30px_30px] bg-white border border-[#b45f3b]/15 rounded-sm text-[18px] text-cromia-ink2 leading-[1.4] [&_strong]:font-black [&_strong]:text-cromia-gold-dim [&_strong]:italic-none"
-            dangerouslySetInnerHTML={{ __html: scenarios[activeScenario].context }}
-          />
-        </div>
-
-        {/* Base de Informações */}
-        <div className="mb-20 px-8 py-10 bg-cromia-surface border border-cromia-border rounded-sm shadow-xl transition-all">
-          <div className="text-base font-semibold tracking-[0.2em] uppercase text-cromia-gold mb-8 flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-cromia-gold animate-pulse"></span>
-            Base de Cálculo e Referências
-          </div>
-
-          {/* Tag Navigation */}
-          <div className="flex flex-wrap gap-0 mb-2 pb-6">
-            {Object.keys(referenceData).map((key) => (
-              <button
-                key={key}
-                onClick={() => setActiveRef(key)}
-                className={`px-2.5 py-2 text-xs font-semibold tracking-normal transition-all duration-200 border ${activeRef === key
-                  ? 'bg-cromia-gold text-white border-cromia-gold shadow-md'
-                  : 'bg-white text-cromia-ink2 border-cromia-border hover:border-cromia-gold/50 cursor-pointer'
-                  }`}
-              >
-                {referenceData[key].label}
-              </button>
-            ))}
-          </div>
-
-          {/* Active Content Area */}
-          <div className="space-y-8 text-cromia-ink2 leading-relaxed text-base min-h-[300px]">
-            <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
-              <p>
-                <strong className="text-cromia-gold-dim tracking-wider uppercase text-base">
-                  {referenceData[activeRef].title}:
-                </strong>
-                <br />
-                {referenceData[activeRef].base}
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-2">
-                {referenceData[activeRef].benchmarks.map((bench, idx) => (
-                  <div key={idx} className="flex flex-col border-l-2 border-cromia-gold/30 pl-4 group hover:border-cromia-gold transition-colors">
-                    <span className="text-4xl font-fraunces font-bold text-cromia-gold group-hover:scale-110 transition-transform origin-left inline-block">
-                      {bench.value}
-                    </span>
-                    <span className="text-base leading-snug">
-                      {bench.desc}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {referenceData[activeRef].obs && (
-                <p className="text-base italic opacity-100 border-t border-cromia-border/50 pt-6">
-                  <strong className="not-italic text-cromia-gold-dim">Observação:</strong>{' '}
-                  {referenceData[activeRef].obs}
-                </p>
-              )}
-            </section>
-          </div>
-        </div>
-
-        {/* Blocos de Valor */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          {/* Eficiência Operacional */}
-          <div className="rounded-sm p-7 bg-white border border-cromia-red/15 shadow-lg">
-            <div className="text-lg font-semibold tracking-wider uppercase mb-[6px] text-cromia-red">
-              Eficiência operacional
-            </div>
-            <div className="text-base text-cromia-ink2 mb-[18px] leading-[1.4]">
-              Horas liberadas da recepção por mês
-            </div>
-            <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-red transition-all duration-300 ${getPulseClass('horasLiberadasMes')}`}>
-              {results.horasLiberadasMes}h
-            </div>
-            <div className="text-[18px] text-cromia-ink2 mb-[18px]">/ mês liberadas</div>
-            <div className="flex flex-col gap-0">
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
-                <span>Média por semana</span>
-                <strong className={getPulseClass('horasLiberadasSemana')}>~{results.horasLiberadasSemana}h</strong>
-              </div>
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
-                <span>Redução de no-show</span>
-                <strong className={getPulseClass('ecoNoshow')}>{fmt(results.ecoNoshow)}</strong>
-              </div>
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5 last:border-b-0">
-                <span>Tarefas absorvidas pela Yasmim</span>
-                <strong className="text-cromia-teal">agendamento, FAQ, confirmação</strong>
-              </div>
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px]">
-                <span>Tempo redirecionado para</span>
-                <strong className="text-cromia-teal">acolhimento e qualidade</strong>
-              </div>
-            </div>
-          </div>
-
-          {/* Receita */}
-          <div className="rounded-sm p-7 bg-white border border-cromia-teal/15 shadow-lg">
-            <div className="text-lg font-semibold tracking-wider uppercase mb-[6px] text-cromia-teal">O que passa a ganhar</div>
-            <div className="text-base text-cromia-ink2 mb-[18px] leading-[1.4]">Receita nova capturando <strong>24/7</strong></div>
-            <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-teal transition-all duration-300 ${getPulseClass('totalRec')}`}>
-              {fmt(results.totalRec)}
-            </div>
-            <div className="text-[18px] text-cromia-ink2 mb-[18px]">/ mês</div>
-            <div className="flex flex-col gap-0">
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5 last:border-b-0">
-                <span>Agendamentos fora do horário</span>
-                <strong className={getPulseClass('recFora')}>{fmt(results.recFora)}</strong>
-              </div>
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5 last:border-b-0">
-                <span>Reencaixe de cancelamentos</span>
-                <strong className={getPulseClass('recEncaixe')}>{fmt(results.recEncaixe)}</strong>
-              </div>
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5 last:border-b-0">
-                <span>Reativação de pacientes inativos</span>
-                <strong className={getPulseClass('recReativ')}>{fmt(results.recReativ)}</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero Final */}
-        <div className="bg-cromia-ink rounded-sm p-10 text-center mt-10 mb-4 relative overflow-hidden shadow-lg">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,#008000_50%,transparent_200%)] pointer-events-none" />
-          <div className="text-base font-normal tracking-[0.2em] uppercase text-white/80 mb-[10px] relative z-10">
-            Receita nova capturada pela Yasmim (por mês):
-          </div>
-          <div className={`font-fraunces text-[clamp(2.5rem,8vw,5rem)] font-black text-cromia-bg leading-none mb-2 transition-all duration-400 relative z-10 [text-shadow:0_0_80px_rgba(200,130,10,0.25)] ${getPulseClass('total')}`}>
-            {fmt(results.totalRec)}
-          </div>
-          <div className="text-[18px] text-white/70 tracking-wider leading-relaxed relative z-10">
-            <strong className={`text-white/100 text-xl ${getPulseClass('totalAno')}`}>{fmt(results.totalAno)}</strong> por ano<br /><br />
-            A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>{results.paybackDias} {results.paybackDias === 1 ? 'dia' : 'dias'}</strong> de operação
-          </div>
-        </div>
-
-        {/* ROI / Pills */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10 mt-10">
-          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
-            <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('roi')}`}>{results.roi}%</span>
-            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">ROI sobre Mensalidade</span>
-          </div>
-          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
-            <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('mult')}`}>{results.mult}x</span>
-            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Retorno por cada R$ investido</span>
-          </div>
-          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
-            <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('consultasExtra')}`}>+ {fmtN(results.consultasExtra)}/mês</span>
-            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Consultas novas/mês</span>
-          </div>
-        </div>
-
-        {/* Pitch Argument */}
-        <div className="bg-cromia-surface border border-cromia-border border-l-2 border-l-cromia-gold rounded-sm px-8 py-7 mb-10 shadow-lg">
-          <div className="text-[18px] font-bold tracking-widest uppercase text-cromia-gold mb-3.5">
-            O fato é...
-          </div>
-          <p className="font-fraunces text-[1.3rem] font-light italic text-cromia-ink leading-[1.8]">
-            "Com <strong className="font-semibold not-italic text-cromia-gold-dim">{consultas} consultas/dia</strong> e ticket médio de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(ticket)}</strong>,
-            essa clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)}/mês</strong> só com <strong className="font-semibold not-italic text-cromia-gold-dim">no-show</strong> —
-            e mais <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.recFora)}/mês</strong> em pacientes que tentam agendar fora do horário e não encontram ninguém.
-            A Yasmim trabalha às 23h de domingo. No total, ela gera <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.total)}/mês</strong> de valor real.
-            A recorrência do plano <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> é <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong>. O resto fica inteiro no caixa da clínica."
-          </p>
-        </div>
-
-        {/* Planos */}
-        <div className="bg-cromia-surface2 border border-cromia-border rounded-sm px-8 py-7 mb-30 shadow-lg">
-          <div className="text-base font-semibold tracking-widest uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
-            Planos de Implementação - Proporcionais ao tamanho da Clínica
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {planos.map(({ id, label, preco, desc }) => {
-              const isRecomendado = id === planoRecomendado;
-              return (
-                <div
-                  key={id}
-                  className={`border rounded-sm p-5 bg-cromia-surface text-center transition-all duration-300 relative
-          ${isRecomendado
-                      ? 'border-[#b45f3b] shadow-[0_0_0_2px_rgba(180,95,59,0.25)] scale-[1.03]'
-                      : 'border-cromia-border opacity-70'
-                    }`}
-                >
-                  {isRecomendado && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#b45f3b] text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full whitespace-nowrap">
-                      Recomendado
-                    </div>
-                  )}
-                  <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">{label}</div>
-                  <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ {preco.toLocaleString('pt-BR')}</div>
-                  <div className="text-[17px] text-cromia-ink2 mb-3.5">{desc}</div>
-                  <span className={`text-sm px-2.5 py-1 rounded-full font-semibold inline-block transition-all duration-300 ${getPulseClass('total')} ${isRecomendado
-                    ? 'bg-cromia-teal-light text-cromia-teal'
-                    : 'bg-cromia-border/40 text-cromia-muted'
-                    }`}>
-                    {isRecomendado
-                      ? `gera ${(results.total / preco).toFixed(1)}x`
-                      : 'não aplicável para este porte'
-                    }
+            {/* Agora o grid contém todos os campos necessários */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 mb-8">
+              {/* Médicos — define plano e sugere consultas */}
+              <div className="flex flex-col gap-[10px]">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-base text-cromia-ink2 tracking-wider">Médicos ativos</span>
+                  <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
+                    {medicos} <small className="font-space-grotesk text-base text-cromia-muted font-normal">médicos</small>
                   </span>
                 </div>
-              );
-            })}
+                <input
+                  type="range" min="1" max="25" step="1" value={medicos}
+                  onChange={e => {
+                    const m = +e.target.value;
+                    setMedicos(m);
+                    // Sugere consultas/dia se o usuário nunca ajustou manualmente
+                    if (!consultaManual) setConsultas(Math.round(m * 7));
+                  }}
+                  className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
+                />
+                <span className="text-base text-cromia-muted italic">
+                  Plano recomendado: <strong className="not-italic text-cromia-gold-dim">
+                    {planoRecomendado.charAt(0).toUpperCase() + planoRecomendado.slice(1)}
+                  </strong>
+                </span>
+              </div>
+
+              {/* Consultas por dia — agora com flag de override manual */}
+              <div className="flex flex-col gap-[10px]">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-base text-cromia-ink2 tracking-wider">
+                    Consultas por dia
+                    {consultaManual && (
+                      <button
+                        onClick={() => { setConsultaManual(false); setConsultas(medicos * 7); }}
+                        className="ml-2 text-xs text-cromia-gold underline font-normal cursor-pointer"
+                      >
+                        resetar sugestão
+                      </button>
+                    )}
+                  </span>
+                  <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
+                    {consultas} <small className="font-space-grotesk text-base text-cromia-muted font-normal">consultas</small>
+                  </span>
+                </div>
+                <input
+                  type="range" min="10" max="200" step="5" value={consultas}
+                  onChange={e => { setConsultaManual(true); setConsultas(+e.target.value); }}
+                  className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
+                />
+                {!consultaManual && (
+                  <span className="text-sm text-cromia-muted italic">
+                    Sugerido automaticamente (~7 /médico/dia)
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-[10px]">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-base text-cromia-ink2 tracking-wider">Ticket médio</span>
+                  <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
+                    R$ {ticket} <small className="font-space-grotesk text-base text-cromia-muted font-normal">/ consulta</small>
+                  </span>
+                </div>
+                <input
+                  type="range" min="100" max="300" step="10" value={ticket}
+                  onChange={e => setTicket(+e.target.value)}
+                  className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
+                />
+              </div>
+
+              <div className="flex flex-col gap-[10px]">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-base text-cromia-ink2 tracking-wider">Recepcionistas</span>
+                  <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
+                    {recep} <small className="font-space-grotesk text-base text-cromia-muted font-normal">pessoas</small>
+                  </span>
+                </div>
+                <input
+                  type="range" min="1" max="10" value={recep}
+                  onChange={e => setRecep(+e.target.value)}
+                  className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
+                />
+              </div>
+
+              <div className="flex flex-col gap-[10px]">
+                <div className="flex justify-between items-baseline">
+                  <span className="text-base text-cromia-ink2 tracking-wider">Salário recepção</span>
+                  <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
+                    R$ {salario.toLocaleString('pt-BR')} <small className="font-space-grotesk text-base text-cromia-muted font-normal">/ mês</small>
+                  </span>
+                </div>
+                <input
+                  type="range" min="1200" max="4000" step="50" value={salario}
+                  onChange={e => setSalario(+e.target.value)}
+                  className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Cenários */}
+          <div className="mt-15 mb-0 shadow-lg">
+            <div className="text-xl font-semibold tracking-normal uppercase text-cromia-ink2 mb-5 mt-[40px] flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
+              Maturidade operacional atual
+              <span className="text-base font-semibold tracking-wide normal-case text-cromia-ink2">— Quanto mais precária, maior o impacto da Yasmim</span>
+            </div>
+            <div className="flex border border-cromia-border rounded-sm overflow-hidden bg-cromia-surface shadow-lg">
+              {Object.keys(scenarios).map(s => (
+                <button
+                  key={s}
+                  onClick={() => setActiveScenario(s)}
+                  className={`flex-1 py-4 px-2 md:px-8 text-center cursor-pointer text-[15px] font-semibold tracking-wider uppercase transition-all duration-200 border-r border-cromia-border last:border-r-0 ${activeScenario === s ? 'bg-[#b45f3b] text-white' : 'bg-none text-cromia-ink'
+                    }`}
+                >
+                  <span className="block mb-1">{scenarios[s].label}</span>
+                  <span className="block text-sm font-normal tracking-normal lowercase opacity-100 leading-tight" dangerouslySetInnerHTML={{ __html: scenarios[s].shortDesc }} />
+                </button>
+              ))}
+            </div>
+            <div
+              className="mt-0 p-[30px_30px] bg-white border border-[#b45f3b]/15 rounded-sm text-[18px] text-cromia-ink2 leading-[1.4] [&_strong]:font-black [&_strong]:text-cromia-gold-dim [&_strong]:italic-none"
+              dangerouslySetInnerHTML={{ __html: scenarios[activeScenario].context }}
+            />
+          </div>
+
+          {/* Base de Informações */}
+          <div className="mb-20 px-8 py-10 bg-cromia-surface border border-cromia-border rounded-sm shadow-xl transition-all">
+            <div className="text-base font-semibold tracking-[0.2em] uppercase text-cromia-gold mb-8 flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-cromia-gold animate-pulse"></span>
+              Base de Cálculo e Referências
+            </div>
+
+            {/* Tag Navigation */}
+            <div className="flex flex-wrap gap-0 mb-2 pb-6">
+              {Object.keys(referenceData).map((key) => (
+                <button
+                  key={key}
+                  onClick={() => setActiveRef(key)}
+                  className={`px-2.5 py-2 text-xs font-semibold tracking-normal transition-all duration-200 border ${activeRef === key
+                    ? 'bg-cromia-gold text-white border-cromia-gold shadow-md'
+                    : 'bg-white text-cromia-ink2 border-cromia-border hover:border-cromia-gold/50 cursor-pointer'
+                    }`}
+                >
+                  {referenceData[key].label}
+                </button>
+              ))}
+            </div>
+
+            {/* Active Content Area */}
+            <div className="space-y-8 text-cromia-ink2 leading-relaxed text-base min-h-[300px]">
+              <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+                <p>
+                  <strong className="text-cromia-gold-dim tracking-wider uppercase text-base">
+                    {referenceData[activeRef].title}:
+                  </strong>
+                  <br />
+                  {referenceData[activeRef].base}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-2">
+                  {referenceData[activeRef].benchmarks.map((bench, idx) => (
+                    <div key={idx} className="flex flex-col border-l-2 border-cromia-gold/30 pl-4 group hover:border-cromia-gold transition-colors">
+                      <span className="text-4xl font-fraunces font-bold text-cromia-gold group-hover:scale-110 transition-transform origin-left inline-block">
+                        {bench.value}
+                      </span>
+                      <span className="text-base leading-snug">
+                        {bench.desc}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {referenceData[activeRef].obs && (
+                  <p className="text-base italic opacity-100 border-t border-cromia-border/50 pt-6">
+                    <strong className="not-italic text-cromia-gold-dim">Observação:</strong>{' '}
+                    {referenceData[activeRef].obs}
+                  </p>
+                )}
+              </section>
+            </div>
+          </div>
+
+          {/* Blocos de Valor */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            {/* Eficiência Operacional */}
+            <div className="rounded-sm p-7 bg-white border border-cromia-gold-dim/15 shadow-lg">
+              <div className="text-lg font-semibold tracking-wider uppercase mb-[6px] text-cromia-gold-dim">
+                Ganho Operacional
+              </div>
+              <div className="text-base text-cromia-ink2 mb-[18px] leading-[1.4]">
+                Horas liberadas da recepção por mês
+              </div>
+              <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-gold-dim transition-all duration-300 ${getPulseClass('horasLiberadasMes')}`}>
+                {results.horasLiberadasMes}h
+              </div>
+              <div className="text-[18px] text-cromia-ink2 mb-[18px]">/ mês liberadas</div>
+              <div className="flex flex-col gap-0">
+                <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
+                  <span>Média por semana</span>
+                  <strong className={getPulseClass('horasLiberadasSemana')}>~{results.horasLiberadasSemana}h</strong>
+                </div>
+                <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
+                  <span>Tarefas absorvidas pela Yasmim</span>
+                  <strong className="text-cromia-gold text-right">agendamento, FAQ, confirmação</strong>
+                </div>
+                <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px]">
+                  <span>Tempo redirecionado para</span>
+                  <strong className="text-cromia-gold text-right">acolhimento e qualidade</strong>
+                </div>
+              </div>
+            </div>
+
+            {/* Ganho Financeiro */}
+            <div className="rounded-sm p-7 bg-white border border-cromia-teal/15 shadow-lg">
+              <div className="text-lg font-semibold tracking-wider uppercase mb-[6px] text-cromia-teal">Ganho Financeiro</div>
+              <div className="text-base text-cromia-ink2 mb-[18px] leading-[1.4]">Receita recuperada e capturada <strong>24/7</strong></div>
+              <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-teal transition-all duration-300 ${getPulseClass('total')}`}>
+                {fmt(results.total)}
+              </div>
+              <div className="text-[18px] text-cromia-ink2 mb-[18px]">/ mês</div>
+              <div className="flex flex-col gap-0">
+                <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
+                  <span>Recuperação de no-show</span>
+                  <strong className={getPulseClass('ecoNoshow')}>{fmt(results.ecoNoshow)}</strong>
+                </div>
+                <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
+                  <span>Agendamentos fora do horário</span>
+                  <strong className={getPulseClass('recFora')}>{fmt(results.recFora)}</strong>
+                </div>
+                <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
+                  <span>Reencaixe de cancelamentos</span>
+                  <strong className={getPulseClass('recEncaixe')}>{fmt(results.recEncaixe)}</strong>
+                </div>
+                <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px]">
+                  <span>Reativação de pacientes inativos</span>
+                  <strong className={getPulseClass('recReativ')}>{fmt(results.recReativ)}</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Hero Final */}
+          <div className="bg-cromia-ink rounded-sm p-10 text-center mt-10 mb-4 relative overflow-hidden shadow-lg">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,#008000_50%,transparent_200%)] pointer-events-none" />
+            <div className="text-base font-normal tracking-[0.2em] uppercase text-white/80 mb-[10px] relative z-10">
+              Valor total gerado pela Yasmim por mês:
+            </div>
+            <div className={`font-fraunces text-[clamp(2.5rem,8vw,5rem)] font-black text-cromia-bg leading-none mb-4 transition-all duration-400 relative z-10 [text-shadow:0_0_80px_rgba(200,130,10,0.25)] ${getPulseClass('total')}`}>
+              {fmt(results.total)}
+            </div>
+            <div className="text-[18px] text-white/80 tracking-wider leading-relaxed -mb-2 relative z-10">
+              <strong className={`font-fraunces font-semibold text-white/100 text-3xl ${getPulseClass('totalAno')}`}>{fmt(results.totalAno)}</strong> por ano<br /><br />
+              A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>{results.paybackDias} {results.paybackDias === 1 ? 'dia' : 'dias'}</strong> de operação
+            </div>
+          </div>
+
+          {/* ROI / Pills */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10 mt-10">
+            <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
+              <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('roi')}`}>{results.roi}%</span>
+              <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">ROI sobre mensalidade</span>
+              <span className="text-[11px] text-cromia-muted mt-1 italic">plano {planos.find(p => p.id === planoRecomendado)?.label} — R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</span>
+            </div>
+            <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
+              <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('mult')}`}>{results.mult}x</span>
+              <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Retorno por cada R$ investido</span>
+              <span className="text-[11px] text-cromia-muted mt-1 italic">referência plano {planos.find(p => p.id === planoRecomendado)?.label}</span>
+            </div>
+            <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
+              <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('consultasExtra')}`}>+ {fmtN(results.consultasExtra)}/mês</span>
+              <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Consultas novas capturadas</span>
+            </div>
+          </div>
+
+          {/* Pitch Argument */}
+          <div className="bg-cromia-surface border border-cromia-border border-l-10 border-l-cromia-gold rounded-sm px-8 py-16 mb-10 shadow-lg">
+            <div className="font-fraunces text-[35px] font-bold tracking-normal uppercase text-cromia-gold mb-3.5">
+              O fato é...
+            </div>
+            <p className="font-fraunces text-[1.4rem] font-light italic text-cromia-ink leading-[1.6]">
+              "Com <strong className="font-semibold not-italic text-cromia-gold-dim">{consultas} consultas por dia</strong> e ticket médio de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(ticket)}</strong>,
+              a Clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)} por mês</strong> só com <strong className="font-semibold not-italic text-cromia-gold-dim">no-show</strong> —
+              e mais <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.recFora)} por mês</strong> com pacientes que tentam agendar fora do horário e não encontram ninguém.
+              Já a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong>, trabalha às 23h de um domingo. Sendo assim, no total, ela propõe <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.total)} por mês</strong> de valor real resolvendo gargalos e escoamentos da Clínica.
+              O plano de parceria estratégica proposto para e estrutura apresentada é o <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> que custa <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong> de mensalidade. Não chega a <strong className="font-semibold not-italic text-cromia-gold-dim">{Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> do ganho real que a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong> pode gerar. Logo, os outros <strong className="font-semibold not-italic text-cromia-gold-dim">{100 - Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> ficam sorrindo no caixa da clínica."
+            </p>
+          </div>
+
+          {/* Planos */}
+          <div className="bg-cromia-surface2 border border-cromia-border rounded-sm px-8 py-7 mb-5 shadow-lg">
+            <div className="text-base font-semibold tracking-widest uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
+              Planos de Implementação - Proporcionais ao tamanho da Clínica
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {planos.map(({ id, label, preco, desc }) => {
+                const isRecomendado = id === planoRecomendado;
+                return (
+                  <div
+                    key={id}
+                    className={`border rounded-sm p-5 bg-cromia-surface text-center transition-all duration-300 relative
+          ${isRecomendado
+                        ? 'border-[#b45f3b] shadow-[0_0_0_2px_rgba(180,95,59,0.25)] scale-[1.03]'
+                        : 'border-cromia-border opacity-70'
+                      }`}
+                  >
+                    {isRecomendado && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#b45f3b] text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full whitespace-nowrap">
+                        Recomendado
+                      </div>
+                    )}
+                    <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">{label}</div>
+                    <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ {preco.toLocaleString('pt-BR')}</div>
+                    <div className="text-[17px] text-cromia-ink2 mb-3.5">{desc}</div>
+                    <span className={`text-sm px-2.5 py-1 rounded-full font-semibold inline-block transition-all duration-300 ${getPulseClass('total')} ${isRecomendado
+                      ? 'bg-cromia-teal-light text-cromia-teal'
+                      : 'bg-cromia-border/40 text-cromia-muted'
+                      }`}>
+                      {isRecomendado
+                        ? `gera ${(results.total / preco).toFixed(1)}x`
+                        : 'não aplicável para este porte'
+                      }
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
+
+        {/* Footer */}
+        <div className="text-center py-12 text-cromia-gold-dim/80 text-base tracking-wider">
+          Desenvolvido pela <a href="https://cromia.app" className="font-semibold hover:text-cromia-gold transition-colors">Cromia</a> - {new Date().getFullYear()}
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 };
 
 export default Numeros;
