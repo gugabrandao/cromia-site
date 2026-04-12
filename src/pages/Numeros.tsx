@@ -57,7 +57,6 @@ const scenarios: Record<string, Scenario> = {
 };
 
 const DIAS_MES = 26;
-const RECORRENCIA = 2000;
 
 
 const referenceData: Record<string, {
@@ -181,15 +180,22 @@ const Numeros: React.FC = () => {
     // --- TOTAIS ---
     const total = totalEco + totalRec;
     const totalAno = total * 12;
-    const paybackDias = Math.ceil(RECORRENCIA / (total / DIAS_MES));
-    const roi = Math.round((total / RECORRENCIA - 1) * 100);
-    const mult = (total / RECORRENCIA).toFixed(1);
+
+    // Preço do plano para ROI e Payback dinâmicos
+    const precoPlano = medicos <= 5 ? 2000 : medicos <= 15 ? 2800 : 3900;
+
+    const paybackRaw = precoPlano / (total / DIAS_MES);
+    const paybackDias = Math.ceil(paybackRaw);
+    const isSubDay = paybackRaw < 1;
+
+    const roi = Math.round((total / precoPlano - 1) * 100);
+    const mult = (total / precoPlano).toFixed(1);
     const consultasExtra = Math.round((recFora + recEncaixe) / ticket);
 
     return {
       ecoNoshow, totalEco,
       recFora, recEncaixe, recReativ, totalRec,
-      total, totalAno, paybackDias, roi, mult, consultasExtra,
+      total, totalAno, paybackDias, isSubDay, roi, mult, consultasExtra,
       horasLiberadasMes, horasLiberadasSemana
     };
   }, [consultas, ticket, recep, salario, activeScenario, medicos]);
@@ -486,7 +492,9 @@ const Numeros: React.FC = () => {
             </div>
             <div className="text-[18px] text-white/80 tracking-wider leading-relaxed -mb-2 relative z-10">
               <strong className={`font-fraunces font-semibold text-white/100 text-3xl ${getPulseClass('totalAno')}`}>{fmt(results.totalAno)}</strong> por ano<br /><br />
-              A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>{results.paybackDias} {results.paybackDias === 1 ? 'dia' : 'dias'}</strong> de operação
+              A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>
+                {results.isSubDay ? 'menos de 1 dia' : `${results.paybackDias} ${results.paybackDias === 1 ? 'dia' : 'dias'}`}
+              </strong> de operação
             </div>
           </div>
 
@@ -518,7 +526,7 @@ const Numeros: React.FC = () => {
               a Clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)} por mês</strong> só com <strong className="font-semibold not-italic text-cromia-gold-dim">no-show</strong> —
               e mais <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.recFora)} por mês</strong> com pacientes que tentam agendar fora do horário e não encontram ninguém.
               Já a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong>, trabalha às 23h de um domingo. Sendo assim, no total, ela propõe <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.total)} por mês</strong> de valor real resolvendo gargalos e escoamentos da Clínica.
-              O plano de parceria estratégica proposto para e estrutura apresentada é o <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> que custa <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong> de mensalidade. Não chega a <strong className="font-semibold not-italic text-cromia-gold-dim">{Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> do ganho real que a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong> pode gerar. Logo, os outros <strong className="font-semibold not-italic text-cromia-gold-dim">{100 - Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> ficam sorrindo no caixa da clínica."
+              O plano de parceria estratégica proposto para e estrutura apresentada é o <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> que custa <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong> de mensalidade. Não chega a <strong className="font-semibold not-italic text-cromia-gold-dim">{Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> do ganho real que a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong> pode gerar. Logo, os outros <strong className="font-semibold not-italic text-cromia-gold-dim">{100 - Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> entram sorrindo no caixa da Clínica."
             </p>
           </div>
 
