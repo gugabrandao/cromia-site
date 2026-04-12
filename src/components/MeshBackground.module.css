@@ -13,7 +13,7 @@
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(1px);
+  filter: blur(0px);
   will-change: transform;
 }
 
@@ -32,31 +32,31 @@
 .nude1 {
   width: 70vw;
   height: 70vw;
-  background-color: #D29B8C;
-  opacity: 0.12;
+  background-color: #4a2c2a;
+  opacity: 0.04;
   top: -10vw;
   left: -10vw;
-  animation: float1 10s infinite alternate ease-in-out;
+  animation: float1 15s infinite alternate ease-in-out;
 }
 
 .nude2 {
   width: 50vw;
   height: 50vw;
   background-color: #D29B8C;
-  opacity: 0.11;
+  opacity: 0.06;
   bottom: -10vw;
   right: -10vw;
-  animation: float2 12s infinite alternate ease-in-out;
+  animation: float2 14s infinite alternate ease-in-out;
 }
 
 .amber {
   width: 55vw;
   height: 55vw;
   background-color: #B45F3B;
-  opacity: 0.10;
+  opacity: 0.03;
   bottom: -20vw;
   left: 20vw;
-  animation: float3 8s infinite alternate ease-in-out;
+  animation: float3 13s infinite alternate ease-in-out;
 }
 
 @keyframes float1 {
