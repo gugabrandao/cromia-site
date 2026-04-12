@@ -193,15 +193,15 @@ const Numeros: React.FC = () => {
   const getPulseClass = (id: string) => pulsing[id] ? 'animate-calculator-pulse' : '';
 
   return (
-    <div className="bg-[#faf4f2] text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4 relative">
-      <img src="/imgs/logo.svg" alt="Cromia Logo" className="absolute top-8 right-6 md:right-10 w-24 md:w-32" />
-      <div className="max-w-[860px] mx-auto px-6 py-[30px]">
+    <div className="bg-[#faf4f2] text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
+      <div className="max-w-[860px] mx-auto px-6 py-[30px] relative">
+        <img src="/imgs/logo.svg" alt="Cromia Logo" className="absolute top-0 right-6 w-24 md:w-32" />
         {/* Header */}
         <div className="mb-12 border-b-1 border-cromia-ink/20 pb-8">
           <div className="text-base font-semibold tracking-[0.3em] uppercase text-[#b45f3b] mb-4 flex items-center gap-[10px] before:content-[''] before:w-6 before:h-[2px] before:bg-cromia-gold">
             Cromia Health
           </div>
-          <h1 className="font-fraunces text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] m-0 mb-3">
+          <h1 className="font-fraunces text-cromia-ink/80 text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] m-0 mb-3">
             O que a Yasmim gera<br />
             <em className="italic font-light text-[#b45f3b]">trabalhando</em> enquanto<br />
             você dorme
