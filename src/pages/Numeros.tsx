@@ -155,12 +155,12 @@ const Numeros: React.FC = () => {
 
   const results = useMemo(() => {
     // --- ECONOMIA ---
-    const ecoRecep = salario * recep * sc.recep_reducao;
     const consultasMes = consultas * DIAS_MES;
     const noshowMes = consultasMes * sc.noshow_atual;
+    const horasLiberadasMes = Math.round(recep * 176 * sc.recep_reducao);
+    const horasLiberadasSemana = Math.round(horasLiberadasMes / 4);
     const ecoNoshow = noshowMes * sc.noshow_reducao * ticket;
-    const ecoExtras = salario * recep * sc.recep_reducao * 0.10;
-    const totalEco = ecoRecep + ecoNoshow + ecoExtras;
+    const totalEco = ecoNoshow;
 
     // --- RECEITA NOVA ---
     const tentativasFora = consultasMes * sc.fora_horario_vol;
@@ -186,10 +186,10 @@ const Numeros: React.FC = () => {
     ];
 
     return {
-      ecoRecep, ecoNoshow, ecoExtras, totalEco,
+      ecoNoshow, totalEco,
       recFora, recEncaixe, recReativ, totalRec,
       total, totalAno, paybackDias, roi, mult, consultasExtra,
-      planoRecomendado, planos
+      planoRecomendado, horasLiberadasMes, horasLiberadasSemana, planos
     };
   }, [consultas, ticket, recep, salario, activeScenario, medicos]);
 
@@ -232,7 +232,8 @@ const Numeros: React.FC = () => {
           <div className="text-lg font-semibold tracking-[0.15em] uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border/70">
             Tamanho da clínica
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-8">
+          {/* Agora o grid contém todos os campos necessários */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 mb-8">
             {/* Médicos — define plano e sugere consultas */}
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
@@ -242,7 +243,7 @@ const Numeros: React.FC = () => {
                 </span>
               </div>
               <input
-                type="range" min="1" max="40" step="1" value={medicos}
+                type="range" min="1" max="25" step="1" value={medicos}
                 onChange={e => {
                   const m = +e.target.value;
                   setMedicos(m);
@@ -251,7 +252,7 @@ const Numeros: React.FC = () => {
                 }}
                 className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
               />
-              <span className="text-xs text-cromia-muted italic">
+              <span className="text-base text-cromia-muted italic">
                 Plano recomendado: <strong className="not-italic text-cromia-gold-dim">
                   {planoRecomendado.charAt(0).toUpperCase() + planoRecomendado.slice(1)}
                 </strong>
@@ -277,13 +278,13 @@ const Numeros: React.FC = () => {
                 </span>
               </div>
               <input
-                type="range" min="10" max="150" step="5" value={consultas}
+                type="range" min="10" max="200" step="5" value={consultas}
                 onChange={e => { setConsultaManual(true); setConsultas(+e.target.value); }}
                 className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
               />
               {!consultaManual && (
-                <span className="text-xs text-cromia-muted italic">
-                  Sugerido automaticamente (~7 consultas/médico/dia)
+                <span className="text-sm text-cromia-muted italic">
+                  Sugerido automaticamente (~7 /médico/dia)
                 </span>
               )}
             </div>
@@ -416,26 +417,34 @@ const Numeros: React.FC = () => {
 
         {/* Blocos de Valor */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          {/* Economia */}
+          {/* Eficiência Operacional */}
           <div className="rounded-sm p-7 bg-white border border-cromia-red/15 shadow-lg">
-            <div className="text-lg font-semibold tracking-wider uppercase mb-[6px] text-cromia-red">O que deixa de perder</div>
-            <div className="text-base text-cromia-ink2 mb-[18px] leading-[1.4]">Economia com automação do atendimento</div>
-            <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-red transition-all duration-300 ${getPulseClass('totalEco')}`}>
-              {fmt(results.totalEco)}
+            <div className="text-lg font-semibold tracking-wider uppercase mb-[6px] text-cromia-red">
+              Eficiência operacional
             </div>
-            <div className="text-[18px] text-cromia-ink2 mb-[18px]">/ mês</div>
+            <div className="text-base text-cromia-ink2 mb-[18px] leading-[1.4]">
+              Horas liberadas da recepção por mês
+            </div>
+            <div className={`font-fraunces text-3xl md:text-4xl lg:text-[2.4rem] font-black leading-none mb-1 text-cromia-red transition-all duration-300 ${getPulseClass('horasLiberadasMes')}`}>
+              {results.horasLiberadasMes}h
+            </div>
+            <div className="text-[18px] text-cromia-ink2 mb-[18px]">/ mês liberadas</div>
             <div className="flex flex-col gap-0">
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5 last:border-b-0">
-                <span>Redução de headcount</span>
-                <strong className={getPulseClass('ecoRecep')}>{fmt(results.ecoRecep)}</strong>
+              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
+                <span>Média por semana</span>
+                <strong className={getPulseClass('horasLiberadasSemana')}>~{results.horasLiberadasSemana}h</strong>
               </div>
-              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5 last:border-b-0">
+              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5">
                 <span>Redução de no-show</span>
                 <strong className={getPulseClass('ecoNoshow')}>{fmt(results.ecoNoshow)}</strong>
               </div>
               <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px] border-b border-black/5 last:border-b-0">
-                <span>Horas extras evitadas</span>
-                <strong className={getPulseClass('ecoExtras')}>{fmt(results.ecoExtras)}</strong>
+                <span>Tarefas absorvidas pela Yasmim</span>
+                <strong className="text-cromia-teal">agendamento, FAQ, confirmação</strong>
+              </div>
+              <div className="flex justify-between text-[15px] text-cromia-ink2 py-[6px]">
+                <span>Tempo redirecionado para</span>
+                <strong className="text-cromia-teal">acolhimento e qualidade</strong>
               </div>
             </div>
           </div>
@@ -469,28 +478,28 @@ const Numeros: React.FC = () => {
         <div className="bg-cromia-ink rounded-sm p-10 text-center mt-10 mb-4 relative overflow-hidden shadow-lg">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,#008000_50%,transparent_200%)] pointer-events-none" />
           <div className="text-base font-normal tracking-[0.2em] uppercase text-white/80 mb-[10px] relative z-10">
-            Valor total gerado com a Yasmim por mês:
+            Receita nova capturada pela Yasmim (por mês):
           </div>
           <div className={`font-fraunces text-[clamp(2.5rem,8vw,5rem)] font-black text-cromia-bg leading-none mb-2 transition-all duration-400 relative z-10 [text-shadow:0_0_80px_rgba(200,130,10,0.25)] ${getPulseClass('total')}`}>
-            {fmt(results.total)}
+            {fmt(results.totalRec)}
           </div>
           <div className="text-[18px] text-white/70 tracking-wider leading-relaxed relative z-10">
             <strong className={`text-white/100 text-xl ${getPulseClass('totalAno')}`}>{fmt(results.totalAno)}</strong> por ano<br /><br />
-            A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>{results.paybackDias} dias</strong> de operação
+            A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>{results.paybackDias} {results.paybackDias === 1 ? 'dia' : 'dias'}</strong> de operação
           </div>
         </div>
 
         {/* ROI / Pills */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-10 mt-10">
-          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg">
+          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
             <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('roi')}`}>{results.roi}%</span>
-            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">ROI sobre Mensalidade Starter* <i>(R$ 2000)</i></span>
+            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">ROI sobre Mensalidade</span>
           </div>
-          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg">
+          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
             <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('mult')}`}>{results.mult}x</span>
-            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Retorno por cada R$ investido* <i>(Starter - R$ 2000)</i></span>
+            <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Retorno por cada R$ investido</span>
           </div>
-          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg pt-10">
+          <div className="bg-white border border-cromia-gold/20 rounded-sm p-[18px] text-center shadow-lg flex flex-col justify-center">
             <span className={`block font-fraunces text-3xl font-black text-cromia-teal mb-1 transition-all duration-300 ${getPulseClass('consultasExtra')}`}>+ {fmtN(results.consultasExtra)}/mês</span>
             <span className="text-[14px] text-cromia-ink2 tracking-widest uppercase">Consultas novas/mês</span>
           </div>
@@ -506,7 +515,7 @@ const Numeros: React.FC = () => {
             essa clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)}/mês</strong> só com <strong className="font-semibold not-italic text-cromia-gold-dim">no-show</strong> —
             e mais <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.recFora)}/mês</strong> em pacientes que tentam agendar fora do horário e não encontram ninguém.
             A Yasmim trabalha às 23h de domingo. No total, ela gera <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.total)}/mês</strong> de valor real.
-            A recorrência (starter) é <strong className="font-semibold not-italic text-cromia-gold-dim">R$ 2.000</strong>. O resto fica inteiro no caixa da clínica."
+            A recorrência do plano <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> é <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong>. O resto fica inteiro no caixa da clínica."
           </p>
         </div>
 
@@ -535,8 +544,14 @@ const Numeros: React.FC = () => {
                   <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">{label}</div>
                   <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ {preco.toLocaleString('pt-BR')}</div>
                   <div className="text-[17px] text-cromia-ink2 mb-3.5">{desc}</div>
-                  <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
-                    gera {(results.total / preco).toFixed(1)}x
+                  <span className={`text-sm px-2.5 py-1 rounded-full font-semibold inline-block transition-all duration-300 ${getPulseClass('total')} ${isRecomendado
+                    ? 'bg-cromia-teal-light text-cromia-teal'
+                    : 'bg-cromia-border/40 text-cromia-muted'
+                    }`}>
+                    {isRecomendado
+                      ? `gera ${(results.total / preco).toFixed(1)}x`
+                      : 'não aplicável para este porte'
+                    }
                   </span>
                 </div>
               );
