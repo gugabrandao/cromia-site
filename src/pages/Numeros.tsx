@@ -58,12 +58,94 @@ const scenarios: Record<string, Scenario> = {
 const DIAS_MES = 26;
 const RECORRENCIA = 2000;
 
+const referenceData: Record<string, {
+  label: string;
+  title: string;
+  base: React.ReactNode;
+  benchmarks: { value: string; desc: string }[];
+  obs?: string;
+}> = {
+  'noshow-mercado': {
+    label: '1) No-Show (Mercado)',
+    title: 'No-Show (Médias de Mercado)',
+    base: <>Literatura internacional de saúde aponta no-show entre <span className="font-semibold text-cromia-ink">15%–30%</span> em clínicas sem sistema de confirmação ativa. No Brasil, estudos do CFM e relatos de gestores de clínicas apontam médias próximas de <span className="font-semibold text-cromia-ink">20%</span> sem automação.</>,
+    benchmarks: [
+      { value: '10%', desc: 'Clínica que já faz alguma confirmação manual (ligação da recepção)' },
+      { value: '18%', desc: 'Clínica que não confirma sistematicamente, recepção ocupada' },
+      { value: '28%', desc: 'Sem nenhuma confirmação, agenda por telefone apenas' }
+    ],
+    obs: 'Esses números variam muito por especialidade. Psiquiatria e nutrição têm no-show muito maior (30%–40%). Urgências, menor.'
+  },
+  'noshow-yasmim': {
+    label: '2) Redução No-Show (Yasmim)',
+    title: 'Redução de No-Show pela Yasmim',
+    base: <>Estudos de SMS e WhatsApp reminder em saúde mostram redução de <span className="font-semibold text-cromia-ink">25%–50%</span> no no-show. Com confirmação ativa + reagendamento automático, o teto sobe.</>,
+    benchmarks: [
+      { value: '40%', desc: 'Clínica que já confirmava manualmente — a Yasmim melhora, mas o delta é menor' },
+      { value: '55%', desc: 'Substitui um processo inexistente por um consistente' },
+      { value: '70%', desc: 'Substitui o caos total — qualquer confirmação já resolve muito' }
+    ]
+  },
+  'headcount': {
+    label: '3) Redução de headcount',
+    title: 'Redução de headcount de recepção',
+    base: <>Estimativa funcional — se a Yasmim absorve agendamento, cancelamento, FAQ e confirmação, quanto do trabalho da recepção ela substitui?</>,
+    benchmarks: [
+      { value: '30%', desc: 'Clínica organizada ainda precisa de recepção para acolhimento, prontuário, pagamento' },
+      { value: '50%', desc: 'Metade do volume era atendimento que a Yasmim resolve' },
+      { value: '80%', desc: 'Clínica que usava recepção quase exclusivamente para agendamento por telefone' }
+    ],
+    obs: 'Esse é o número mais difícil de vender. Gestores resistem a falar em demissão. Na prática, o argumento muda para "não precisa contratar mais quando crescer" em vez de "vai demitir".'
+  },
+  'volume-fora': {
+    label: '4) Volume fora do horário',
+    title: 'Volume fora do horário',
+    base: <>Comportamento de consumidor digital. Dados do Google Health e pesquisas de UX em saúde mostram que <span className="font-semibold text-cromia-ink">30%–40%</span> das buscas por serviços de saúde acontecem fora do horário comercial — noite, madrugada e fins de semana.</>,
+    benchmarks: [
+      { value: '20%', desc: 'Especialidade com perfil mais corporativo (plano empresarial, horário comercial)' },
+      { value: '30%', desc: 'Média geral do mercado' },
+      { value: '40%', desc: 'Especialidades com perfil familiar ou popular (pediatria, clínica geral)' }
+    ]
+  },
+  'perda-tentativas': {
+    label: '5) Perda dessas tentativas',
+    title: 'Perda dessas tentativas',
+    base: <>Inferência direta da maturidade da clínica.</>,
+    benchmarks: [
+      { value: '60%', desc: 'Tem WhatsApp ativo, mas sem resposta automática — alguns pacientes tentam de novo no dia seguinte' },
+      { value: '75%', desc: 'Telefone fixo ou WhatsApp sem bot — maioria desiste' },
+      { value: '90%', desc: 'Só telefone, sem WhatsApp — quase perda total fora do horário' }
+    ]
+  },
+  'reencaixe': {
+    label: '6) Reencaixe de cancelamentos',
+    title: 'Reencaixe de cancelamentos',
+    base: <>Estimativa de eficiência de fila de espera ativa. Sem automação, horário cancelado vira buraco. Com Yasmim oferecendo o horário para lista de espera:</>,
+    benchmarks: [
+      { value: '30%', desc: 'Clínica com agenda muito cheia, pouca lista de espera' },
+      { value: '45%', desc: 'Média com alguma demanda reprimida' },
+      { value: '60%', desc: 'Clínica precária tem mais cancelamentos E mais pacientes esperando' }
+    ]
+  },
+  'reativacao': {
+    label: '7) Reativação de inativos',
+    title: 'Reativação de inativos',
+    base: <>Benchmarks de CRM em saúde e varejo. Taxa de reativação de base inativa via mensagem ativa gira entre <span className="font-semibold text-cromia-ink">2%–8%</span> dependendo do tempo de inatividade e da oferta.</>,
+    benchmarks: [
+      { value: '1%', desc: 'Base relativamente recente, pacientes não sumiram há muito tempo' },
+      { value: '2,5%', desc: 'Base mista, algum potencial de recuperação' },
+      { value: '5%', desc: 'Base antiga, nunca recontactada — qualquer mensagem já converte mais' }
+    ]
+  }
+};
+
 const Numeros: React.FC = () => {
   const [consultas, setConsultas] = useState(40);
   const [ticket, setTicket] = useState(200);
   const [recep, setRecep] = useState(3);
   const [salario, setSalario] = useState(1900);
   const [activeScenario, setActiveScenario] = useState('media');
+  const [activeRef, setActiveRef] = useState('noshow-mercado');
   const [pulsing, setPulsing] = useState<Record<string, boolean>>({});
 
   const sc = scenarios[activeScenario];
@@ -190,7 +272,7 @@ const Numeros: React.FC = () => {
         </div>
 
         {/* Cenários */}
-        <div className="mt-15 mb-20 shadow-lg">
+        <div className="mt-15 mb-0 shadow-lg">
           <div className="text-base font-semibold tracking-wide uppercase text-cromia-ink2 mb-5 mt-[50px] flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
             Maturidade operacional atual
             <span className="text-base font-normal tracking-wide normal-case text-cromia-ink2">— Quanto mais precária, maior o impacto da Yasmim</span>
@@ -215,34 +297,60 @@ const Numeros: React.FC = () => {
         </div>
 
         {/* Base de Informações */}
-        <div className="mb-10 px-8 py-7 bg-cromia-surface border border-cromia-border rounded-sm shadow-sm transition-all hover:shadow-md">
-          <div className="text-sm font-semibold tracking-[0.2em] uppercase text-cromia-gold mb-4 flex items-center gap-2">
+        <div className="mb-20 px-8 py-10 bg-cromia-surface border border-cromia-border rounded-sm shadow-xl transition-all">
+          <div className="text-sm font-semibold tracking-[0.2em] uppercase text-cromia-gold mb-8 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-cromia-gold animate-pulse"></span>
             Base de Cálculo e Referências
           </div>
-          <div className="space-y-4 text-cromia-ink2 leading-relaxed text-base">
-            <p>
-              <strong className="text-cromia-gold-dim">Base:</strong> literatura internacional de saúde aponta no-show entre <span className="font-semibold text-cromia-ink">15%–30%</span> em clínicas sem sistema de confirmação ativa. No Brasil, estudos do CFM e relatos de gestores de clínicas apontam médias próximas de <span className="font-semibold text-cromia-ink">20%</span> sem automação.
-            </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-4">
-              <div className="flex flex-col border-l-2 border-cromia-gold/30 pl-4">
-                <span className="text-2xl font-fraunces font-bold text-cromia-gold">10%</span>
-                <span className="text-sm leading-snug">Clínica que já faz alguma confirmação manual (ligação da recepção)</span>
+
+          {/* Tag Navigation */}
+          <div className="flex flex-wrap gap-2 mb-10 pb-6 border-b border-cromia-border/50">
+            {Object.keys(referenceData).map((key) => (
+              <button
+                key={key}
+                onClick={() => setActiveRef(key)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all duration-200 border ${
+                  activeRef === key
+                    ? 'bg-cromia-gold text-white border-cromia-gold shadow-md'
+                    : 'bg-white text-cromia-ink2 border-cromia-border hover:border-cromia-gold/50 cursor-pointer'
+                }`}
+              >
+                {referenceData[key].label}
+              </button>
+            ))}
+          </div>
+
+          {/* Active Content Area */}
+          <div className="space-y-8 text-cromia-ink2 leading-relaxed text-base min-h-[300px]">
+            <section className="space-y-6 animate-in fade-in slide-in-from-bottom-2 duration-500">
+              <p>
+                <strong className="text-cromia-gold-dim tracking-wider uppercase text-base">
+                  {referenceData[activeRef].title}:
+                </strong>
+                <br />
+                {referenceData[activeRef].base}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-2">
+                {referenceData[activeRef].benchmarks.map((bench, idx) => (
+                  <div key={idx} className="flex flex-col border-l-2 border-cromia-gold/30 pl-4 group hover:border-cromia-gold transition-colors">
+                    <span className="text-4xl font-fraunces font-bold text-cromia-gold group-hover:scale-110 transition-transform origin-left inline-block">
+                      {bench.value}
+                    </span>
+                    <span className="text-base leading-snug">
+                      {bench.desc}
+                    </span>
+                  </div>
+                ))}
               </div>
-              <div className="flex flex-col border-l-2 border-cromia-gold/30 pl-4">
-                <span className="text-2xl font-fraunces font-bold text-cromia-gold">18%</span>
-                <span className="text-sm leading-snug">Clínica que não confirma sistematicamente, recepção ocupada</span>
-              </div>
-              <div className="flex flex-col border-l-2 border-cromia-gold/30 pl-4">
-                <span className="text-2xl font-fraunces font-bold text-cromia-gold">28%</span>
-                <span className="text-sm leading-snug">Sem nenhuma confirmação, agenda por telefone apenas</span>
-              </div>
-            </div>
-            
-            <p className="text-sm italic opacity-85 border-t border-cromia-border pt-4">
-              <strong className="not-italic text-cromia-gold-dim">Risco:</strong> esses números variam muito por especialidade. Psiquiatria e nutrição têm no-show muito maior (30%–40%). Urgências, menor.
-            </p>
+
+              {referenceData[activeRef].obs && (
+                <p className="text-base italic opacity-70 border-t border-cromia-border/50 pt-6">
+                  <strong className="not-italic text-cromia-gold-dim">Observação:</strong>{' '}
+                  {referenceData[activeRef].obs}
+                </p>
+              )}
+            </section>
           </div>
         </div>
 
