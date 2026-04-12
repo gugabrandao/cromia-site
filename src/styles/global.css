@@ -8,9 +8,9 @@
   --color-cromia-ink2: #4a3f2f;
   --color-cromia-muted: #9a8f7f;
   --color-cromia-border: #e8e0d0;
-  --color-cromia-gold: #c8820a;
-  --color-cromia-gold-light: #fdf3e0;
-  --color-cromia-gold-dim: #8a5a05;
+  --color-cromia-gold: #b45f3b;
+  --color-cromia-gold-light: #f9f0ec;
+  --color-cromia-gold-dim: #4a2c2a;
   --color-cromia-teal: #0a6b5c;
   --color-cromia-teal-light: #e0f5f0;
   --color-cromia-red: #b83232;
@@ -22,8 +22,15 @@
   --animate-calculator-pulse: calculator-pulse 0.35s ease-in-out;
 
   @keyframes calculator-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.04);
+    }
   }
 }
 
@@ -44,7 +51,9 @@
 }
 
 /* ---------- Reset & Base ---------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 

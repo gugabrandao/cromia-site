@@ -153,6 +153,14 @@ const Numeros: React.FC = () => {
 
   const sc = scenarios[activeScenario];
 
+  const planoRecomendado = medicos <= 5 ? 'starter' : medicos <= 15 ? 'standard' : 'pro';
+
+  const planos = [
+    { id: 'starter', label: 'Starter', preco: 2000, desc: '1–5 médicos' },
+    { id: 'standard', label: 'Standard', preco: 2800, desc: '6–15 médicos' },
+    { id: 'pro', label: 'Pro', preco: 3900, desc: '15+ médicos' },
+  ];
+
   const results = useMemo(() => {
     // --- ECONOMIA ---
     const consultasMes = consultas * DIAS_MES;
@@ -177,23 +185,13 @@ const Numeros: React.FC = () => {
     const mult = (total / RECORRENCIA).toFixed(1);
     const consultasExtra = Math.round((recFora + recEncaixe) / ticket);
 
-    const planoRecomendado = medicos <= 5 ? 'starter' : medicos <= 15 ? 'standard' : 'pro';
-
-    const planos = [
-      { id: 'starter', label: 'Starter', preco: 2000, desc: '1–5 médicos' },
-      { id: 'standard', label: 'Standard', preco: 2800, desc: '6–15 médicos' },
-      { id: 'pro', label: 'Pro', preco: 3900, desc: '15+ médicos' },
-    ];
-
     return {
       ecoNoshow, totalEco,
       recFora, recEncaixe, recReativ, totalRec,
       total, totalAno, paybackDias, roi, mult, consultasExtra,
-      planoRecomendado, horasLiberadasMes, horasLiberadasSemana, planos
+      horasLiberadasMes, horasLiberadasSemana
     };
   }, [consultas, ticket, recep, salario, activeScenario, medicos]);
-
-  const { planoRecomendado, planos } = results;
 
   useEffect(() => {
     const keys = Object.keys(results);
