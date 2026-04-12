@@ -195,7 +195,9 @@ const Numeros: React.FC = () => {
   return (
     <div className="bg-[#faf4f2] text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
       <div className="max-w-[860px] mx-auto px-6 py-[30px] relative">
-        <img src="/imgs/logo.svg" alt="Cromia Logo" className="absolute top-0 right-6 w-24 md:w-32" />
+        <a href="https://cromia.app" className="absolute top-4 right-6 transition-transform hover:scale-105 active:scale-95">
+          <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-40 md:w-40" />
+        </a>
         {/* Header */}
         <div className="mb-12 border-b-1 border-cromia-ink/20 pb-8">
           <div className="text-base font-semibold tracking-[0.3em] uppercase text-[#b45f3b] mb-4 flex items-center gap-[10px] before:content-[''] before:w-6 before:h-[2px] before:bg-cromia-gold">
