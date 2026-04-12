@@ -58,6 +58,7 @@ const scenarios: Record<string, Scenario> = {
 const DIAS_MES = 26;
 const RECORRENCIA = 2000;
 
+
 const referenceData: Record<string, {
   label: string;
   title: string;
@@ -140,6 +141,8 @@ const referenceData: Record<string, {
 };
 
 const Numeros: React.FC = () => {
+  const [medicos, setMedicos] = useState(8);
+  const [consultaManual, setConsultaManual] = useState(false);
   const [consultas, setConsultas] = useState(40);
   const [ticket, setTicket] = useState(200);
   const [recep, setRecep] = useState(3);
@@ -174,12 +177,23 @@ const Numeros: React.FC = () => {
     const mult = (total / RECORRENCIA).toFixed(1);
     const consultasExtra = Math.round((recFora + recEncaixe) / ticket);
 
+    const planoRecomendado = medicos <= 5 ? 'starter' : medicos <= 15 ? 'standard' : 'pro';
+
+    const planos = [
+      { id: 'starter', label: 'Starter', preco: 2000, desc: '1–5 médicos' },
+      { id: 'standard', label: 'Standard', preco: 2800, desc: '6–15 médicos' },
+      { id: 'pro', label: 'Pro', preco: 3900, desc: '15+ médicos' },
+    ];
+
     return {
       ecoRecep, ecoNoshow, ecoExtras, totalEco,
       recFora, recEncaixe, recReativ, totalRec,
       total, totalAno, paybackDias, roi, mult, consultasExtra,
+      planoRecomendado, planos
     };
-  }, [consultas, ticket, recep, salario, activeScenario]);
+  }, [consultas, ticket, recep, salario, activeScenario, medicos]);
+
+  const { planoRecomendado, planos } = results;
 
   useEffect(() => {
     const keys = Object.keys(results);
@@ -219,19 +233,61 @@ const Numeros: React.FC = () => {
             Tamanho da clínica
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-8">
+            {/* Médicos — define plano e sugere consultas */}
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
-                <span className="text-base text-cromia-ink2 tracking-wider">Consultas por dia</span>
+                <span className="text-base text-cromia-ink2 tracking-wider">Médicos ativos</span>
+                <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
+                  {medicos} <small className="font-space-grotesk text-base text-cromia-muted font-normal">médicos</small>
+                </span>
+              </div>
+              <input
+                type="range" min="1" max="40" step="1" value={medicos}
+                onChange={e => {
+                  const m = +e.target.value;
+                  setMedicos(m);
+                  // Sugere consultas/dia se o usuário nunca ajustou manualmente
+                  if (!consultaManual) setConsultas(Math.round(m * 7));
+                }}
+                className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
+              />
+              <span className="text-xs text-cromia-muted italic">
+                Plano recomendado: <strong className="not-italic text-cromia-gold-dim">
+                  {planoRecomendado.charAt(0).toUpperCase() + planoRecomendado.slice(1)}
+                </strong>
+              </span>
+            </div>
+
+            {/* Consultas por dia — agora com flag de override manual */}
+            <div className="flex flex-col gap-[10px]">
+              <div className="flex justify-between items-baseline">
+                <span className="text-base text-cromia-ink2 tracking-wider">
+                  Consultas por dia
+                  {consultaManual && (
+                    <button
+                      onClick={() => { setConsultaManual(false); setConsultas(medicos * 7); }}
+                      className="ml-2 text-xs text-cromia-gold underline font-normal cursor-pointer"
+                    >
+                      resetar sugestão
+                    </button>
+                  )}
+                </span>
                 <span className="font-fraunces text-[1.8rem] font-semibold text-cromia-gold-dim">
                   {consultas} <small className="font-space-grotesk text-base text-cromia-muted font-normal">consultas</small>
                 </span>
               </div>
               <input
                 type="range" min="10" max="150" step="5" value={consultas}
-                onChange={e => setConsultas(+e.target.value)}
+                onChange={e => { setConsultaManual(true); setConsultas(+e.target.value); }}
                 className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
               />
+              {!consultaManual && (
+                <span className="text-xs text-cromia-muted italic">
+                  Sugerido automaticamente (~7 consultas/médico/dia)
+                </span>
+              )}
             </div>
+
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
                 <span className="text-base text-cromia-ink2 tracking-wider">Ticket médio</span>
@@ -245,6 +301,7 @@ const Numeros: React.FC = () => {
                 className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
               />
             </div>
+
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
                 <span className="text-base text-cromia-ink2 tracking-wider">Recepcionistas</span>
@@ -258,6 +315,7 @@ const Numeros: React.FC = () => {
                 className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
               />
             </div>
+
             <div className="flex flex-col gap-[10px]">
               <div className="flex justify-between items-baseline">
                 <span className="text-base text-cromia-ink2 tracking-wider">Salário recepção</span>
@@ -458,30 +516,31 @@ const Numeros: React.FC = () => {
             Planos de Implementação - Proporcionais ao tamanho da Clínica
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="border border-cromia-border rounded-sm p-5 bg-cromia-surface text-center">
-              <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">Starter</div>
-              <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ 2.000</div>
-              <div className="text-[17px] text-cromia-ink2 mb-3.5">1–5 médicos</div>
-              <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
-                gera {(results.total / 2000).toFixed(1)}x
-              </span>
-            </div>
-            <div className="border border-cromia-border rounded-sm p-5 bg-cromia-surface text-center">
-              <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">Standard</div>
-              <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ 2.800</div>
-              <div className="text-[17px] text-cromia-ink2 mb-3.5">6–15 médicos</div>
-              <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
-                gera {(results.total / 2800).toFixed(1)}x
-              </span>
-            </div>
-            <div className="border border-cromia-border rounded-sm p-5 bg-cromia-surface text-center">
-              <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">Pro</div>
-              <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ 3.900</div>
-              <div className="text-[17px] text-cromia-ink2 mb-3.5">15+ médicos</div>
-              <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
-                gera {(results.total / 3900).toFixed(1)}x
-              </span>
-            </div>
+            {planos.map(({ id, label, preco, desc }) => {
+              const isRecomendado = id === planoRecomendado;
+              return (
+                <div
+                  key={id}
+                  className={`border rounded-sm p-5 bg-cromia-surface text-center transition-all duration-300 relative
+          ${isRecomendado
+                      ? 'border-[#b45f3b] shadow-[0_0_0_2px_rgba(180,95,59,0.25)] scale-[1.03]'
+                      : 'border-cromia-border opacity-70'
+                    }`}
+                >
+                  {isRecomendado && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#b45f3b] text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full whitespace-nowrap">
+                      Recomendado
+                    </div>
+                  )}
+                  <div className="text-base font-semibold tracking-widest uppercase text-cromia-muted mb-2">{label}</div>
+                  <div className="font-fraunces text-[1.8rem] font-black text-cromia-ink mb-1">R$ {preco.toLocaleString('pt-BR')}</div>
+                  <div className="text-[17px] text-cromia-ink2 mb-3.5">{desc}</div>
+                  <span className={`text-sm px-2.5 py-1 rounded-full font-semibold bg-cromia-teal-light text-cromia-teal inline-block transition-all duration-300 ${getPulseClass('total')}`}>
+                    gera {(results.total / preco).toFixed(1)}x
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
