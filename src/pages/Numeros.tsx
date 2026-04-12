@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import MeshBackground from '../components/MeshBackground';
 
 const fmt = (v: number) => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
 const fmtN = (v: number) => Math.round(v).toLocaleString('pt-BR');
@@ -205,7 +206,9 @@ const Numeros: React.FC = () => {
   const getPulseClass = (id: string) => pulsing[id] ? 'animate-calculator-pulse' : '';
 
   return (
-    <div className="bg-[#faf4f2] text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
+    <>
+      <MeshBackground />
+      <div className="bg-transparent text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
       <div className="max-w-[860px] mx-auto px-6 py-[30px] relative">
         <a href="https://cromia.app" className="absolute top-4 right-6 transition-transform hover:scale-105 active:scale-95">
           <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-40 md:w-40" />
@@ -557,7 +560,7 @@ const Numeros: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
