@@ -5,7 +5,7 @@ const Chapter = ({
   number,
   title,
   text,
-  image,
+  images,
   mockup,
   imageSide = 'right',
   onImageClick
@@ -13,50 +13,55 @@ const Chapter = ({
   number: string,
   title: string,
   text: string | React.ReactNode,
-  image?: string,
+  images?: string[],
   mockup?: React.ReactNode,
   imageSide?: 'left' | 'right',
   onImageClick?: (img: string) => void
 }) => (
   <div className={`flex max-w-[860px] mx-auto flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-start gap-10 md:gap-10 mb-32`}>
-    <div className="w-full md:w-[60%] bg-white/50 backdrop-blur-sm p-11 rounded-2xl shadow-xl">
-      <div className="text-[18px] font-bold tracking-[0.3em] uppercase text-cromia-gold mb-6 opacity-80">Capítulo {number}</div>
+    <div className="w-full md:w-[60%] bg-white/80 backdrop-blur-sm p-11 rounded-2xl shadow-xl -mt-12">
+      <div className="text-[22px] font-bold tracking-widest uppercase text-cromia-gold mb-6 opacity-80">Item {number}</div>
       <h2 className="font-fraunces text-3xl md:text-4xl font-black text-[#3a3a3a] mb-6 leading-[1.1]">
         {title}
       </h2>
-      <div className="text-[19px] text-cromia-ink2 leading-[1.8] font-light opacity-90">
+      <div className="text-[18px] text-cromia-ink2 leading-[1.8] font-light opacity-90">
         {text}
       </div>
     </div>
-    <div className="w-full md:w-[55%]">
-      <div
-        className={`bg-white/60 backdrop-blur-sm border border-cromia-border/40 rounded-sm shadow-xl relative overflow-hidden group transition-all duration-500 hover:shadow-2xl ${image ? 'cursor-zoom-in' : ''}`}
-        onClick={() => image && onImageClick?.(image)}
-      >
-        <div className="p-1 md:p-2 bg-white/40">
-          {image ? (
-            <div className="relative rounded-[2px] overflow-hidden shadow-sm border border-cromia-border/20">
-              <img src={image} alt={title} className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]" />
+    <div className="w-full md:w-[55%] flex flex-col gap-10 mt-5">
+      {images && images.length > 0 ? (
+        images.map((img, idx) => (
+          <div
+            key={idx}
+            className={`bg-white/60 backdrop-blur-sm ${idx === 0 ? '-mt-12' : ''} rounded-lg border border-cromia-border/40 shadow-lg relative overflow-hidden group transition-all duration-500 hover:shadow-2xl cursor-zoom-in`}
+            onClick={() => onImageClick?.(img)}
+          >
+            <div className="p-3 md:p-3 bg-cromia-bg/20">
+              <div className="relative rounded-lg overflow-hidden shadow-sm border border-cromia-border/20">
+                <img src={img} alt={`${title} - ${idx + 1}`} className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.1]" />
+              </div>
             </div>
-          ) : mockup ? (
-            <div className="bg-cromia-bg/20 p-8 min-h-[340px] flex flex-col justify-center rounded-[2px]">
-              {mockup}
-            </div>
-          ) : (
-            <div className="aspect-[16/10] flex items-center justify-center text-cromia-muted/30 italic text-sm font-space-grotesk tracking-widest">
-              [ Espaço para Print da Área: {title} ]
-            </div>
-          )}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(180,95,59,0.03),transparent)] pointer-events-none" />
+          </div>
+        ))
+      ) : mockup ? (
+        <div className="bg-white/60 backdrop-blur-sm -mt-12 border border-cromia-border/40 shadow-lg relative overflow-hidden p-0 md:p-0">
+          <div className="bg-cromia-bg/20 p-8 min-h-[340px] flex flex-col justify-center rounded-[2px]">
+            {mockup}
+          </div>
         </div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(180,95,59,0.03),transparent)] pointer-events-none" />
-      </div>
+      ) : (
+        <div className="bg-white/60 backdrop-blur-sm -mt-12 border border-cromia-border/40 shadow-lg relative overflow-hidden p-8 flex items-center justify-center text-cromia-muted/30 italic text-sm font-space-grotesk tracking-widest">
+          [ Espaço para Print da Área: {title} ]
+        </div>
+      )}
     </div>
   </div>
 );
 
 const ImageLightbox = ({ src, onClose }: { src: string, onClose: () => void }) => (
   <div
-    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-md transition-all duration-300 animate-in fade-in"
+    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-md transition-all duration-300 animate-in fade-in"
     onClick={onClose}
   >
     <button
@@ -75,7 +80,7 @@ const ImageLightbox = ({ src, onClose }: { src: string, onClose: () => void }) =
       <img
         src={src}
         alt="Visualização ampliada"
-        className="w-full h-full object-contain shadow-2xl rounded-sm border border-white/10"
+        className="w-[70vw] h-auto object-contain shadow-2xl"
       />
     </div>
   </div>
@@ -95,28 +100,32 @@ const CromiaHealth = () => {
   return (
     <>
       <MeshBackground />
-      <div className="bg-transparent text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
-        <div className="max-w-[1100px] mx-auto px-6 py-[30px] relative">
+      <div className="bg-cromia-gold/5 text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
+        <div className="max-w-[1100px] mx-auto px-6 relative">
 
           {/* Logo */}
-          <a href="https://cromia.app" className="flex justify-end mr-14">
-            <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-60 md:w-60" />
+          <a href="https://cromia.app" className="flex justify-center">
+            <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-80 md:w-80 mb-4" />
           </a>
 
           {/* Hero Section */}
-          <div className="mb-32 mt-10 p-15 text-left max-w-[860px] mx-auto bg-white/50 backdrop-blur-sm border border-cromia-border/40 rounded-2xl shadow-lg relative overflow-hidden">
+          <div className="mb-32  p-15 text-left max-w-[860px] h-[770px] mx-auto bg-white/80 backdrop-blur-sm border border-cromia-border/40 rounded-2xl shadow-lg relative overflow-x-hidden overflow-y-auto scrollbar">
 
-            <h1 className="font-fraunces font-black not-italic text-5xl text-cromia-gold ">Cromia Health:</h1>
-            <h2 className="font-fraunces text-4xl md:text-5xl tracking-tight lg:text-6xl font-semibold text-[#3a3a3a] leading-[1] m-0 mb-8">
-              O Sistema que
-              <em className="italic font-light text-[#b45f3b]"> muda o jogo</em>
+            <h1 className="font-fraunces font-black not-italic text-6xl text-cromia-grey/90">Cromia Health</h1>
+            <h2 className="font-fraunces text-4xl md:text-4xl tracking-tight lg:text-5xl font-semibold text-cromia-gold-dark leading-[1] m-0 mb-8">
+              Ecossistema que
+              <em className="italic font-light text-[#b45f3b] text-6xl"> muda o jogo</em>
             </h2>
-            <div className="mt-16 h-[1px] w-[500px] bg-cromia-gold/80 mx-auto" />
+            <div className="mt-16 h-[1px] w-[740px] bg-cromia-gold/80 mx-auto" />
             <p className="text-[19px] text-cromia-ink2 leading-[1.7] font-light mt-20">
-              <span className="font-semibold">Cromia Health</span> é um Ecossistema desenvolvido meticulosamente para o uso com as mais modernas <span className="font-semibold">ferramentas de automação</span> e com a <span className="italic">Yasmim</span>, uma agente de <span className="font-semibold">IA</span> com atendimento humanizado, capaz de fazer multiplos agendamentos ao mesmo tempo, sem filas, sem qualquer intervenção humana no processo e, o detalhe mais especial: com uma <span className="font-semibold">escala de 24/7</span>.<br /><br />
-              Ela realiza reagendamentos, confirmações, cancelamentos e muito mais. Responde as <span className="font-semibold">"Perguntas Mais Frequentes"</span> dos pacientes, que hoje são respondidas pela recepção ou deixam de ser respondidas, gerando perda de receita.<br /><br />
+              <span className="font-semibold">Cromia Health</span> é um Ecossistema desenvolvido meticulosamente para o uso com as mais modernas <span className="font-semibold">ferramentas de automação</span> e com a nossa <span className="font-semibold italic">Yasmim</span>, uma agente de <span className="font-semibold">IA</span> com atendimento humanizado, capaz de fazer multiplos agendamentos ao mesmo tempo, sem filas, sem qualquer intervenção humana e o detalhe mais importante: com uma <span className="font-semibold">escala de 24/7</span>.<br /><br />
+              <span className="font-semibold italic">Yasmim</span> realiza reagendamentos, confirmações, cancelamentos e muito mais. Responde as <span className="font-semibold">"Perguntas Mais Frequentes"</span> dos pacientes, que hoje são respondidas pela recepção ou deixam de ser respondidas, gerando perda de receita.<br /><br />
               O <span className="font-semibold">Portal Administrativo</span>, muito mais que um <span className="italic">Sistema de Agendamento</span>, é um Painel Administrativo inteligente projetado para Clínicas que buscam eficiência absoluta e crescimento em escala com as ferramentas mais modernas do Mercado.<br /><br />
-              Aqui é uma breve apresentação do que o Ecossistema <span className="font-semibold">Cromia Health</span> é capaz de oferecer, suas funcionalidades e como ele pode transformar a gestão da sua Clínica e o impacto financeiro que ele pode gerar.
+              E para complementar esse <span className="font-semibold">Ecossistema</span>, várias automações são implementadas para uma melhor experiência dos envolvidos e gerenciamento por parte dos administradores, sem qualquer necessidade de programação e envolvimento humano:<br /><br />
+              • Envio diário direcionado aos Gestores da Clínica com os números do dia: Faturamento Bruto, número de agendamentos X cancelamentos, especialidades mais procuradas, médicos mais agendados, planos de saúde mais usados, relatórios que permitem uma melhor administração de recursos e planejamentos estratégicos.<br /><br />
+              • Envio diário das Agendas do Dia Seguinte direcionada ao Corpo Clínico com informações relevantes.<br /><br />
+              • Envio de lembretes de consultas para os pacientes (no dia anterior e 2 horas antes da consulta), imprescindíveis para reduzir o índice de <span className="font-semibold">No-Show</span>.<br /><br />
+              Aqui é uma breve apresentação do que o <span className="font-semibold">Cromia Health</span> é capaz de oferecer, suas funcionalidades e como ele pode transformar a gestão da sua Clínica e o impacto financeiro que ele pode gerar.
             </p>
 
           </div>
@@ -129,10 +138,10 @@ const CromiaHealth = () => {
               title="Dashboard: O pulso da sua clínica em tempo real"
               text={
                 <p>
-                  O Painel Administrativo possui um Dashboard gráfico de acompanhamento de dados relevantes à gestão da Clínica. Visual, conta com rankings que mostram o desempenho de cada área e profissional envolvido, além de mostrar a performance da <strong>Yasmim</strong> com a conversão de leads e agendamentos realizados dentro e fora do horário comercial. Tudo com filtros dinâmicos de período, para que as estratégias sejam implementadas com precisão cirúrgica.
+                  O Painel Administrativo possui um Dashboard gráfico de acompanhamento de dados relevantes à gestão da Clínica. Visual, conta com rankings que mostram o desempenho de cada área e profissionais envolvidos, além de mostrar a performance da <strong>Yasmim</strong> com a conversão de leads em clientes e a taxa de agendamentos realizados dentro e fora do horário comercial. Tudo com filtros dinâmicos de períodos para uma melhor leitura do processo, permitindo que as estratégias sejam implementadas com precisão cirúrgica.
                 </p>
               }
-              image="/imgs/dashboard_print.png"
+              images={['/imgs/dashboard.png', '/imgs/dashboard2.png', '/imgs/dashboard3.png']}
               imageSide="right"
               onImageClick={setSelectedImage}
             />

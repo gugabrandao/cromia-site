@@ -15,6 +15,7 @@
   --color-cromia-teal-light: #e0f5f0;
   --color-cromia-red: #b83232;
   --color-cromia-red-light: #fdf0f0;
+  --color-cromia-grey: #3A3A3A;
 
   --font-fraunces: "Fraunces", serif;
   --font-space-grotesk: "Space Grotesk", sans-serif;
@@ -85,4 +86,75 @@ a {
 
 a img {
   border: none;
+}
+
+/* =============================================
+   Lightbox & Utilities
+   ============================================= */
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-in {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: forwards;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.zoom-in-95 {
+  animation-name: zoom-in;
+}
+
+/* =============================================
+   Scrollbar Customization (Global & via Classe)
+   ============================================= */
+html {
+  scrollbar-width: 8px;
+  scrollbar-color: #f3d6cd transparent;
+}
+
+::-webkit-scrollbar,
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track,
+.scrollbar::-webkit-scrollbar-track {
+  background: rgba(210, 155, 140, 0.15);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb,
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--nude-org, #d29b8c);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover,
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--amber-tech, #b45f3b);
 }

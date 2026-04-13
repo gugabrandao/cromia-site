@@ -112,4 +112,24 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
-}$cssText
+}
+
+/* Custom Scrollbar */
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #d29b8c77;
+  border-radius: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #e9c4ba;
+  border-radius: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e2b6ab;
+}

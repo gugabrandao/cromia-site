@@ -491,7 +491,7 @@ const Numeros: React.FC = () => {
               {fmt(results.total)}
             </div>
             <div className="text-[18px] text-white/80 tracking-wider leading-relaxed -mb-2 relative z-10">
-              <strong className={`font-fraunces font-semibold text-white/100 text-3xl ${getPulseClass('totalAno')}`}>{fmt(results.totalAno)}</strong> por ano<br /><br />
+              <strong className={`font-fraunces font-semibold text-white/100 text-4xl ${getPulseClass('totalAno')}`}>{fmt(results.totalAno)}</strong> por ano<br /><br />
               A Yasmim se paga em <strong className={`text-white/100 ${getPulseClass('paybackDias')}`}>
                 {results.isSubDay ? 'menos de 1 dia' : `${results.paybackDias} ${results.paybackDias === 1 ? 'dia' : 'dias'}`}
               </strong> de operação
@@ -560,7 +560,7 @@ const Numeros: React.FC = () => {
                       : 'bg-cromia-border/40 text-cromia-muted'
                       }`}>
                       {isRecomendado
-                        ? `gera ${(results.total / preco).toFixed(1)}x`
+                        ? `Se paga em ${results.paybackDias <= 1 ? 'menos de 1 dia' : `menos de ${results.paybackDias} dias`} de operação`
                         : 'não aplicável para este porte'
                       }
                     </span>
