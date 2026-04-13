@@ -1,9 +1,9 @@
 import React from 'react';
 import MeshBackground from '../components/MeshBackground';
 
-const Chapter = ({ number, title, text, imageSide = 'right' }: { number: string, title: string, text: string | React.ReactNode, imageSide?: 'left' | 'right' }) => (
-  <div className={`flex flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 md:gap-20 mb-32`}>
-    <div className="flex-1">
+const Chapter = ({ number, title, text, image, imageSide = 'right' }: { number: string, title: string, text: string | React.ReactNode, image?: string, imageSide?: 'left' | 'right' }) => (
+  <div className={`flex flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 md:gap-16 mb-24 md:mb-32`}>
+    <div className="w-full md:w-[45%]">
       <div className="text-[12px] font-bold tracking-[0.3em] uppercase text-cromia-gold mb-4">Capítulo {number}</div>
       <h2 className="font-fraunces text-3xl md:text-4xl font-black text-cromia-ink mb-6 leading-tight">
         {title}
@@ -12,14 +12,18 @@ const Chapter = ({ number, title, text, imageSide = 'right' }: { number: string,
         {text}
       </div>
     </div>
-    <div className="flex-1 w-full">
-      <div className="aspect-[16/10] bg-white/40 border border-cromia-border rounded-sm shadow-2xl relative overflow-hidden group">
+    <div className="w-full md:w-[55%]">
+      <div className="bg-white/40 border border-cromia-border rounded-sm shadow-2xl relative overflow-hidden group transition-transform duration-500 hover:scale-[1.02]">
+        {image ? (
+          <img src={image} alt={title} className="w-full h-auto block" />
+        ) : (
+          <div className="aspect-[16/10] flex items-center justify-center text-cromia-muted/30 italic text-sm font-space-grotesk tracking-widest">
+            [ Espaço para Print da Área: {title} ]
+          </div>
+        )}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(180,95,59,0.05),transparent)] pointer-events-none" />
-        <div className="absolute inset-0 flex items-center justify-center text-cromia-muted/30 italic text-sm font-space-grotesk tracking-widest">
-          [ Espaço para Print da Área: {title} ]
-        </div>
         {/* Overlay sutil para dar acabamento premium */}
-        <div className="absolute inset-0 border-[12px] border-white/20 pointer-events-none" />
+        <div className="absolute inset-0 border-[1px] border-white/20 pointer-events-none" />
       </div>
     </div>
   </div>
@@ -60,6 +64,7 @@ const CromiaHealth = () => {
                   O Sistema Cromia Health possui um Dashboard gráfico de acompanhamento de dados relevantes à gestão da Clínica. Visual, conta com rankings que mostram o desempenho de cada área e profissional envolvido, além de mostrar a performance da <strong>Yasmim</strong> com a conversão de leads e agendamentos realizados dentro e fora do horário comercial. Tudo com filtros dinâmicos de período, para que as estratégias sejam implementadas com precisão cirúrgica.
                 </p>
               }
+              image="/imgs/dashboard_print.png"
               imageSide="right"
             />
 
