@@ -1,37 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MeshBackground from '../components/MeshBackground';
 
-const Chapter = ({ 
-  number, 
-  title, 
-  text, 
-  image, 
-  mockup, 
-  imageSide = 'right' 
-}: { 
-  number: string, 
-  title: string, 
-  text: string | React.ReactNode, 
-  image?: string, 
-  mockup?: React.ReactNode, 
-  imageSide?: 'left' | 'right' 
+const Chapter = ({
+  number,
+  title,
+  text,
+  image,
+  mockup,
+  imageSide = 'right',
+  onImageClick
+}: {
+  number: string,
+  title: string,
+  text: string | React.ReactNode,
+  image?: string,
+  mockup?: React.ReactNode,
+  imageSide?: 'left' | 'right',
+  onImageClick?: (img: string) => void
 }) => (
-  <div className={`flex flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-start gap-12 md:gap-20 mb-32`}>
-    <div className="w-full md:w-[45%] pt-2">
-      <div className="text-[12px] font-bold tracking-[0.3em] uppercase text-cromia-gold mb-6 opacity-80">Capítulo {number}</div>
-      <h2 className="font-fraunces text-3xl md:text-4xl font-black text-cromia-ink mb-6 leading-[1.1]">
+  <div className={`flex max-w-[860px] mx-auto flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-start gap-10 md:gap-10 mb-32`}>
+    <div className="w-full md:w-[60%] bg-white/50 backdrop-blur-sm p-11 rounded-2xl shadow-xl">
+      <div className="text-[18px] font-bold tracking-[0.3em] uppercase text-cromia-gold mb-6 opacity-80">Capítulo {number}</div>
+      <h2 className="font-fraunces text-3xl md:text-4xl font-black text-[#3a3a3a] mb-6 leading-[1.1]">
         {title}
       </h2>
-      <div className="text-[17px] text-cromia-ink2 leading-[1.8] font-light opacity-90">
+      <div className="text-[19px] text-cromia-ink2 leading-[1.8] font-light opacity-90">
         {text}
       </div>
     </div>
     <div className="w-full md:w-[55%]">
-      <div className="bg-white/60 backdrop-blur-sm border border-cromia-border/40 rounded-sm shadow-xl relative overflow-hidden group transition-all duration-500 hover:shadow-2xl">
+      <div
+        className={`bg-white/60 backdrop-blur-sm border border-cromia-border/40 rounded-sm shadow-xl relative overflow-hidden group transition-all duration-500 hover:shadow-2xl ${image ? 'cursor-zoom-in' : ''}`}
+        onClick={() => image && onImageClick?.(image)}
+      >
         <div className="p-1 md:p-2 bg-white/40">
           {image ? (
             <div className="relative rounded-[2px] overflow-hidden shadow-sm border border-cromia-border/20">
-              <img src={image} alt={title} className="w-full h-auto block" />
+              <img src={image} alt={title} className="w-full h-auto block transition-transform duration-700 group-hover:scale-[1.02]" />
             </div>
           ) : mockup ? (
             <div className="bg-cromia-bg/20 p-8 min-h-[340px] flex flex-col justify-center rounded-[2px]">
@@ -49,46 +54,90 @@ const Chapter = ({
   </div>
 );
 
+const ImageLightbox = ({ src, onClose }: { src: string, onClose: () => void }) => (
+  <div
+    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-md transition-all duration-300 animate-in fade-in"
+    onClick={onClose}
+  >
+    <button
+      className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
+      onClick={onClose}
+    >
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div
+      className="max-w-[90vw] max-h-[85vh] relative animate-in zoom-in-95 duration-300"
+      onClick={e => e.stopPropagation()}
+    >
+      <img
+        src={src}
+        alt="Visualização ampliada"
+        className="w-full h-full object-contain shadow-2xl rounded-sm border border-white/10"
+      />
+    </div>
+  </div>
+);
+
 const CromiaHealth = () => {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (selectedImage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [selectedImage]);
+
   return (
     <>
       <MeshBackground />
       <div className="bg-transparent text-[#b45f3b] font-space-grotesk min-h-screen m-0 p-0 overflow-x-hidden pt-4">
         <div className="max-w-[1100px] mx-auto px-6 py-[30px] relative">
-          
+
           {/* Logo */}
-          <a href="https://cromia.app" className="absolute top-4 right-6 transition-transform hover:scale-105 active:scale-95">
-            <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-40 md:w-40" />
+          <a href="https://cromia.app" className="flex justify-end mr-14">
+            <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-60 md:w-60" />
           </a>
 
           {/* Hero Section */}
-          <div className="mb-32 pt-28 text-center max-w-[800px] mx-auto">
-            <h1 className="font-fraunces text-4xl md:text-5xl lg:text-7xl font-black text-cromia-ink leading-[1] m-0 mb-8">
-              O Portal que<br />
-              <em className="italic font-light text-[#b45f3b]">muda o jogo</em>
-            </h1>
-            <p className="text-[19px] text-cromia-ink2 leading-[1.7] font-light">
-              Explore o ecossistema Cromia Health. Muito mais que uma agenda, um centro de comando inteligente projetado para clínicas que buscam eficiência absoluta e crescimento escala.
+          <div className="mb-32 mt-10 p-15 text-left max-w-[860px] mx-auto bg-white/50 backdrop-blur-sm border border-cromia-border/40 rounded-2xl shadow-lg relative overflow-hidden">
+
+            <h1 className="font-fraunces font-black not-italic text-5xl text-cromia-gold ">Cromia Health:</h1>
+            <h2 className="font-fraunces text-4xl md:text-5xl tracking-tight lg:text-6xl font-semibold text-[#3a3a3a] leading-[1] m-0 mb-8">
+              O Sistema que
+              <em className="italic font-light text-[#b45f3b]"> muda o jogo</em>
+            </h2>
+            <div className="mt-16 h-[1px] w-[500px] bg-cromia-gold/80 mx-auto" />
+            <p className="text-[19px] text-cromia-ink2 leading-[1.7] font-light mt-20">
+              <span className="font-semibold">Cromia Health</span> é um Ecossistema desenvolvido meticulosamente para o uso com as mais modernas <span className="font-semibold">ferramentas de automação</span> e com a <span className="italic">Yasmim</span>, uma agente de <span className="font-semibold">IA</span> com atendimento humanizado, capaz de fazer multiplos agendamentos ao mesmo tempo, sem filas, sem qualquer intervenção humana no processo e, o detalhe mais especial: com uma <span className="font-semibold">escala de 24/7</span>.<br /><br />
+              Ela realiza reagendamentos, confirmações, cancelamentos e muito mais. Responde as <span className="font-semibold">"Perguntas Mais Frequentes"</span> dos pacientes, que hoje são respondidas pela recepção ou deixam de ser respondidas, gerando perda de receita.<br /><br />
+              O <span className="font-semibold">Portal Administrativo</span>, muito mais que um <span className="italic">Sistema de Agendamento</span>, é um Painel Administrativo inteligente projetado para Clínicas que buscam eficiência absoluta e crescimento em escala com as ferramentas mais modernas do Mercado.<br /><br />
+              Aqui é uma breve apresentação do que o Ecossistema <span className="font-semibold">Cromia Health</span> é capaz de oferecer, suas funcionalidades e como ele pode transformar a gestão da sua Clínica e o impacto financeiro que ele pode gerar.
             </p>
-            <div className="mt-10 h-px w-24 bg-cromia-gold/30 mx-auto" />
+
           </div>
 
           {/* Jornada por Capítulos */}
           <div className="space-y-12">
-            
-            <Chapter 
+
+            <Chapter
               number="01"
               title="Dashboard: O pulso da sua clínica em tempo real"
               text={
                 <p>
-                  O Sistema Cromia Health possui um Dashboard gráfico de acompanhamento de dados relevantes à gestão da Clínica. Visual, conta com rankings que mostram o desempenho de cada área e profissional envolvido, além de mostrar a performance da <strong>Yasmim</strong> com a conversão de leads e agendamentos realizados dentro e fora do horário comercial. Tudo com filtros dinâmicos de período, para que as estratégias sejam implementadas com precisão cirúrgica.
+                  O Painel Administrativo possui um Dashboard gráfico de acompanhamento de dados relevantes à gestão da Clínica. Visual, conta com rankings que mostram o desempenho de cada área e profissional envolvido, além de mostrar a performance da <strong>Yasmim</strong> com a conversão de leads e agendamentos realizados dentro e fora do horário comercial. Tudo com filtros dinâmicos de período, para que as estratégias sejam implementadas com precisão cirúrgica.
                 </p>
               }
               image="/imgs/dashboard_print.png"
               imageSide="right"
+              onImageClick={setSelectedImage}
             />
 
-            <Chapter 
+            <Chapter
               number="02"
               title="Relatórios: De dados soltos a decisões lucrativas"
               text={
@@ -116,7 +165,7 @@ const CromiaHealth = () => {
               imageSide="left"
             />
 
-            <Chapter 
+            <Chapter
               number="03"
               title="Agenda: O coração pulsante da sua operação"
               text={
@@ -144,7 +193,7 @@ const CromiaHealth = () => {
               imageSide="right"
             />
 
-            <Chapter 
+            <Chapter
               number="04"
               title="Médicos & Especialidades: Gestão de Ativos"
               text={
@@ -167,7 +216,7 @@ const CromiaHealth = () => {
               imageSide="left"
             />
 
-            <Chapter 
+            <Chapter
               number="05"
               title="Cenários & Feriados: Controle Total sobre o Tempo"
               text={
@@ -194,7 +243,7 @@ const CromiaHealth = () => {
               imageSide="right"
             />
 
-            <Chapter 
+            <Chapter
               number="06"
               title="Planos & Convênios: Inteligência Financeira"
               text={
@@ -217,7 +266,7 @@ const CromiaHealth = () => {
               imageSide="left"
             />
 
-            <Chapter 
+            <Chapter
               number="07"
               title="Membros & Hierarquia: Segurança e Delegação"
               text={
@@ -247,7 +296,7 @@ const CromiaHealth = () => {
               imageSide="right"
             />
 
-            <Chapter 
+            <Chapter
               number="08"
               title="FAQ Operacional: Treine sua IA em segundos"
               text={
@@ -267,7 +316,7 @@ const CromiaHealth = () => {
               imageSide="left"
             />
 
-            <Chapter 
+            <Chapter
               number="09"
               title="Auditoria de Tokens & Custos: Transparência Absoluta"
               text={
@@ -309,8 +358,8 @@ const CromiaHealth = () => {
           {/* Call to Action Final */}
           <div className="text-center py-20 border-t border-cromia-border">
             <h3 className="font-fraunces text-3xl font-black text-cromia-ink mb-6">Leve a inteligência da Cromia para sua clínica</h3>
-            <a 
-              href="https://wa.me/5511999999999" 
+            <a
+              href="https://wa.me/5511999999999"
               className="inline-block bg-cromia-ink text-white px-10 py-5 rounded-sm font-bold tracking-widest uppercase hover:bg-cromia-gold transition-all duration-300 shadow-xl"
             >
               Agendar Demonstração
@@ -321,8 +370,12 @@ const CromiaHealth = () => {
           <div className="text-center py-12 text-cromia-muted text-sm tracking-widest border-t border-cromia-border">
             DESENVOLVIDO PELA <a href="https://cromia.app" className="font-semibold hover:text-cromia-gold transition-colors underline decoration-cromia-border underline-offset-4">CROMIA</a> - {new Date().getFullYear()}
           </div>
-        </div>
-      </div>
+        </div >
+      </div >
+
+      {selectedImage && (
+        <ImageLightbox src={selectedImage} onClose={() => setSelectedImage(null)} />
+      )}
     </>
   );
 };
