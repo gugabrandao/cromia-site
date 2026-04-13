@@ -6,45 +6,44 @@ const Chapter = ({
   title, 
   text, 
   image, 
-  mockup, 
-  imageSide = 'right' 
+  mockup
 }: { 
   number: string, 
   title: string, 
   text: string | React.ReactNode, 
   image?: string, 
-  mockup?: React.ReactNode, 
-  imageSide?: 'left' | 'right' 
+  mockup?: React.ReactNode
 }) => (
-  <div className={`flex flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-start gap-12 md:gap-20 mb-32`}>
-    <div className="w-full md:w-[45%] pt-2">
+  <div className="mb-24 md:mb-40 last:mb-0">
+    <div className="max-w-[800px] mb-12">
       <div className="text-[12px] font-bold tracking-[0.3em] uppercase text-cromia-gold mb-6 opacity-80">Capítulo {number}</div>
-      <h2 className="font-fraunces text-3xl md:text-4xl font-black text-cromia-ink mb-6 leading-[1.1]">
+      <h2 className="font-fraunces text-3xl md:text-5xl font-black text-cromia-ink mb-6 leading-[1.1]">
         {title}
       </h2>
-      <div className="text-[17px] text-cromia-ink2 leading-[1.8] font-light opacity-90">
+      <div className="text-[18px] text-cromia-ink2 leading-[1.7] font-light opacity-90">
         {text}
       </div>
     </div>
-    <div className="w-full md:w-[55%]">
-      <div className="bg-white/60 backdrop-blur-sm border border-cromia-border/40 rounded-sm shadow-xl relative overflow-hidden group transition-all duration-500 hover:shadow-2xl">
-        <div className="p-1 md:p-2 bg-white/40">
-          {image ? (
-            <div className="relative rounded-[2px] overflow-hidden shadow-sm border border-cromia-border/20">
-              <img src={image} alt={title} className="w-full h-auto block" />
-            </div>
-          ) : mockup ? (
-            <div className="bg-cromia-bg/20 p-8 min-h-[340px] flex flex-col justify-center rounded-[2px]">
+    
+    <div className="bg-white/60 backdrop-blur-sm border border-cromia-border/40 rounded-sm shadow-xl relative overflow-hidden group transition-all duration-500 hover:shadow-2xl">
+      <div className="p-1 md:p-2 bg-white/40">
+        {image ? (
+          <div className="relative rounded-[2px] overflow-hidden shadow-sm border border-cromia-border/20">
+            <img src={image} alt={title} className="w-full h-auto block" />
+          </div>
+        ) : mockup ? (
+          <div className="bg-cromia-bg/20 p-8 md:p-12 min-h-[300px] md:min-h-[450px] flex flex-col justify-center rounded-[2px]">
+            <div className="max-w-[600px] mx-auto w-full">
               {mockup}
             </div>
-          ) : (
-            <div className="aspect-[16/10] flex items-center justify-center text-cromia-muted/30 italic text-sm font-space-grotesk tracking-widest">
-              [ Espaço para Print da Área: {title} ]
-            </div>
-          )}
-        </div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(180,95,59,0.03),transparent)] pointer-events-none" />
+          </div>
+        ) : (
+          <div className="aspect-[21/9] flex items-center justify-center text-cromia-muted/30 italic text-sm font-space-grotesk tracking-widest">
+            [ Espaço para Print da Área: {title} ]
+          </div>
+        )}
       </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(180,95,59,0.03),transparent)] pointer-events-none" />
     </div>
   </div>
 );
