@@ -176,7 +176,7 @@ const CromiaHealth = () => {
           {/* Hero Section */}
           <div className="mb-32  p-15 text-left max-w-[860px] h-[850px] mx-auto bg-white/80 backdrop-blur-sm border border-cromia-border/40 rounded-2xl shadow-lg relative overflow-x-hidden overflow-y-auto scrollbar">
 
-            <h1 className="font-fraunces font-black not-italic text-6xl text-cromia-grey/90">Cromia Health</h1>
+            <h1 className="font-fraunces font-black not-italic text-6xl text-cromia-grey">Cromia Health</h1>
             <h2 className="font-fraunces text-4xl md:text-4xl tracking-tight lg:text-5xl font-semibold text-cromia-gold-dark leading-[1] m-0 mb-8">
               Ecossistema que
               <em className="italic font-light text-[#b45f3b] text-6xl"> muda o jogo</em>
@@ -342,14 +342,69 @@ const CromiaHealth = () => {
               </div>
             </div>
 
+            {/* Nova Seção: Automações do WhatsApp */}
+            <div className="mt-10 mb-20 border-t border-cromia-border/50 pt-20">
+              <div className="text-center mb-16">
+                <div className="text-[12px] font-bold tracking-[0.3em] uppercase text-cromia-gold mb-4">Em Ação</div>
+                <h3 className="font-fraunces text-4xl font-black text-[#3a3a3a] mb-4">Automações Ativas no WhatsApp</h3>
+                <p className="text-lg text-cromia-ink2 font-light max-w-[600px] mx-auto">
+                  Alguns exemplos de como a Yasmim interage ativamente com os pacientes para organizar o fluxo e proteger a receita da Clínica, trabalhando 24h por dia.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-[860px] mx-auto">
+                {/* Automação 1 */}
+                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
+                    [ Print: Relatório Gerencial ]
+                  </div>
+                  <h4 className="font-fraunces font-bold text-2xl text-cromia-ink mb-3">Relatório Executivo para Gestores</h4>
+                  <p className="text-cromia-ink2 leading-relaxed font-light">
+                    O pulso da clínica, todo fim de dia no WhatsApp do Gestor. Receba instantaneamente o faturamento bruto, número de pacientes atendidos, faltas, especialistas e planos mais recorrentes sem abrir o Painel. A bússola perfeita para fechar a noite.
+                  </p>
+                </div>
+                {/* Automação 2 */}
+                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
+                    [ Print: Agenda Diária do Médico ]
+                  </div>
+                  <h4 className="font-fraunces font-bold text-2xl text-cromia-ink mb-3">Agenda Automática Direto ao Médico</h4>
+                  <p className="text-cromia-ink2 leading-relaxed font-light">
+                    Todos os dias, a Yasmim envia um resumo completo com a agenda de atendimentos para o WhatsApp pessoal de cada médico. Chega de papéis impressos confusos ou desinformação — tudo atualizado de forma dinâmica e objetiva, centralizando a operação.
+                  </p>
+                </div>
+                {/* Automação 3 */}
+                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
+                    [ Print: Lembrete de Consulta ]
+                  </div>
+                  <h4 className="font-fraunces font-bold text-2xl text-cromia-ink mb-3">Lembrete & Confirmação</h4>
+                  <p className="text-cromia-ink2 leading-relaxed font-light">
+                    Disparo inteligente 24h e 2h antes da consulta. Se o paciente cancelar, a Yasmim já avisa a recepção e pode engatilhar uma mensagem oferecendo o horário para pacientes na lista de espera ou crônicos. O antídoto definitivo contra o No-Show.
+                  </p>
+                </div>
+
+                {/* Automação 4 */}
+                <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
+                    [ Print: Pesquisa de Qualidade / NPS ]
+                  </div>
+                  <h4 className="font-fraunces font-bold text-2xl text-cromia-ink mb-3">Pesquisa de Satisfação</h4>
+                  <p className="text-cromia-ink2 leading-relaxed font-light">
+                    Terminou a consulta? O sistema envia automaticamente uma mensagem colhendo o feedback do paciente. Excelente para auditar o atendimento dos profissionais e elevar a nota da clínica no Google.
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Call to Action Final */}
           <div className="text-center py-20 border-t border-cromia-border">
-            <h3 className="font-fraunces text-4xl font-black text-cromia-grey mb-6">Leve a inteligência da Cromia para sua clínica</h3>
+            <h3 className="font-fraunces text-4xl font-black text-cromia-grey mb-10">Leve a inteligência da Cromia para sua clínica</h3>
             <a
               href="https://wa.me/5521991550328"
-              className="inline-block bg-cromia-gold-light !text-cromia-ink2 px-10 py-5 mt-10 rounded-lg font-bold tracking-widest uppercase hover:bg-cromia-gold-dim/20 transition-all duration-300 shadow-xl"
+              className="inline-block bg-cromia-gold-light !text-cromia-ink2 px-10 py-5 mt-10 rounded-lg font-bold tracking-widest uppercase hover:bg-cromia-gold-dim/20 transition-all duration-300 hover:scale-110 shadow-xl"
             >
               Agendar Demonstração
             </a>

@@ -572,8 +572,8 @@ const Numeros: React.FC = () => {
         </div>
 
         {/* Footer */}
-        <div className="text-center py-12 text-cromia-gold-dim/80 text-base tracking-wider">
-          Desenvolvido pela <a href="https://cromia.app" className="font-semibold hover:text-cromia-gold transition-colors">Cromia</a> - {new Date().getFullYear()}
+        <div className="text-center py-12 text-cromia-muted text-sm tracking-widest border-t border-cromia-border">
+          DESENVOLVIDO PELA <a href="https://cromia.app" className="font-semibold hover:text-cromia-gold transition-colors underline decoration-cromia-border underline-offset-4">CROMIA</a> - {new Date().getFullYear()}
         </div>
       </div>
     </>
