@@ -224,7 +224,7 @@ const Numeros: React.FC = () => {
             <div className="text-base font-semibold tracking-[0.3em] uppercase text-[#b45f3b] mb-4 flex items-center gap-[10px] before:content-[''] before:w-6 before:h-[2px] before:bg-cromia-gold">
               Cromia Health
             </div>
-            <h1 className="font-fraunces text-cromia-ink/80 text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] m-0 mb-3">
+            <h1 className="font-fraunces text-cromia-grey text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] m-0 mb-3">
               O que a Yasmim gera<br />
               <em className="italic font-light text-[#b45f3b]">trabalhando</em> enquanto<br />
               você dorme
