@@ -211,6 +211,43 @@ const Numeros: React.FC = () => {
 
   const getPulseClass = (id: string) => pulsing[id] ? 'animate-calculator-pulse' : '';
 
+  // --- FRANKENSTEIN COST CALC (dinâmico por médicos) ---
+  const recepDigital = Math.max(1, Math.ceil(medicos / 8)); // ~1 recep. digital a cada 8 médicos
+  const frankRows = [
+    {
+      nome: 'Zenvia / TakeBlip / Wavy',
+      funcao: 'Hub de WhatsApp e Chat Omnichannel',
+      min: 1000, max: 2500,
+      nota: '+ taxa por mensagem enviada',
+    },
+    {
+      nome: 'Doctoralia / Feegow (Addons)',
+      funcao: `Agenda SaaS — ${medicos} médico${medicos > 1 ? 's' : ''} ativos`,
+      min: 300 * medicos, max: 800 * medicos,
+      nota: `R$ 300–800 × ${medicos} méd.`,
+    },
+    {
+      nome: 'Chatbot de IA de Prateleira',
+      funcao: 'Responde dúvidas, mas não agenda de verdade',
+      min: 500, max: 1500,
+      nota: 'Markup na OpenAI embutido',
+    },
+    {
+      nome: 'Make / Zapier',
+      funcao: 'Colar os sistemas acima entre si',
+      min: 400, max: 860,
+      nota: '~US$ 70–150/mês',
+    },
+    {
+      nome: `${recepDigital} recepcionista${recepDigital > 1 ? 's' : ''} dedicada${recepDigital > 1 ? 's' : ''} ao WhatsApp`,
+      funcao: 'Copiar, colar e responder manualmente',
+      min: recepDigital * 3500, max: recepDigital * 4500,
+      nota: `CLT + encargos × ${recepDigital}`,
+    },
+  ];
+  const frankTotalMin = frankRows.reduce((acc, r) => acc + r.min, 0);
+  const frankTotalMax = frankRows.reduce((acc, r) => acc + r.max, 0);
+
   return (
     <>
       <MeshBackground />
@@ -521,13 +558,85 @@ const Numeros: React.FC = () => {
             <div className="font-fraunces text-[35px] font-bold tracking-normal uppercase text-cromia-gold mb-3.5">
               O fato é...
             </div>
-            <p className="font-fraunces text-[1.4rem] font-light italic text-cromia-ink leading-[1.6]">
+            <p className="font-fraunces text-[1.4rem] font-light italic text-cromia-ink leading-[1.6] mb-8">
               "Com <strong className="font-semibold not-italic text-cromia-gold-dim">{consultas} consultas por dia</strong> e ticket médio de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(ticket)}</strong>,
               a Clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)} por mês</strong> só com <strong className="font-semibold not-italic text-cromia-gold-dim">no-show</strong> —
               e mais <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.recFora)} por mês</strong> com pacientes que tentam agendar fora do horário e não encontram ninguém.
               Já a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong>, trabalha às 23h de um domingo. Sendo assim, no total, ela propõe <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.total)} por mês</strong> de valor real resolvendo gargalos e escoamentos da Clínica.
-              O plano de parceria estratégica proposto para e estrutura apresentada é o <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> que custa <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong> de mensalidade. Não chega a <strong className="font-semibold not-italic text-cromia-gold-dim">{Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> do ganho real que a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong> pode gerar. Logo, os outros <strong className="font-semibold not-italic text-cromia-gold-dim">{100 - Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> entram sorrindo no caixa da Clínica."
+              O plano de parceria estratégica proposto para a estrutura apresentada é o <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> que custa <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong> de mensalidade. Não chega a <strong className="font-semibold not-italic text-cromia-gold-dim">{Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> do ganho real que a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong> pode gerar. Logo, os outros <strong className="font-semibold not-italic text-cromia-gold-dim">{100 - Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> entram sorrindo no caixa da Clínica."
             </p>
+            <div className="border-t border-cromia-gold/20 pt-8">
+              <p className="font-fraunces text-[1.1rem] font-light text-cromia-ink2 leading-[1.7]">
+                E isso sem contar que a maioria das clínicas chega a nós pagando entre{' '}
+                <strong className="text-cromia-gold-dim not-italic font-bold">R$ 5.800 e R$ 9.800 por mês</strong>{' '}
+                empilhando ferramentas das quais a Yasmim substitui todas de uma só vez — sem menus de "Aperte 1, 2 ou 3", sem Zapier, sem bot engessado e sem escalar custo por médico contratado.
+                Um único ecossistema orgânico. Um único parceiro estratégico.
+              </p>
+            </div>
+          </div>
+
+          {/* Bloco: Custo do Frankenstein */}
+          <div className="bg-white border border-cromia-border rounded-sm px-8 py-8 mb-5 shadow-lg">
+            <div className="text-base font-semibold tracking-[0.2em] uppercase text-cromia-ink2 mb-2 flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full bg-red-400"></span>
+              O que a clínica paga hoje — sem a Cromia Health
+            </div>
+            <p className="text-sm text-cromia-muted mb-6 italic">
+              Para ter algo próximo ao que a Cromia Health entrega, a clínica precisa empilhar ferramentas de múltiplos fornecedores. É o chamado modelo "Frankenstein".
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-cromia-gold/30">
+                    <th className="text-left py-3 pr-4 text-cromia-ink2 font-semibold tracking-wide text-xs uppercase">Solução no mercado</th>
+                    <th className="text-left py-3 pr-4 text-cromia-ink2 font-semibold tracking-wide text-xs uppercase">Função</th>
+                    <th className="text-right py-3 text-cromia-ink2 font-semibold tracking-wide text-xs uppercase">Custo estimado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {frankRows.map((row, i) => (
+                    <tr key={i} className="border-b border-cromia-border/40 hover:bg-cromia-surface transition-colors">
+                      <td className="py-3 pr-4 font-semibold text-cromia-ink align-top">{row.nome}</td>
+                      <td className="py-3 pr-4 text-cromia-ink2 align-top">
+                        {row.funcao}
+                        <div className="text-[11px] text-cromia-muted mt-0.5 italic">{row.nota}</div>
+                      </td>
+                      <td className="py-3 text-right text-cromia-gold-dim font-semibold whitespace-nowrap align-top">
+                        {fmt(row.min)}
+                        <span className="text-cromia-muted font-normal"> – </span>
+                        {fmt(row.max)}
+                        <div className="text-[11px] text-cromia-muted font-normal">/mês</div>
+                      </td>
+                    </tr>
+                  ))}
+                  <tr className="bg-red-50">
+                    <td colSpan={2} className="py-4 pr-4 font-black text-cromia-ink text-base">CUSTO TOTAL MENSAL DO “FRANKENSTEIN”</td>
+                    <td className="py-4 text-right font-black text-red-500 text-lg whitespace-nowrap">
+                      {fmt(frankTotalMin)}<span className="text-red-400 font-normal"> – </span>{fmt(frankTotalMax)}
+                      <div className="text-sm font-normal text-red-400">/mês</div>
+                    </td>
+                  </tr>
+                  <tr className="bg-cromia-teal/5 border-t-2 border-cromia-teal/30">
+                    <td colSpan={2} className="py-4 pr-4 font-black text-cromia-teal text-base">CROMIA HEALTH — Ecossistema Único</td>
+                    <td className="py-4 text-right font-black text-cromia-teal text-lg whitespace-nowrap">
+                      R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}
+                      <div className="text-sm font-normal text-cromia-teal/70">/mês</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="text-xs text-cromia-muted mt-5 border-t border-cromia-border/40 pt-4 space-y-2">
+              <p className="italic">
+                * Valores estimados com base em pesquisa de mercado (abril/2026). A licença da Cromia Health inclui WhatsApp API Oficial, IA generativa com LLM (GPT-4), CRM, agenda, automações completas, auditoria de tokens e painel administrativo White Label.
+                O custo da infraestrutura de IA (OpenAI) é repassado a preço de custo, sem markup, sob auditoria direta do gestor.
+              </p>
+              <p className="italic">
+                ** <strong className="not-italic text-cromia-ink2">Doctoralia e Feegow não publicam tabela de preços.</strong>{' '}
+                Os valores da linha "Agenda SaaS" são baseados em relatos públicos de gestores de clínicas, avaliações no Capterra e G2, e cotações compartilhadas em comunidades médicas.
+                Em geral, gestores de clínicas com mais de 10 médicos relatam gastos entre R$ 300–800 por profissional/mês com essas plataformas — valores que pedimos para você confirmar com um consultor deles antes de qualquer tomada de decisão.
+              </p>
+            </div>
           </div>
 
           {/* Planos */}
