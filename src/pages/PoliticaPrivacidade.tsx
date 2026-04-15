@@ -6,8 +6,6 @@ import styles from './LegalPage.module.css';
 import { PoliticaPrivacidadeContent } from '../components/LegalContent';
 
 export default function PoliticaPrivacidade() {
-  const year = new Date().getFullYear();
-
   return (
     <>
       <MeshBackground />
