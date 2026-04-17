@@ -18,13 +18,13 @@ const Chapter = ({
   imageSide?: 'left' | 'right',
   onImageClick?: (images: string[], index: number) => void
 }) => (
-  <div className={`flex max-w-[860px] mx-auto flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-start gap-10 md:gap-10 mb-32`}>
-    <div className="w-full md:w-[60%] bg-white/80 backdrop-blur-sm p-11 rounded-2xl shadow-xl -mt-12">
-      <div className="text-[22px] font-bold tracking-widest uppercase text-cromia-gold mb-6 opacity-80">Item {number}</div>
-      <h2 className="font-fraunces text-3xl md:text-4xl font-black text-[#3a3a3a] mb-6 leading-[1.1]">
+  <div className={`flex max-w-[1100px] mx-auto flex-col ${imageSide === 'left' ? 'md:flex-row-reverse' : 'md:flex-row'} items-start gap-10 md:gap-10 mb-32`}>
+    <div className="w-full md:w-[100%] bg-white/80 backdrop-blur-sm rounded-xl md:rounded-2xl shadow-xl -mt-12 p-6 md:p-11">
+      <div className="text-lg lg:text-[24px] font-bold tracking-widest uppercase text-cromia-gold mb-6 opacity-80">Item {number}</div>
+      <h2 className="font-fraunces text-2xl md:text-4xl font-black text-[#3a3a3a] mb-6 leading-[1.1]">
         {title}
       </h2>
-      <div className="text-[18px] text-cromia-ink2 leading-[1.8] font-light opacity-90">
+      <div className="text-base md:text-[18px] text-cromia-ink2 leading-[1.5] md:leading-[1.8] font-light opacity-90">
         {text}
       </div>
     </div>
@@ -170,19 +170,18 @@ const CromiaHealth = () => {
 
           {/* Logo */}
           <a href="https://cromia.app" className="flex justify-center">
-            <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-80 md:w-80 mb-4" />
+            <img src="/imgs/logo.svg" alt="Cromia Logo" className="w-50 md:w-80 lg:w-100 -mt-2 mb-1 md:mb-4 md:mt-0" />
           </a>
 
           {/* Hero Section */}
-          <div className="mb-32  p-15 text-left max-w-[1200px] h-[800px] mx-auto bg-white/80 backdrop-blur-sm border border-cromia-border/40 rounded-2xl shadow-lg relative overflow-x-hidden overflow-y-auto scrollbar">
+          <div className="mb-30 lg:p-14 p-6 text-left max-w-[1200px] h-[800px] mx-auto bg-white/80 backdrop-blur-sm border border-cromia-border/40 rounded-xl md:rounded-2xl shadow-lg relative overflow-x-hidden overflow-y-auto scrollbar">
 
-            <h1 className="font-fraunces font-black not-italic text-6xl text-cromia-grey">Cromia Health</h1>
-            <h2 className="font-fraunces text-4xl md:text-4xl tracking-tight lg:text-5xl font-semibold text-cromia-gold-dark leading-[1] m-0 mb-8">
-              Ecossistema que
-              <em className="italic font-light text-[#b45f3b] text-6xl"> muda o jogo</em>
+            <h1 className="font-fraunces font-bold md:font-black not-italic text-4xl lg:text-5xl tracking-tight text-cromia-grey leading-10">Cromia Health</h1>
+            <h2 className="font-fraunces text-4xl lg:text-5xl tracking-tight font-semibold text-cromia-gold-dark">Ecossistema que
+              <em className="italic font-light text-[#b45f3b] text-[40px] lg:text-6xl"> muda o jogo</em>
             </h2>
-            <div className="mt-16 h-[1px] w-[740px] bg-cromia-gold/80 mx-auto" />
-            <p className="text-[19px] text-cromia-ink2 leading-[1.7] font-light mt-20">
+            <div className="mt-10 lg:mt-20 h-[1px] w-[740px] bg-cromia-gold/80 mx-auto" />
+            <p className="text-base lg:text-xl text-cromia-ink2 leading-[1.7] font-light mt-10 lg:mt-20">
               <span className="font-semibold">Cromia Health</span> é um Ecossistema desenvolvido meticulosamente para o uso com as mais modernas <span className="font-semibold">ferramentas de automação</span> e com a nossa agente de <span className="font-semibold">IA</span> com atendimento extremamente humanizado, capaz de fazer multiplos agendamentos ao mesmo tempo, sem filas, sem qualquer necessidade de intervenção humana e o detalhe mais importante: com uma <span className="font-semibold">escala de 24/7</span>, sem nunca mais perder clientes fora do horário comercial.<br /><br />
               Chamamos carinhosamente de <span className="font-semibold italic">Yasmim</span>, mas você pode dar o nome que lhes for mais agradável. Uma especialista na gestão da sua Clínica, ela é treinada pra saber tudo sobre as particularidades do seu negócio. Realiza agendamentos, confirmações, reagendamentos, cancelamentos e muito mais de forma nativa, sem qualquer <span className="font-semibold">gambiarra</span> de integração com Sistemas de terceiros. Responde as <span className="font-semibold">"Perguntas Mais Frequentes"</span> dos pacientes, que hoje são respondidas exaustivamente pela recepção ou pior: deixam de ser respondidas, gerando perda de receita.<br /><br />
               O <span className="font-semibold">Portal Administrativo</span>, muito mais que um <span className="italic">Sistema de Agendamento</span>, é um Painel inteligente projetado para Clínicas que buscam eficiência e crescimento em escala com as ferramentas mais modernas do Mercado e está em constante evolução, com atualizações frequentes para performar ainda melhor a cada dia.<br /><br />
@@ -314,16 +313,17 @@ const CromiaHealth = () => {
               imageSide="right"
               onImageClick={handleImageClick}
             />
-            <div className="bg-cromia-ink text-white rounded-2xl p-15 -mt-10 mb-10 relative overflow-hidden w-[860px] !shadow-xl mx-auto">
+            {/* whatsapp item 10 */}
+            <div className="w-full bg-cromia-ink text-white rounded-2xl p-6 md:p-15 mb-10 relative overflow-hidden w-[860px] !shadow-xl mx-auto">
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_75%_50%,#30df4de3_10%,transparent_120%)] pointer-events-none z-0" />
               <svg className="absolute top-1/2 left-10/12 -translate-y-1/2 -translate-x-1/2 w-[850px] h-[850px] text-white opacity-5 pointer-events-none z-0 -rotate-12" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
               <div className="relative z-10 flex flex-col md:flex-row items-center gap-12">
                 <div className="flex-1">
-                  <div className="text-[24px] font-bold tracking-[0.3em] uppercase text-white mb-4">ITEM 10</div>
-                  <h2 className="font-fraunces text-4xl font-black mb-6">Whatsapp API Oficial & Chat/CRM: Comunicação Segura</h2>
-                  <p className="text-lg text-white/100 leading-[1.8] font-light italic">
+                  <div className="text-lg md:text-[24px] font-bold tracking-[0.3em] uppercase text-white mb-4">ITEM 10</div>
+                  <h2 className="font-fraunces text-3xl md:text-4xl font-black mb-6">Whatsapp API Oficial & Chat/CRM: Comunicação Segura</h2>
+                  <p className="text-base md:text-lg text-white/100 leading-[1.8] font-light italic">
                     Ao utilizar o Whatsapp API Oficial, o monitoramento das conversas não se aplica à um celular ou algum outro simples dispositivo e a única maneira de se visualizar e atribuir as conversas é através do Chat incorporado no Painel Administrativo, onde a recepcionista consegue ter acesso a todas as conversas entre a Yasmim e os pacientes, podendo intervir quando necessário, garantindo que todas as conversas sejam auditáveis e seguras. Assuma o chat quando a complexidade exigir um toque humano ou quando for solicitado pela Yasmim, sem nunca perder o histórico ou a privacidade dos dados. Os pacientes ficam cadastrados como em um CRM, com o histórico de todas as conversas, permitindo um atendimento personalizado e eficiente.
                   </p>
                 </div>
