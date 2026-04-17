@@ -198,7 +198,7 @@ const Numeros: React.FC = () => {
       total, totalAno, paybackDias, isSubDay, roi, mult, consultasExtra,
       horasLiberadasMes, horasLiberadasSemana
     };
-  }, [consultas, ticket, recep, salario, activeScenario, medicos]);
+  }, [consultas, ticket, recep, /*salario,*/ activeScenario, medicos]);
 
   useEffect(() => {
     const keys = Object.keys(results);
