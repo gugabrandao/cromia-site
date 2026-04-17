@@ -146,7 +146,7 @@ const Numeros: React.FC = () => {
   const [consultas, setConsultas] = useState(40);
   const [ticket, setTicket] = useState(200);
   const [recep, setRecep] = useState(3);
-  const [salario, setSalario] = useState(1900);
+  // const [salario, setSalario] = useState(1900);
   const [activeScenario, setActiveScenario] = useState('media');
   const [activeRef, setActiveRef] = useState('noshow-mercado');
   const [pulsing, setPulsing] = useState<Record<string, boolean>>({});
