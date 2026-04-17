@@ -212,37 +212,41 @@ const Numeros: React.FC = () => {
   const getPulseClass = (id: string) => pulsing[id] ? 'animate-calculator-pulse' : '';
 
   // --- FRANKENSTEIN COST CALC (dinâmico por médicos) ---
+  // Fontes: Make.com/pricing, Zapier.com/pricing, pesquisa de mercado BR saúde 2025, IBGE/CLT calculadora Contabilizei
   const recepDigital = Math.max(1, Math.ceil(medicos / 8)); // ~1 recep. digital a cada 8 médicos
+  const USD_BRL = 5.80; // câmbio de referência conservador (abr/2026)
+  const makeProMensal = Math.round(19 * USD_BRL);   // Make Pro: US$ 19/mês
+  const zapierProMensal = Math.round(30 * USD_BRL);  // Zapier Professional: ~US$ 30/mês
   const frankRows = [
     {
-      nome: 'Zenvia / TakeBlip / Wavy',
-      funcao: 'Hub de WhatsApp e Chat Omnichannel',
-      min: 1000, max: 2500,
-      nota: '+ taxa por mensagem enviada',
+      nome: 'Zenvia / TakeBlip (WhatsApp API)',
+      funcao: 'Hub oficial de WhatsApp e Chat Omnichannel',
+      min: 800, max: 2500,
+      nota: 'Plataforma + taxas de conversação Meta. Sem tabela pública — orçamento sob demanda. Estimativa por relatos de mercado.',
     },
     {
-      nome: 'Doctoralia / Feegow (Addons)',
-      funcao: `Agenda SaaS — ${medicos} médico${medicos > 1 ? 's' : ''} ativos`,
+      nome: 'Doctoralia + Feegow (mesmo grupo)',
+      funcao: `Visibilidade + Prontuário — ${medicos} médico${medicos > 1 ? 's' : ''} ativos`,
       min: 300 * medicos, max: 800 * medicos,
-      nota: `R$ 300–800 × ${medicos} méd.`,
+      nota: `Feegow e Doctoralia são do mesmo grupo (Docplanner) desde 2022. A clínica paga duas licenças da mesma empresa. Sem preço público — R$ 300–800/médico/mês por relatos de gestores (Capterra/G2). Amplimed, concorrente com preço público, cobra R$ 89/médico/mês (plano Lite) — só agenda, sem IA.`,
     },
     {
       nome: 'Chatbot de IA de Prateleira',
-      funcao: 'Responde dúvidas, mas não agenda de verdade',
-      min: 500, max: 1500,
-      nota: 'Markup na OpenAI embutido',
+      funcao: 'Responde FAQ — não agenda em banco de dados real',
+      min: 300, max: 1500,
+      nota: 'Ex.: Desler (~R$ 160/mês), Syntia, WTA3, SecretáriaIA. Prometem integração com Feegow para agendamento — sem casos de uso públicos verificados. Risco real de “burnar” a confiança do gestor na IA.',
     },
     {
-      nome: 'Make / Zapier',
-      funcao: 'Colar os sistemas acima entre si',
-      min: 400, max: 860,
-      nota: '~US$ 70–150/mês',
+      nome: `Make (Pro) ou Zapier (Professional)`,
+      funcao: 'Middleware para conectar os sistemas acima',
+      min: makeProMensal, max: zapierProMensal * 2,
+      nota: `Make Pro: US$ 19/mês (~R$ ${makeProMensal}). Zapier Professional: ~US$ 30/mês (~R$ ${zapierProMensal}). Volume alto de operações sobe o plano. (make.com/pricing, zapier.com/pricing)`,
     },
     {
       nome: `${recepDigital} recepcionista${recepDigital > 1 ? 's' : ''} dedicada${recepDigital > 1 ? 's' : ''} ao WhatsApp`,
-      funcao: 'Copiar, colar e responder manualmente',
-      min: recepDigital * 3500, max: recepDigital * 4500,
-      nota: `CLT + encargos × ${recepDigital}`,
+      funcao: 'Copiar, colar e responder manualmente 8h/dia',
+      min: recepDigital * 3300, max: recepDigital * 3700,
+      nota: `Custo real CLT: salário R$ 2.000 + FGTS + INSS patronal + 13º + férias + VT = R$ 3.300–3.700/funcionário (fonte: Contabilizei, Solides, 2024/2025). × ${recepDigital} pessoa${recepDigital > 1 ? 's' : ''}.`,
     },
   ];
   const frankTotalMin = frankRows.reduce((acc, r) => acc + r.min, 0);
@@ -341,7 +345,7 @@ const Numeros: React.FC = () => {
                   </span>
                 </div>
                 <input
-                  type="range" min="100" max="300" step="10" value={ticket}
+                  type="range" min="100" max="1000" step="50" value={ticket}
                   onChange={e => setTicket(+e.target.value)}
                   className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
                 />
@@ -360,7 +364,7 @@ const Numeros: React.FC = () => {
                   className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
                 />
               </div>
-
+              {/*
               <div className="flex flex-col gap-[10px]">
                 <div className="flex justify-between items-baseline">
                   <span className="text-base text-cromia-ink2 tracking-wider">Salário recepção</span>
@@ -373,7 +377,7 @@ const Numeros: React.FC = () => {
                   onChange={e => setSalario(+e.target.value)}
                   className="w-full h-[2px] bg-cromia-border appearance-none cursor-pointer outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-[18px] [&::-webkit-slider-thumb]:h-[18px] [&::-webkit-slider-thumb]:bg-[#b45f3b] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_2px_8px_rgba(200,130,10,0.35)] [&::-webkit-slider-thumb]:hover:scale-125 [&::-webkit-slider-thumb]:transition-transform"
                 />
-              </div>
+              </div>*/}
             </div>
           </div>
 
@@ -581,8 +585,15 @@ const Numeros: React.FC = () => {
               <span className="w-3 h-3 rounded-full bg-red-400"></span>
               O que a clínica paga hoje — sem a Cromia Health
             </div>
-            <p className="text-sm text-cromia-muted mb-6 italic">
-              Para ter algo próximo ao que a Cromia Health entrega, a clínica precisa empilhar ferramentas de múltiplos fornecedores. É o chamado modelo "Frankenstein".
+            <p className="text-sm text-cromia-muted mb-3 italic">
+              Para ter algo próximo ao que a Cromia Health entrega, a clínica precisa empilhar ferramentas de múltiplos fornecedores — o chamado modelo "Frankenstein".
+            </p>
+            <p className="text-sm text-cromia-muted mb-6">
+              Um exemplo real: a <strong className="text-cromia-ink">Doctoralia</strong> oferece o perfil de médico e agendamento online.
+              Para ter prontuário eletrônico, a clínica contrata o <strong className="text-cromia-ink">Feegow</strong> — que é, literalmente, um <em>addon</em> da Doctoralia.
+              Para ter IA no WhatsApp, contrata um terceiro agente que "promete integração" com o Feegow — sem casos de uso comprovados em clínicas reais.
+              Para conectar tudo isso, usa Make ou Zapier. Para alguém operar o caos, contrata mais uma recepcionista.
+              <strong className="text-cromia-ink"> Addon sobre addon. Custo sobre custo.</strong>
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm border-collapse">
@@ -635,6 +646,133 @@ const Numeros: React.FC = () => {
                 ** <strong className="not-italic text-cromia-ink2">Doctoralia e Feegow não publicam tabela de preços.</strong>{' '}
                 Os valores da linha "Agenda SaaS" são baseados em relatos públicos de gestores de clínicas, avaliações no Capterra e G2, e cotações compartilhadas em comunidades médicas.
                 Em geral, gestores de clínicas com mais de 10 médicos relatam gastos entre R$ 300–800 por profissional/mês com essas plataformas — valores que pedimos para você confirmar com um consultor deles antes de qualquer tomada de decisão.
+              </p>
+            </div>
+          </div>
+
+          {/* Bloco: Simples por Design */}
+          <div className="border-l-4 border-cromia-gold bg-cromia-surface px-8 py-8 mb-5 rounded-r-sm shadow-lg">
+            <div className="flex items-start gap-5">
+              <div className="text-4xl select-none mt-1">💡</div>
+              <div>
+                <div className="text-base font-bold tracking-[0.2em] uppercase text-cromia-gold mb-3">
+                  Simples por Design — Robusto por Dentro
+                </div>
+                <p className="text-[1.05rem] text-cromia-ink2 leading-[1.8] font-light">
+                  Sistemas como o Feegow são extraordinariamente completos. Mas pergunte-se:{' '}
+                  <strong className="text-cromia-ink font-semibold">
+                    uma secretária que ganha R$ 1.800/mês vai ter tempo, disposição e suporte para aprender a operar
+                    uma plataforma com dezenas de módulos, abas e submenus complexos?
+                  </strong>
+                </p>
+                <p className="text-[1.05rem] text-cromia-ink2 leading-[1.8] font-light mt-4">
+                  A Cromia Health foi projetada com a premissa oposta: a recepcionista usa no primeiro dia.
+                  O fluxo de trabalho foi simplificado ao essencial — agendar, visualizar, confirmar e atender — sem sacrificar
+                  nenhum passo do processo clínico. O resultado é uma adoção silenciosa, sem curva de aprendizado dolorosa
+                  e sem depender de treinamentos caros que ninguém lembra no mês seguinte.
+                </p>
+                <div className="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {[
+                    { icon: '✅', label: 'Onboarding em horas', desc: 'A equipe aprende na prática, sem manual de 80 páginas.' },
+                    { icon: '✅', label: 'Interface focada no fluxo', desc: 'Sem menus escondidos. Cada ação está onde faz sentido.' },
+                    { icon: '✅', label: 'IA absorve a complexidade', desc: 'A Yasmim faz o trabalho pesado. A recepção faz o acolhimento.' },
+                  ].map((item, i) => (
+                    <div key={i} className="bg-white rounded-sm border border-cromia-border p-4 shadow-sm">
+                      <div className="text-base font-semibold text-cromia-ink mb-1">{item.icon} {item.label}</div>
+                      <div className="text-sm text-cromia-ink2 font-light leading-snug">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bloco: Parceria Estratégica — Principal Predicado */}
+          <div className="bg-cromia-ink text-white rounded-sm mb-5 shadow-xl relative overflow-hidden">
+
+            {/* Gradients decorativos */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_0%_100%,#d1602f60_0%,transparent_33%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,#d1602f60_0%,transparent_66%)] pointer-events-none" />
+
+            {/* Cabeçalho hero do bloco */}
+            <div className="border-b border-white/10 px-8 pt-10 pb-8 relative z-10">
+              <div className="text-lg font-bold tracking-[0.35em] uppercase text-cromia-gold/90 mb-4">
+                O nosso maior predicado
+              </div>
+              <h2 className="font-fraunces text-5xl md:text-5xl font-black text-white leading-tight mb-4">
+                Não vendemos um sistema.<br />
+                <em className="font-light text-cromia-gold">Construímos uma parceria.</em>
+              </h2>
+              <p className="text-white/80 text-lg font-light leading-relaxed max-w-[620px]">
+                Qualquer SaaS do mercado pode te vender um plano, gerar um boleto e desaparecer atrás de um formulário de suporte.
+                A Cromia Health opera com uma premissa diferente: <strong className="text-white font-medium">só crescemos se você crescer.</strong>{' '}
+                Isso muda completamente como tratamos cada relação, cada ajuste e cada evolução do sistema.
+              </p>
+            </div>
+
+            {/* Pilares da parceria */}
+            <div className="px-8 py-8 grid grid-cols-1 md:grid-cols-3 gap-8 border-b border-white/10 relative z-10">
+              <div className="space-y-5">
+                <div className="w-8 h-[2px] bg-cromia-gold" />
+                <div className="text-lg font-fraunces font-semibold text-white">Comprometimento com o seu resultado</div>
+                <p className="text-white/80 text-base leading-relaxed font-light">
+                  Antes de fechar qualquer contrato, mapeamos a operação da sua clínica, entendemos os gargalos reais
+                  e só propomos uma solução se acreditarmos que ela vai funcionar para o seu contexto específico.
+                  Não existe proposta genérica aqui.
+                </p>
+              </div>
+              <div className="space-y-5">
+                <div className="w-8 h-[2px] bg-cromia-gold" />
+                <div className="text-lg font-fraunces font-semibold text-white">Presença além do onboarding</div>
+                <p className="text-white/80 text-base leading-relaxed font-light">
+                  Um SaaS tradicional te abandona depois da implantação. O suporte vira um ticket sem rosto.
+                  Com a Cromia, você tem um interlocutor que conhece a sua clínica pelo nome,
+                  seu histórico e seus próximos objetivos — disponível de verdade quando algo precisa evoluir.
+                </p>
+              </div>
+              <div className="space-y-5">
+                <div className="w-8 h-[2px] bg-cromia-gold" />
+                <div className="text-lg font-fraunces font-semibold text-white">Evolução contínua e co-criada</div>
+                <p className="text-white/80 text-base leading-relaxed font-light">
+                  O sistema cresce com a clínica. Feedbacks viram funcionalidades.
+                  Problemas viram prioridades de desenvolvimento — não entram numa fila de anos esperando pela
+                  próxima versão de um SaaS que serve mil mercados ao mesmo tempo.
+                </p>
+              </div>
+            </div>
+
+            {/* Declaração de valores + customização */}
+            <div className="px-8 py-8 grid grid-cols-1 md:grid-cols-2 gap-8 border-b border-white/10 relative z-10">
+              <div className="space-y-3">
+                <div className="text-lg font-bold tracking-wide uppercase text-cromia-gold/70">O sistema veste a sua marca</div>
+                <p className="text-white/80 text-base leading-relaxed font-light">
+                  Cada clínica parceira recebe um sistema configurado com a sua identidade visual — nome, cores, logotipo.
+                  Seus médicos e pacientes interagem com algo que parece construído exclusivamente para a sua instituição.
+                  Porque foi. Isso não é template. É dedicação.
+                </p>
+              </div>
+              <div className="space-y-3">
+                <div className="text-lg font-bold tracking-wide uppercase text-cromia-gold/70">Transparência total de custos</div>
+                <p className="text-white/80 text-base leading-relaxed font-light">
+                  Ao contrário dos SaaS que ocultam os preços e empurram planos anuais no escuro,
+                  na Cromia você sabe exatamente o que paga e o que recebe — incluindo o custo de IA
+                  repassado sem markup direto da OpenAI, auditável centavo a centavo no painel de gestão.
+                </p>
+              </div>
+            </div>
+
+            {/* Rodapé: IA real + CTA */}
+            <div className="px-8 py-8 relative z-10">
+              <div className="text-lg font-bold tracking-wide uppercase text-cromia-gold/70 mb-3">
+                Sobre a IA: entrega real, não promessa de marketing
+              </div>
+              <p className="text-white/80 text-base leading-relaxed font-light max-w-[680px] mb-6">
+                O mercado está cheio de "agentes de IA" (Desler, Syntia, WTA3) que prometem agendamento inteligente
+                e entregam um chatbot de FAQ com menu numerado revestido de marketing. Isso{' '}
+                <strong className="text-white font-medium">queima a confiança do gestor</strong>{' '}
+                antes que ele experimente algo de verdade.
+                A Yasmim agenda em uma agenda real, altera em um banco de dados real, responde áudios e
+                mantém contexto de conversa. Não pedimos fé — pedimos 30 minutos de demonstração ao vivo.
               </p>
             </div>
           </div>
