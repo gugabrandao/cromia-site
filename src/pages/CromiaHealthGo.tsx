@@ -35,12 +35,12 @@ const pillars = [
   {
     icon: <Handshake className="w-11 h-11 text-[#b45f3b]" />,
     title: 'Parceria Estratégica',
-    desc: 'Não vendemos um produto, mas sim uma parceria. Mapeamos a sua operação, entendemos seus gargalos e crescemos juntos com você. Sem ticket de suporte sem rosto — um desenvolvedor real que conhece sua clínica pelo nome.',
+    desc: 'Não vendemos apenas um produto, mas sim uma parceria. Mapeamos a sua operação, entendemos seus gargalos e crescemos juntos com você. Sem ticket de suporte sem rosto — um desenvolvedor real que conhece sua clínica pelo nome.',
   },
   {
     icon: <Lightbulb className="w-11 h-11 text-[#b45f3b]" />,
     title: 'Interface Amigável',
-    desc: 'Sua equipe aprende a usar no primeiro dia. Sem manuais de 500 páginas, sem batalha com ferramentas escondidos ou desnecessárias. Simples por design — robusto na infraestrutura.',
+    desc: 'Sua equipe aprende a usar o Sistema no primeiro dia. Sem manuais de 500 páginas, sem batalha com ferramentas escondidas ou desnecessárias. Simples de usar — robusto na infraestrutura.',
   },
   {
     icon: <Bot className="w-11 h-11 text-[#b45f3b]" />,
@@ -51,35 +51,35 @@ const pillars = [
 
 const features: { icon: React.ReactNode; label: string }[] = [
   { icon: <BarChart3 className="w-5 h-5 text-[#b45f3b]" />, label: 'Dashboard em tempo real' },
-  { icon: <CalendarDays className="w-5 h-5 text-[#b45f3b]" />, label: 'Agenda inteligente integrada' },
+  { icon: <CalendarDays className="w-5 h-5 text-[#b45f3b]" />, label: 'Agenda inteligente' },
   { icon: <LineChart className="w-5 h-5 text-[#b45f3b]" />, label: 'Relatórios e faturamento' },
   { icon: <MessageSquare className="w-5 h-5 text-[#b45f3b]" />, label: 'WhatsApp API Oficial' },
   { icon: <Stethoscope className="w-5 h-5 text-[#b45f3b]" />, label: 'Gestão de médicos e escalas' },
   { icon: <ShieldCheck className="w-5 h-5 text-[#b45f3b]" />, label: 'Hierarquia de acesso e segurança' },
-  { icon: <BookOpen className="w-5 h-5 text-[#b45f3b]" />, label: 'FAQ operacional treinado em segundos' },
+  { icon: <BookOpen className="w-5 h-5 text-[#b45f3b]" />, label: 'FAQ operacional prático' },
   { icon: <DollarSign className="w-5 h-5 text-[#b45f3b]" />, label: 'Auditoria de custos de IA' },
-  { icon: <Bell className="w-5 h-5 text-[#b45f3b]" />, label: 'Confirmação e lembrete anti No-Show' },
+  { icon: <Bell className="w-5 h-5 text-[#b45f3b]" />, label: 'Confirmação e lembretes anti No-Show' },
   { icon: <RefreshCcw className="w-5 h-5 text-[#b45f3b]" />, label: 'Reativação automática de inativos' },
-  { icon: <Moon className="w-5 h-5 text-[#b45f3b]" />, label: 'Agendamento 24/7 fora do horário' },
-  { icon: <UserRoundCog className="w-5 h-5 text-[#b45f3b]" />, label: 'Painel exclusivo para médicos' },
+  { icon: <Moon className="w-5 h-5 text-[#b45f3b]" />, label: 'Agendamento 24/7' },
+  { icon: <UserRoundCog className="w-5 h-5 text-[#b45f3b]" />, label: 'Painel extra para médicos' },
 ];
 
 const objections = [
   {
-    q: 'Já uso Doctoralia + Feegow. Por que mudar?',
-    a: 'Porque você está pagando duas licenças da mesma empresa (são do mesmo grupo desde 2022), mais um chatbot que "promete integrar", mais Make ou Zapier pra conectar tudo, mais uma recepcionista pra operar o caos. São R$ 5.800–9.800/mês empilhados. O Cromia Health substitui tudo isso em um único ecossistema.',
+    q: 'Já uso outras plataformas renomadas do mercado, por que eu deveria mudar?',
+    a: 'Você realmente está satisfeito com as ferramentas que usa hoje? Sabemos o quanto você investe nesses Sistemas que até entregam o que se propõem a entregar, mas provavelmente não trazem o resultado que você espera: Agendamentos em escala. Não temos a intensão de ser anti-éticos e difamar o trabalho alheio, mas sabemos das dificuldades que nossos clientes enfrentam ao utilizar essas ferramentas complexas e confusas e por isso criamos um Ecossistema com o foco em produção, usabilidade e resultados reais, com valor justo.',
   },
   {
     q: 'A IA realmente agenda sem intervenção humana?',
-    a: 'Sim. A Yasmim agenda, reagenda, cancela e oferece horários em uma agenda real — não num formulário genérico. Responde áudios, mantém contexto de conversa e aciona a recepção somente quando a complexidade exige um toque humano.',
+    a: 'Sim. A chamamos carinhosamente de Yasmim, podendo ser personalizada com o nome que for compatível com a identidade da sua clínica. A Yasmim agenda, reagenda, cancela e oferece horários em uma agenda real, criada pelos nossos desenvolvedores — não em calendário genérico de terceiros. Ela entende envios de áudios, mantém contexto de conversa e só aciona a recepção humana se realmente desejarem ou quando a complexidade realmente exigir um toque humano, como a avaliação de um exame, por exemplo. Sabemos a responsabilidade que é lidar com dados sensíveis.',
   },
   {
     q: 'Minha equipe vai conseguir usar?',
-    a: 'Essa é exatamente nossa premissa. A Cromia Health foi projetada para que uma secretária que ganha R$ 1.800/mês comece a operar no primeiro dia, sem treinamento caro e sem depender de suporte técnico para tarefas básicas.',
+    a: 'Essa talvez seja a nossa principal premissa. O Cromia Health foi projetado para que uma secretária de nível júnior comece a operar no primeiro dia, sem treinamento caro - entendemos que tempo é dinheiro e "aqueles" treinamentos podem ser, de fato, intermináveis. O Sistema foi desenhado para ser intuitivo, mas ao mesmo tempo robusto para que as necessidades da rotina da sua clínica sejam atendidas.',
   },
   {
     q: 'Como funciona o suporte?',
-    a: 'Você tem um interlocutor real que conhece sua clínica pelo nome. Não um ticket sem rosto. Problemas viram prioridades de desenvolvimento — não entram numa fila de meses de um SaaS que atende mil mercados ao mesmo tempo.',
+    a: 'Você tem parceiros estratégicos de verdade que conhecem sua clínica pelo nome e que estão presentes. Não somos revendedores de um produto, somos os desenvolvedores, não somos um ticket sem rosto. Seus problemas são nossas prioridades de desenvolvimento — Eles não entram numa fila de meses de um SaaS que atende mil mercados ao mesmo tempo.',
   },
 ];
 
@@ -176,20 +176,20 @@ const CromiaHealthGo = () => {
             <div className="border-l-4 border-[#b45f3b] pl-8">
               <div className="text-xl font-bold tracking-[0.3em] uppercase text-[#b45f3b] mb-4">O cenário real</div>
               <h2 className="font-fraunces text-3xl md:text-4xl font-black text-cromia-grey mb-6">
-                A maioria das clínicas paga entre 5.000 a R$ 10.000/mês<br />
-                <em className="font-semibold italic text-[#b45f3b]">empilhando ferramentas que não entregam.</em>
+                A maioria das clínicas paga entre 5.000 a R$ 10.000/mês (ou mais),
+                <em className="font-semibold italic text-[#b45f3b]"> empilhando ferramentas que não conversam.</em>
               </h2>
               <p className="text-cromia-ink2 text-xl font-light leading-relaxed mb-8">
                 São Ferramentas para visibilidade. Outras para agenda (muitas vezes do mesmo grupo, mas com cobranças separadas).
-                Um chatbot de terceiro que "promete integrar" no sistema que faz questão de dificultar a comunicação entre si.
-                Sendo necessárias integrações das mais escusas pra conectar esse caos. Mais uma pessoa pra realizar esse monitoramento e administração extremamente técnica dificultando até a contratação desse funcionário específico.
-                E ainda pra somar: Addon sobre addon. Custo sobre custo. E sabemos que não pára por aí.
+                Chatbot de um terceiro que "promete integrar" ao sistema que faz questão de dificultar o funcionamento adequado.
+                Sendo necessárias integrações das mais escusas pra tentar conectar esse caos e mais a pessoa pra, provavelmente, realizar esse monitoramento e administração em tempo integral, mão de obra extremamente técnica dificultando até a contratação desse funcionário específico no Mercado.
+                E ainda pra somar: Add-on sobre add-on. Custo sobre custo. E sabemos que não pára por aí.
               </p>
               <div className="bg-green-800 text-white rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6">
                 <DollarSign className="w-12 h-12 text-white flex-shrink-0" />
                 <div>
                   <div className="font-fraunces text-3xl font-black mb-1">Cromia Health propõe outro caminho.</div>
-                  <p className="text-white/90 font-light mt-4 text-xl">Um único Ecossistema. Uma única plataforma. Uma única parceria para os diversos problemas da sua clínica. Mais Agendamentos, mais receita porque esse é o foco, sem complicar de um ponto a outro.</p>
+                  <p className="text-white/90 font-light mt-4 text-xl">Um único Ecossistema. Uma única plataforma. Uma única parceria para os diversos problemas de atendimento, agendamento e relacionamento com o paciente da sua clínica. Mais Agendamentos, mais receita porque esse é o foco, sem complicar de um ponto a outro. Um Sistema que se propõe a se desenvolver constantemente junto com as necessidades da clínica.</p>
                 </div>
               </div>
             </div>
@@ -207,7 +207,7 @@ const CromiaHealthGo = () => {
                   Conheça a <em className="font-light italic text-[#b45f3b]">Yasmim.</em>
                 </h2>
                 <p className="text-cromia-ink2 font-light leading-relaxed text-base md:text-xl mb-6">
-                  Treinada com tudo sobre a sua clínica — especialidades, médicos, horários, planos, dúvidas frequentes —
+                  Treinada com todos as particularidades da sua clínica — especialidades, médicos, horários, planos, dúvidas frequentes —
                   ela atende seus pacientes no WhatsApp com uma naturalidade humana.
                   Não é um chatbot de FAQ. É uma especialista em gestão clínica.
                 </p>
@@ -217,7 +217,8 @@ const CromiaHealthGo = () => {
                     'Responde áudios e mantém contexto de conversa',
                     'Reativa pacientes inativos automaticamente',
                     'Dispara lembretes anti No-Show com confirmação ativa',
-                    'Aciona a recepção quando a complexidade exige humano',
+                    'Disponível 24/7 sem feriados ou finais de semana',
+                    'Integra-se ao sistema existente sem barreiras',
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3 text-cromia-ink2 text-base md:text-base">
                       <CheckCircle2 className="w-5 h-5 text-[#b45f3b] flex-shrink-0 mt-0.5" />
@@ -276,34 +277,34 @@ const CromiaHealthGo = () => {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,#b45f3b25,transparent_50%)] pointer-events-none" />
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-14">
-              <div className="text-xs font-bold tracking-[0.3em] uppercase text-cromia-gold/80 mb-3">Nosso maior predicado</div>
-              <h2 className="font-fraunces text-3xl md:text-5xl font-black leading-tight">
+              <div className="text-lg font-bold tracking-[0.3em] uppercase text-cromia-gold/80 mb-3">Nosso maior predicado</div>
+              <h2 className="font-fraunces text-3xl md:text-5xl font-semibold leading-tight text-cromia-gold-light">
                 Não vendemos um sistema.<br />
                 <em className="font-light italic text-[#b45f3b]">Construímos uma parceria.</em>
               </h2>
-              <p className="text-white/70 text-lg font-light max-w-2xl mx-auto mt-6">
-                Qualquer SaaS do mercado gera um boleto e desaparece atrás de um formulário de suporte.
-                A Cromia opera com uma premissa diferente: <strong className="text-white font-medium">só crescemos se você crescer.</strong>
+              <p className="text-cromia-gold-light text-xl font-light max-w-2xl mx-auto mt-6">
+                Muitas ferramentas geram um boleto e desaparecem atrás de um formulário de suporte.
+                A Cromia opera com uma premissa diferente: <strong className="text-cromia-gold-light font-bold">Parceria Estratégica e Inteligente são fundamentais para nós.</strong>
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
               {[
                 {
                   title: 'Comprometimento com resultado',
-                  desc: 'Antes de fechar qualquer contrato, mapeamos sua operação e só propomos solução se acreditarmos que vai funcionar para o seu contexto específico.',
+                  desc: 'Antes de fechar contrato, mapeamos a operação e então propomos a solução se acreditarmos que vai funcionar para o seu contexto específico, porque entendemos que não existem fórmulas mágicas.',
                 },
                 {
                   title: 'Presença além do onboarding',
-                  desc: 'Um interlocutor que conhece sua clínica pelo nome, seu histórico e seus próximos objetivos — disponível de verdade quando algo precisa evoluir.',
+                  desc: 'Desenvolvedores que se propõem a conhecer a sua clínica pessoalmente, seu histórico e seus objetivos — interessados em criar soluções definitivas para o seu negócio.',
                 },
                 {
                   title: 'Evolução co-criada',
-                  desc: 'Feedbacks viram funcionalidades. Problemas viram prioridades — não entram numa fila de anos esperando a próxima versão de um SaaS genérico.',
+                  desc: 'Feedbacks viram funcionalidades. Problemas viram prioridades — não entram numa fila genérica de espera. O Sistema se adapta e evolui junto com a sua clínica.',
                 },
               ].map((c) => (
                 <div key={c.title} className="border-t-2 border-cromia-gold/40 pt-6">
-                  <h3 className="font-fraunces text-xl font-semibold text-white mb-3">{c.title}</h3>
-                  <p className="text-white/70 font-light leading-relaxed text-[15px]">{c.desc}</p>
+                  <h3 className="font-fraunces text-3xl font-semibold text-cromia-gold mb-3">{c.title}</h3>
+                  <p className="text-cromia-gold-light/90 font-light leading-relaxed text-lg">{c.desc}</p>
                 </div>
               ))}
             </div>
@@ -317,14 +318,14 @@ const CromiaHealthGo = () => {
         <section className="py-20 px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
-              <div className="text-xs font-bold tracking-[0.3em] uppercase text-[#b45f3b] mb-3">Dúvidas Frequentes</div>
-              <h2 className="font-fraunces text-3xl md:text-4xl font-black text-cromia-grey">Respostas diretas.</h2>
+              <div className="text-lg font-bold tracking-[0.3em] uppercase text-[#b45f3b] mb-3">Dúvidas Frequentes</div>
+              <h2 className="font-fraunces text-3xl md:text-5xl font-black text-cromia-grey">Respostas diretas.</h2>
             </div>
             <div className="space-y-3">
               {objections.map((o, i) => (
                 <div key={i} className="bg-white border border-cromia-border rounded-xl overflow-hidden shadow-sm">
                   <button
-                    className="w-full flex justify-between items-center p-6 text-left text-cromia-ink font-semibold text-[15px] hover:bg-cromia-gold/5 transition-colors cursor-pointer"
+                    className="w-full flex justify-between items-center p-6 text-left text-cromia-ink font-medium text-xl hover:bg-cromia-gold/5 transition-colors cursor-pointer"
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     <span>{o.q}</span>
@@ -333,7 +334,7 @@ const CromiaHealthGo = () => {
                     </span>
                   </button>
                   {openFaq === i && (
-                    <div className="px-6 pb-6 text-cromia-ink2 font-light leading-relaxed text-[15px] border-t border-cromia-border/50 pt-4">
+                    <div className="px-6 pb-6 text-cromia-ink2 font-light leading-relaxed text-lg border-t border-cromia-border/50 pt-4">
                       {o.a}
                     </div>
                   )}
@@ -347,19 +348,16 @@ const CromiaHealthGo = () => {
         <section className="py-24 px-6 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,#b45f3b08,transparent_70%)] pointer-events-none" />
           <div className="max-w-3xl mx-auto relative z-10">
-            <div className="text-xs font-bold tracking-[0.3em] uppercase text-[#b45f3b] mb-6">Próximo passo</div>
+            <div className="text-lg font-bold tracking-[0.3em] uppercase text-[#b45f3b] mb-6">Próximo passo</div>
             <h2 className="font-fraunces text-4xl md:text-6xl font-black text-cromia-grey leading-tight mb-6">
-              Não pedimos fé.<br />
-              <em className="font-light italic text-[#b45f3b]">Pedimos 30 minutos.</em>
+              Fez sentido pra você?<br />
+              <em className="font-light italic text-[#b45f3b]">Que tal uma conversa?</em>
             </h2>
-            <p className="text-cromia-ink2 text-lg font-light leading-relaxed mb-10 max-w-xl mx-auto">
-              Uma demonstração ao vivo é mais convincente do que qualquer argumento.
-              Veja a Yasmim em ação na sua especialidade, com a sua agenda, com o seu nome.
+            <p className="text-cromia-ink2 text-xl font-light leading-relaxed mb-10 max-w-xl mx-auto">
+              Uma demonstração ao vivo é mais produtiva do que qualquer argumento.
+              Mostraremos quão impressionante pode ser a gestão da sua clínica.
             </p>
-            <CTA label="Agendar demonstração gratuita agora" size="lg" />
-            <p className="mt-5 text-sm text-cromia-muted italic">
-              Sem compromisso · Demonstração personalizada · Resposta em minutos
-            </p>
+            <CTA label="Entre em Contato com a Cromia" size="lg" />
           </div>
         </section>
 
