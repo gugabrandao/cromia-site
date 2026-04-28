@@ -580,7 +580,7 @@ const Numeros: React.FC = () => {
           </div>
 
           {/* Bloco: Custo do Frankenstein */}
-          <div className="bg-white border border-cromia-border rounded-sm px-8 py-8 mb-5 shadow-lg">
+          {/*        <div className="bg-white border border-cromia-border rounded-sm px-8 py-8 mb-5 shadow-lg">
             <div className="text-base font-semibold tracking-[0.2em] uppercase text-cromia-ink2 mb-2 flex items-center gap-3">
               <span className="w-3 h-3 rounded-full bg-red-400"></span>
               O que a clínica paga hoje — sem a Cromia Health
@@ -651,7 +651,7 @@ const Numeros: React.FC = () => {
           </div>
 
           {/* Bloco: Simples por Design */}
-          <div className="border-l-4 border-cromia-gold bg-cromia-surface px-8 py-8 mb-5 rounded-r-sm shadow-lg">
+          {/*     <div className="border-l-4 border-cromia-gold bg-cromia-surface px-8 py-8 mb-5 rounded-r-sm shadow-lg">
             <div className="flex items-start gap-5">
               <div className="text-4xl select-none mt-1">💡</div>
               <div>
@@ -778,7 +778,7 @@ const Numeros: React.FC = () => {
           </div>
 
           {/* Planos */}
-          <div className="bg-cromia-surface2 border border-cromia-border rounded-sm px-8 py-7 mb-5 shadow-lg">
+          {/*   <div className="bg-cromia-surface2 border border-cromia-border rounded-sm px-8 py-7 mb-5 shadow-lg">
             <div className="text-base font-semibold tracking-widest uppercase text-cromia-ink2 mb-6 flex items-center gap-[10px] after:content-[''] after:flex-1 after:h-[1px] after:bg-cromia-border">
               Planos de Implementação - Proporcionais ao tamanho da Clínica
             </div>
@@ -815,14 +815,14 @@ const Numeros: React.FC = () => {
                 );
               })}
             </div>
-          </div>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center py-12 text-cromia-muted text-sm tracking-widest border-t border-cromia-border">
-          DESENVOLVIDO PELA <a href="https://cromia.app" className="font-semibold hover:text-cromia-gold transition-colors underline decoration-cromia-border underline-offset-4">CROMIA</a> - {new Date().getFullYear()}
+            */}
         </div>
       </div>
+      {/* Footer */}
+      <div className="text-center py-12 text-cromia-muted text-sm tracking-widest border-t border-cromia-border">
+        DESENVOLVIDO PELA <a href="https://cromia.app" className="font-semibold hover:text-cromia-gold transition-colors underline decoration-cromia-border underline-offset-4">CROMIA</a> - {new Date().getFullYear()}
+      </div>
+      {/*  </div >*/}
     </>
   );
 };
