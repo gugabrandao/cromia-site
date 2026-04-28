@@ -211,7 +211,7 @@ const Numeros: React.FC = () => {
 
   const getPulseClass = (id: string) => pulsing[id] ? 'animate-calculator-pulse' : '';
 
-  // --- FRANKENSTEIN COST CALC (dinâmico por médicos) ---
+  /* --- FRANKENSTEIN COST CALC (dinâmico por médicos) ---
   // Fontes: Make.com/pricing, Zapier.com/pricing, pesquisa de mercado BR saúde 2025, IBGE/CLT calculadora Contabilizei
   const recepDigital = Math.max(1, Math.ceil(medicos / 8)); // ~1 recep. digital a cada 8 médicos
   const USD_BRL = 5.80; // câmbio de referência conservador (abr/2026)
@@ -250,7 +250,7 @@ const Numeros: React.FC = () => {
     },
   ];
   const frankTotalMin = frankRows.reduce((acc, r) => acc + r.min, 0);
-  const frankTotalMax = frankRows.reduce((acc, r) => acc + r.max, 0);
+  const frankTotalMax = frankRows.reduce((acc, r) => acc + r.max, 0); */
 
   return (
     <>
