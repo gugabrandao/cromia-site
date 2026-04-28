@@ -345,7 +345,10 @@ const CromiaHealth = () => {
               </div>
             </div>
 
-            {/* Nova Seção: Automações do WhatsApp */}
+          </div>
+
+          {/* 
+            Nova Seção: Automações do WhatsApp
             <div className="mt-10 mb-20 border-t border-cromia-border/50 pt-20">
               <div className="text-center mb-16">
                 <div className="text-[12px] font-bold tracking-[0.3em] uppercase text-cromia-gold mb-4">Em Ação</div>
@@ -356,7 +359,7 @@ const CromiaHealth = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-[860px] mx-auto">
-                {/* Automação 1 */}
+                Automação 1
                 <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
                   <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
                     [ Print: Relatório Gerencial ]
@@ -366,7 +369,7 @@ const CromiaHealth = () => {
                     O pulso da clínica, todo fim de dia no WhatsApp do Gestor. Receba instantaneamente o faturamento bruto, número de pacientes atendidos, faltas, especialistas e planos mais recorrentes sem abrir o Painel. A bússola perfeita para fechar a noite.
                   </p>
                 </div>
-                {/* Automação 2 */}
+                Automação 2
                 <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
                   <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
                     [ Print: Agenda Diária do Médico ]
@@ -376,7 +379,7 @@ const CromiaHealth = () => {
                     Todos os dias, a Yasmim envia um resumo completo com a agenda de atendimentos para o WhatsApp pessoal de cada médico. Chega de papéis impressos confusos ou desinformação — tudo atualizado de forma dinâmica e objetiva, centralizando a operação.
                   </p>
                 </div>
-                {/* Automação 3 */}
+                Automação 3
                 <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
                   <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
                     [ Print: Lembrete de Consulta ]
@@ -387,7 +390,7 @@ const CromiaHealth = () => {
                   </p>
                 </div>
 
-                {/* Automação 4 */}
+                Automação 4
                 <div className="bg-white/80 backdrop-blur-sm p-8 rounded-xl border border-cromia-border shadow-lg hover:shadow-xl transition-shadow">
                   <div className="bg-cromia-bg/50 rounded-lg h-[280px] mb-6 flex items-center justify-center border border-cromia-border/30 text-cromia-muted italic text-sm cursor-zoom-in hover:bg-cromia-bg/80 transition-colors">
                     [ Print: Pesquisa de Qualidade / NPS ]
@@ -400,18 +403,18 @@ const CromiaHealth = () => {
               </div>
             </div>
 
-          </div>
+            Call to Action Final
+            <div className="text-center py-20 border-t border-cromia-border">
+              <h3 className="font-fraunces text-4xl font-black text-cromia-grey mb-10">Leve a inteligência da Cromia para sua clínica</h3>
+              <a
+                href="https://wa.me/5521991550328"
+                className="inline-block bg-cromia-gold-light !text-cromia-ink2 px-10 py-5 mt-10 rounded-lg font-bold tracking-widest uppercase hover:bg-cromia-gold-dim/20 transition-all duration-300 hover:scale-110 shadow-xl"
+              >
+                Agendar Demonstração
+              </a>
+            </div>
+          */}
 
-          {/* Call to Action Final */}
-          <div className="text-center py-20 border-t border-cromia-border">
-            <h3 className="font-fraunces text-4xl font-black text-cromia-grey mb-10">Leve a inteligência da Cromia para sua clínica</h3>
-            <a
-              href="https://wa.me/5521991550328"
-              className="inline-block bg-cromia-gold-light !text-cromia-ink2 px-10 py-5 mt-10 rounded-lg font-bold tracking-widest uppercase hover:bg-cromia-gold-dim/20 transition-all duration-300 hover:scale-110 shadow-xl"
-            >
-              Agendar Demonstração
-            </a>
-          </div>
 
           {/* Footer */}
           <div className="text-center py-12 text-cromia-muted text-sm tracking-widest border-t border-cromia-border">
