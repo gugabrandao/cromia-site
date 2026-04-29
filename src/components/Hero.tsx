@@ -61,9 +61,9 @@ export default function Hero() {
         </div>
 
         <ul className={styles.legenda} id="legenda">
-          <li>Marketing</li>
+          <li>Desenvolvimento</li>
           <li className={styles.divisor2}></li>
-          <li>Parceria <br className={styles.quebra_mobile} />Estratégica</li>
+          <li>Marketing <br className={styles.quebra_mobile} />Estratégico</li>
           <li className={styles.divisor2}></li>
           <li>Tecnologia</li>
         </ul>

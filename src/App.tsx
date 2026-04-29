@@ -7,6 +7,7 @@ import TermosDeUso from './pages/TermosDeUso';
 import Numeros from './pages/Numeros.tsx';
 import CromiaHealth from './pages/CromiaHealth';
 import CromiaHealthGo from './pages/CromiaHealthGo';
+import Apresentacao from './pages/Apresentacao';
 import { ModalProvider, useModal } from './context/ModalContext';
 import Modal from './components/Modal';
 import { PoliticaPrivacidadeContent, TermosDeUsoContent } from './components/LegalContent';
@@ -23,6 +24,7 @@ function AppContent() {
         <Route path="/numeros" element={<Numeros />} />
         <Route path="/cromiahealth" element={<CromiaHealth />} />
         <Route path="/go" element={<CromiaHealthGo />} />
+        <Route path="/apresentacao" element={<Apresentacao />} />
       </Routes>
 
       <Modal 
