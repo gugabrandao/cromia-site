@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import MeshBackground from '../components/MeshBackground';
 
 const fmt = (v: number) => 'R$ ' + Math.round(v).toLocaleString('pt-BR');
-const fmtN = (v: number) => Math.round(v).toLocaleString('pt-BR');
+
 
 interface Scenario {
   label: string;
@@ -58,86 +58,6 @@ const scenarios: Record<string, Scenario> = {
 
 const DIAS_MES = 26;
 
-const referenceData: Record<string, {
-  label: string;
-  title: string;
-  base: React.ReactNode;
-  benchmarks: { value: string; desc: string }[];
-  obs?: string;
-}> = {
-  'noshow-mercado': {
-    label: 'NO-SHOW',
-    title: 'No-Show (Médias de Mercado)',
-    base: <>Literatura internacional de saúde aponta no-show entre <span className="font-semibold text-cromia-ink">15%–30%</span> em clínicas sem sistema de confirmação ativa. No Brasil, estudos do CFM e relatos de gestores de clínicas apontam médias próximas de <span className="font-semibold text-cromia-ink">20%</span> sem automação.</>,
-    benchmarks: [
-      { value: '10%', desc: 'Clínica que já faz alguma confirmação manual (ligação da recepção)' },
-      { value: '18%', desc: 'Clínica que não confirma sistematicamente, recepção ocupada' },
-      { value: '28%', desc: 'Sem nenhuma confirmação, agenda por telefone apenas' }
-    ],
-    obs: 'Esses números variam muito por especialidade. Psiquiatria e nutrição têm no-show muito maior (30%–40%). Urgências, menor.'
-  },
-  'noshow-yasmim': {
-    label: 'REDUÇÃO NO-SHOW',
-    title: 'Redução de No-Show pela Yasmim',
-    base: <>Estudos de SMS e WhatsApp reminder em saúde mostram redução de <span className="font-semibold text-cromia-ink">25%–50%</span> no no-show. Com confirmação ativa + reagendamento automático, o teto sobe.</>,
-    benchmarks: [
-      { value: '40%', desc: 'Clínica que já confirmava manualmente — a Yasmim melhora, mas o delta é menor' },
-      { value: '55%', desc: 'Substitui um processo inexistente por um consistente' },
-      { value: '70%', desc: 'Substitui o caos total — qualquer confirmação já resolve muito' }
-    ]
-  },
-  'eficiencia': {
-    label: 'EFICIÊNCIA',
-    title: 'Eficiência operacional da recepção',
-    base: <>A Yasmim absorve as tarefas repetitivas da recepção — agendamento, confirmação, FAQ e cancelamento. O tempo liberado é redirecionado para acolhimento, qualidade no atendimento presencial e resolução de situações complexas. A proposta não é demitir, é <span className="font-semibold text-cromia-ink">transformar o papel da recepção</span>.</>,
-    benchmarks: [
-      { value: '30%', desc: 'Clínica organizada — recepção já tem processos, Yasmim otimiza o que é repetitivo' },
-      { value: '50%', desc: 'Clínica média — metade do tempo da recepção era triagem e agendamento por telefone' },
-      { value: '80%', desc: 'Clínica precária — recepção vivia apagando incêndio, Yasmim assume o volume inteiro' }
-    ],
-    obs: 'Com 3 recepcionistas e 50% do tempo liberado, são ~264h/mês redirecionadas. Isso vale mais do que qualquer corte de headcount.'
-  },
-  'volume-fora': {
-    label: 'FORA DO HORÁRIO',
-    title: 'Volume fora do horário',
-    base: <>Comportamento de consumidor digital. Dados do Google Health e pesquisas de UX em saúde mostram que <span className="font-semibold text-cromia-ink">30%–40%</span> das buscas por serviços de saúde acontecem fora do horário comercial — noite, madrugada e fins de semana.</>,
-    benchmarks: [
-      { value: '20%', desc: 'Especialidade com perfil mais corporativo (plano empresarial, horário comercial)' },
-      { value: '30%', desc: 'Média geral do mercado' },
-      { value: '40%', desc: 'Especialidades com perfil familiar ou popular (pediatria, clínica geral)' }
-    ]
-  },
-  'perda-tentativas': {
-    label: 'PERDAS',
-    title: 'Perda dessas tentativas',
-    base: <>Inferência direta da maturidade da clínica.</>,
-    benchmarks: [
-      { value: '60%', desc: 'Tem WhatsApp ativo, mas sem resposta automática — alguns pacientes tentam de novo no dia seguinte' },
-      { value: '75%', desc: 'Telefone fixo ou WhatsApp sem bot — maioria desiste' },
-      { value: '90%', desc: 'Só telefone, sem WhatsApp — quase perda total fora do horário' }
-    ]
-  },
-  'reencaixe': {
-    label: 'REENCAIXE',
-    title: 'Reencaixe de cancelamentos',
-    base: <>Estimativa de eficiência de fila de espera ativa. Sem automação, horário cancelado vira buraco. Com Yasmim oferecendo o horário para lista de espera:</>,
-    benchmarks: [
-      { value: '30%', desc: 'Clínica com agenda muito cheia, pouca lista de espera' },
-      { value: '45%', desc: 'Média com alguma demanda reprimida' },
-      { value: '60%', desc: 'Clínica precária tem mais cancelamentos E mais pacientes esperando' }
-    ]
-  },
-  'reativacao': {
-    label: 'REATIVAÇÃO',
-    title: 'Reativação de inativos',
-    base: <>Benchmarks de CRM em saúde e varejo. Taxa de reativação de base inativa via mensagem ativa gira entre <span className="font-semibold text-cromia-ink">2%–8%</span> dependendo do tempo de inatividade e da oferta.</>,
-    benchmarks: [
-      { value: '1%', desc: 'Base relativamente recente, pacientes não sumiram há muito tempo' },
-      { value: '2,5%', desc: 'Base mista, algum potencial de recuperação' },
-      { value: '5%', desc: 'Base antiga, nunca recontactada — qualquer mensagem já converte mais' }
-    ]
-  }
-};
 
 const Chapter = ({
   number,
@@ -308,7 +228,6 @@ const Apresentacao = () => {
   const [ticket, setTicket] = useState(200);
   const [recep, setRecep] = useState(3);
   const [activeScenario, setActiveScenario] = useState('media');
-  const [activeRef, setActiveRef] = useState('noshow-mercado');
   const [pulsing, setPulsing] = useState<Record<string, boolean>>({});
 
   const sc = scenarios[activeScenario];
