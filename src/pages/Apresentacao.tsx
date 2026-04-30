@@ -434,7 +434,7 @@ const Apresentacao = () => {
             </div>
 
             {/* Blocos de Valor */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 mt-10">
               {/* Eficiência Operacional */}
               <div className="rounded-sm p-7 bg-white border border-cromia-gold-dim/15 shadow-lg">
                 <div className="text-lg font-semibold tracking-wider uppercase mb-[6px] text-cromia-gold-dim">
@@ -514,12 +514,12 @@ const Apresentacao = () => {
               <div className="font-fraunces text-[35px] font-bold tracking-normal uppercase text-cromia-gold mb-3.5">
                 O fato é...
               </div>
-              <p className="font-fraunces text-[1.4rem] font-light italic text-cromia-ink leading-[1.6] mb-8">
-                "Com <strong className="font-semibold not-italic text-cromia-gold-dim">{consultas} consultas por dia</strong> e ticket médio de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(ticket)}</strong>,
+              <p className="font-fraunces text-[1.4rem] font-light text-cromia-ink leading-[1.6] mb-8">
+                Com <strong className="font-semibold not-italic text-cromia-gold-dim">{consultas} consultas por dia</strong> e ticket médio de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(ticket)}</strong>,
                 a Clínica perde hoje em torno de <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.ecoNoshow)} por mês</strong> só com <strong className="font-semibold not-italic text-cromia-gold-dim">no-show</strong> —
                 e mais <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.recFora)} por mês</strong> com pacientes que tentam agendar fora do horário e não encontram ninguém.
                 Já a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong>, trabalha às 23h de um domingo. Sendo assim, no total, ela propõe <strong className="font-semibold not-italic text-cromia-gold-dim">{fmt(results.total)} por mês</strong> de valor real resolvendo gargalos e escoamentos da Clínica.
-                O plano de parceria estratégica proposto para a estrutura apresentada é o <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong> que custa <strong className="font-semibold not-italic text-cromia-gold-dim">R$ {planos.find(p => p.id === planoRecomendado)?.preco.toLocaleString('pt-BR')}</strong> de mensalidade. Não chega a <strong className="font-semibold not-italic text-cromia-gold-dim">{Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> do ganho real que a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong> pode gerar. Logo, os outros <strong className="font-semibold not-italic text-cromia-gold-dim">{100 - Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> entram sorrindo no caixa da Clínica."
+                O plano de parceria estratégica proposto para a estrutura apresentada é o <strong className="font-semibold not-italic text-cromia-gold-dim">{planos.find(p => p.id === planoRecomendado)?.label}</strong>. O valor do Plano não chega a <strong className="font-semibold not-italic text-cromia-gold-dim">{Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> do ganho real que a <strong className="font-semibold not-italic text-cromia-gold-dim">Yasmim</strong> pode gerar. Logo, os outros <strong className="font-semibold not-italic text-cromia-gold-dim">{100 - Math.ceil((planos.find(p => p.id === planoRecomendado)!.preco / results.total) * 100)}%</strong> entram sorrindo no caixa da Clínica. *
               </p>
               <div className="border-t border-cromia-gold/20 pt-8">
                 <p className="font-fraunces text-[1.1rem] font-light text-cromia-ink2 leading-[1.7]">
@@ -527,6 +527,10 @@ const Apresentacao = () => {
                   <strong className="text-cromia-gold-dim not-italic font-bold">R$ 5.800 e R$ 9.800 por mês</strong>{' '}
                   empilhando ferramentas das quais a Yasmim substitui todas de uma só vez — sem menus de "Aperte 1, 2 ou 3", sem Zapier, sem bot engessado e sem escalar custo por médico contratado.
                   Um único ecossistema orgânico. Um único parceiro estratégico.
+                </p>
+                <br />
+                <p className="font-fraunces text-[1.1rem] font-light text-cromia-ink2 leading-[1.7]">
+                  * Os numeros citados são projeções baseados no máximo aproveitamento de horários de atendimento.
                 </p>
               </div>
             </div>
@@ -551,9 +555,9 @@ const Apresentacao = () => {
             • Envio diário direcionado aos Gestores da Clínica com os números do dia: Faturamento Bruto (simples e direto), número de agendamentos/cancelamentos e o aproveitamento, especialidades mais procuradas, médicos mais agendados, planos de saúde mais usados, relatórios que permitem uma melhor administração de recursos e planejamentos estratégicos do dia-a-dia.<br /><br />
             • Envio diário das Agendas do Dia Seguinte direcionada ao Corpo Clínico com informações relevantes.<br /><br />
             • Envio de lembretes de consultas para os pacientes (no dia anterior e 2 horas antes da consulta), imprescindíveis para reduzir o índice de <span className="font-semibold">No-Show</span>. Dependendo da agenda, podendo ser programado pra enviar com até 7 dias de antecedência, para agendas mais espaçadas.<br /><br />
-            • Envio de mensagens de <span className="font-semibold">Follow-up</span> para esquentar relacionamentos com pacientes inativos, como por exemplo, mensagens de aniversário, mensagens de feliz natal, mensagens de feliz páscoa, etc de forma automatizada, sem tomar o tempo precioso das secretárias. Essas mensagens embora pareçam bobagens, geram conexão e humanização, resultando em um impacto financeiro significativo, trabalhando de mãos dadas com a área de Marketing da sua Clínica. Eles agradecerão!<br /><br />
+            • Envio de mensagens de <span className="font-semibold">Follow-up</span> para esquentar relacionamentos com pacientes inativos, como por exemplo, mensagens de aniversário, mensagens de feliz natal, mensagens de feliz páscoa, etc de forma automatizada, sem tomar o tempo precioso das secretárias. Essas mensagens geram conexão e humanização, resultando em um impacto financeiro significativo, trabalhando de mãos dadas com a área de Marketing da sua Clínica. Eles agradecerão!<br /><br />
             • O acesso ao Painel é na Nuvem e pode ser logado em qualquer computador com acesso à Internet, inclusive de dispositivos móveis, trazendo flexibilidade e mobilidade para a gestão da Clínica. Você não precisa estar preso aos computadores da rede da Clínica.<br /><br />
-            Aqui é uma breve apresentação do que o <span className="font-semibold">Cromia Health</span> é capaz de oferecer, suas funcionalidades e como ele pode transform a gestão da sua Clínica e o impacto financeiro que ele pode gerar.
+            Aqui é uma breve apresentação do que o <span className="font-semibold">Cromia Health</span> é capaz de oferecer, suas funcionalidades e como ele pode transformar a gestão da sua Clínica e o impacto financeiro que ele pode gerar.
           </p>
         </div>
 
@@ -590,7 +594,7 @@ const Apresentacao = () => {
             title="Relatórios: De dados soltos a decisões lucrativas"
             text={
               <p>
-                Provavelmente o segundo maior ativo da Clínica: Dados de Clientes e dos movimentos da Clínica. Nossa área de relatórios consolida faturamento, produtividade, taxas de no-show, e muito mais, em documentos prontos para análise e estratégias. Logs dos atendimentos, filtros por período, por médico, por especialidade, por plano de saúde, etiqueta "Crônicos" pra mapear os pacientes que necessitam de acompanhamento contínuo, logo listado em automações inteligentes de follow-up e oferta de agendamentos mais frequentes, tudo muito intuitivo, permitindo uma gestão baseada em fatos, não em suposições.
+                Nossa área de relatórios consolida faturamento, produtividade, taxas de no-show, e muito mais, em documentos prontos para análise e estratégias. Logs dos atendimentos, filtros por período, por médico, por especialidade, por plano de saúde, mapeamento de pacientes que necessitam de acompanhamento contínuo, logo listado em automações inteligentes de follow-up e oferta de agendamentos mais frequentes, tudo muito intuitivo, permitindo uma gestão baseada em fatos, não em suposições.
               </p>
             }
             images={['/imgs/relatorio1.png', '/imgs/relatorio2.png', '/imgs/relatorio3.png']}
@@ -603,7 +607,7 @@ const Apresentacao = () => {
             title="Feriados & Datas Especiais: Controle Total sobre o Tempo"
             text={
               <p>
-                Gerencie as datas especiais, recessos e feriados com um clique. Ao inserir uma data especial no Painel Administrativo ou algum recesso específico da Clínica ou mesmo em algum expediente atípico como uma quarta-feira de cinzas com o meio expediente à partir de 12h ou como um feriadão prolongado e recessos, a <strong>Yasmim</strong>, automatically, para de oferecer horários e começa a gerenciar as expectativas dos pacientes para os dias úteis seguintes. Você tem o controle absoluto de quando a Clínica opera, sem precisar lutar contra a agenda e os Sistemas engessados do Mercado.
+                Gerencie as datas especiais, recessos e feriados com um clique. Ao inserir uma data especial no Painel Administrativo ou algum recesso específico da Clínica ou mesmo em algum expediente atípico como uma quarta-feira de cinzas com o meio expediente à partir de 12h ou como um feriadão prolongado e recessos, a <strong>Yasmim</strong>, automaticamente, para de oferecer horários e começa a gerenciar as expectativas dos pacientes para os dias úteis seguintes. Você tem o controle absoluto de quando a Clínica opera, sem precisar lutar contra a agenda e os Sistemas engessados do Mercado.
               </p>
             }
             images={['/imgs/feriados1.png', '/imgs/feriados2.png', '/imgs/feriados3.png']}
@@ -642,7 +646,7 @@ const Apresentacao = () => {
             title="Membros & Hierarquia: Segurança e Delegação"
             text={
               <p>
-                Defina quem vê o quê. Com o sistema de membros, você cria níveis de acesso granulares (Administrador, Recepção, Médico). Uma hierarquia funcional e flexível, onde o Gestor foca em relatórios e ROI, a equipe operacional foca na agenda e no chat, tudo sob protocolos rigorosos de segurança e log de acessos pra que os movimentos sejam rastreáveis e as informações financeiras não fiquem expostas a todos os usuários, somente aos Gestores. São 4 níveis de acesso: Admin, que tem acesso a tudo e a todos os dados. Nível Ouro que tem acesso à todas as áreas, exceto às informações financeiras do relatório. Nível Prata, que tem acesso somente à agenda, ao log e ao Chat do Whatsapp, sem qualquer informação financeira. Médicos tem um acesso específico, onde podem visualizar somente seus atendimentos, seus pacientes e seus relatórios.
+                Defina quem vê o quê. Com o sistema de membros, você cria níveis de acesso granulares (Administrador, Recepção, Médico). Uma hierarquia funcional e flexível, onde o Gestor foca em relatórios e decisões, a equipe operacional foca na agenda e no chat, tudo sob protocolos rigorosos de segurança e log de acessos pra que os movimentos sejam rastreáveis e as informações financeiras não fiquem expostas a todos os usuários, somente aos Gestores. São 4 níveis de acesso: Admin, que tem acesso a tudo e a todos os dados. Nível Ouro que tem acesso à todas as áreas, exceto às informações financeiras do relatório. Nível Prata, que tem acesso somente à agenda, ao log e ao Chat do Whatsapp, sem qualquer informação financeira. Médicos tem um acesso específico, onde podem visualizar somente seus atendimentos, seus pacientes e seus relatórios.
               </p>
             }
             images={['/imgs/membros1.png', '/imgs/membros2.png', '/imgs/membros3.png', '/imgs/membros4.png']}
@@ -652,7 +656,7 @@ const Apresentacao = () => {
 
           <Chapter
             number="08"
-            title="FAQ Operacional: Treine sua IA em segundos"
+            title="FAQ Operacional: sua IA atualizada em segundos"
             text={
               <p>
                 Sua clínica mudou de endereço ou trocou o laboratório de exames? Basta atualizar o FAQ no portal. A <strong>Yasmim</strong> consome essa nova informação imediatamente e passa a responder aos pacientes com o dado atualizado. É o fim dos manuais de recepção desatualizados: a inteligência da sua clínica agora é centralizada e viva. É uma área especial, onde essas informações se incorporam ao Prompt Master da Yasmim, fazendo com que ela responda de forma autônoma e inteligente sobre questões operacionais da clínica, dúvidas Institucionais, dúvidas sobre exames e jejuns.
